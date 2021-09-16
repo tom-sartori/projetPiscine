@@ -10,13 +10,13 @@ class Conf {
 
   static private $databases = array(
     // Le nom d'hote de la base de données
-    'hostname' => 'localhost',
+    'hostname' => 'files.000webhost.com',
     // Le nom de la BDD
-    'database' => '...',
+    'database' => 'id17602744_bd',
    // login du PHPmyAdmin
-    'login' => '...',
+    'login' => 'id17602744_admin',
    //password du PHPmyAdmin 
-    'password' => '...'
+    'password' => '-AzertY-1234'
   );
 
   static public function getLogin() {

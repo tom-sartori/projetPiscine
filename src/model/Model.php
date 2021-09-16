@@ -33,5 +33,5 @@ class Model
 }
  
 
-//Model::Init();
+// Model::Init();
 // Il faut decommenter cette ligne pour tenter de se connecter à la BD 
