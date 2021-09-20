@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter une recette </title>
+  <link rel="stylesheet" href="baseCss.css" type="text/css">
+</head>
+
+<body>
+<h1> Ajouter une recette </h1>
+<label for="recette"> Quel recette souhaitez-vous ajouter ? </label>
+<input type="text" id="recette">
+
+<div>
+  <label for="categorie">A quelle catégorie cette recette appartient-elle ?</label>
+  <select id="categorie" required>
+    <option value="">--Choisir une catégorie--</option>
+    <option value="entree"> Entrée </option>
+    <option value="platderesist"> Plat de résistence </option>
+    <option value="dessert"> Dessert </option>
+    <option value="accompagnement"> Accompagnement </option>
+  </select>
+</div>
+
+<div>
+  <label for="ingredients">Ingrédients nécessaires à la recette</label>
+  <input id="ingredients">
+  <button type="button">Ajouter</button>
+</div>
+
+<div>
+  <input type="submit" value="Ajouter la recette">
+</div>
+
+</body>
+</html>
