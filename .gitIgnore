@@ -1,6 +1,4 @@
 .DS_Store
-/.idea/projetPiscine.iml
-/.idea/vcs.xml
-/.idea/php.xml
-/.idea/modules.xml
 .xml
+.idea
+.vscode
