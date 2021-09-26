@@ -3,13 +3,16 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Liste Allergènes</title>
-        <script type="text/javascript" src="../../js/Allergene/AllergeneListScript.js" defer></script>
+        <script type="text/javascript" src="../../js/Allergene/allergenScript.js" defer></script>
     </head>
     <body>
 
         <div id="divCreateAllergene">
-            <input type="text" placeholder="Nom de l'allergène"> </input>
-            <button>Ajouter</button>
+            <form>
+                <label for="inputCreate">Ajouter un allergène : </label>
+                <input id="inputCreate" type="text" placeholder="Nom de l'allergène">
+                <button type="reset" >Ajouter</button>
+            </form>
         </div>
 
         <div id="listeAllergene">

@@ -2,7 +2,8 @@
 
 echo <<< EOT
 
-    <script type="text/javascript" src="./js/Allergene/AllergeneListScript.js" defer></script>
+    <script type="text/javascript" src="./js/generalScript.js" defer></script>
+    <script type="text/javascript" src="./js/Allergene/allergenScript.js" defer></script>
 
     <div id="divCreateAllergene">
 

@@ -1,7 +1,5 @@
 <?php
 
-require_once '../model/ModelAllergene.php';
-
 if (isset($_POST['request'])) {
     $request = $_POST['request'];
     require_once '../model/ModelAllergene.php';

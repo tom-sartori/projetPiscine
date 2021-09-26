@@ -1,6 +1,5 @@
 <?php
 
-//require_once File::build_path(array("model", "Model.php"));
 require_once 'Model.php';
 
 
@@ -14,8 +13,7 @@ class ModelAllergene extends Model {
         $sql = 'SELECT * FROM ' . static::$tableName . ';';
         $req = Model::$pdo->query($sql);
         $req->setFetchMode(PDO::FETCH_OBJ);
-        $tab = $req->fetchAll();
-        return $tab;
+        return $req->fetchAll();
     }
 
     public static function delete($id) {
