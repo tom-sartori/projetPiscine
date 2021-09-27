@@ -1,0 +1,32 @@
+div.center {
+    align-content: center;
+}
+
+li {
+    float: left;
+}
+
+.deroulant {
+    position: relative;
+    display: inline-block;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    text-align: center;
+}
+
+.deroulant:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+}
