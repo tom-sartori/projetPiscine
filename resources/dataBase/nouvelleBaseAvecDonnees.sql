@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 26, 2021 at 05:17 PM
+-- Generation Time: Sep 27, 2021 at 08:36 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -158,7 +158,9 @@ CREATE TABLE `recette` (
   `idRecette` int(11) NOT NULL,
   `nomRecette` varchar(50) NOT NULL,
   `nbCouvert` int(11) NOT NULL,
-  `descriptif` text NOT NULL
+  `descriptif` text NOT NULL,
+  `coefficient` float NOT NULL,
+  `chargeSalariale` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
