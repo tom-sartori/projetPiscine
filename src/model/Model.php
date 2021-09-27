@@ -1,13 +1,13 @@
 <?php
 
-//require_once(File::build_path(array('config', 'Conf.php')));
 require_once '../config/Conf.php';
 
 class Model {
 
     public static $pdo;
 
-    public static function Init() {
+    public static function Init()
+    {
 
         $hostname = Conf::getHostname();
         $database_name = Conf::getDatabase();
@@ -31,6 +31,29 @@ class Model {
             }
             die();
         }
+    }
+
+    public static function selectAll () {
+        $sql = 'SELECT * FROM ' . static::$tableName . ';';
+        $req = Model::$pdo->query($sql);
+        $req->setFetchMode(PDO::FETCH_OBJ);
+        return $req->fetchAll();
+    }
+
+    public static function delete ($id) {
+        $sql = 'DELETE FROM ' . static::$tableName . ' WHERE ' . static::$primaryKey . ' =:valId';
+
+        try {
+            $req_prep = Model::$pdo->prepare($sql);
+            $value = array(
+                "valId" => $id
+            );
+            $req_prep->execute($value);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return 0;
+        }
+        return 1;
     }
 }
 

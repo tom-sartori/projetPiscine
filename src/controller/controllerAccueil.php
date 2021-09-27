@@ -1,5 +1,6 @@
 <?php
 
+// $action == list
 $pagetitle = 'Accueil';
 $object = 'Accueil';
 $view = 'accueil';
