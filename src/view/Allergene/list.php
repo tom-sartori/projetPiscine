@@ -8,6 +8,10 @@ echo <<< EOT
 
     </div>
 
+    <div id="divRecherche">
+
+    </div>
+
     <div id="divListAllergene">
         <p>Aucun allergène disponible. </p>
     </div>
