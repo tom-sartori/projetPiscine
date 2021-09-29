@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    background: linear-gradient(#83a8a8, #1c5656);
+}
+
+.ajoutbox {
+    position: absolute;
+    background : #525e5e;
+    padding : 40px;
+    border-radius: 10px;
+    box-shadow: 0 15px 10px 10px rgba(0,0,0,.6);
+}
+
+h1{
+    margin: 40px;
+    color: #fff;
+    text-align: center;
+}
+
+label {
+    padding: 10px ;
+    font-size: 16px;
+    color: #fff;
+}
+input {
+    padding: 10px ;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
