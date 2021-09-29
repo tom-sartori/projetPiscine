@@ -1,18 +1,36 @@
 <?php
 
+$object = static::$object;
+$primary = 'idIngredient';
+
 echo <<< EOT
+    <div id="divList{$object}"> 
+        <ul>
+EOT;
 
-    <script type="text/javascript" src="./js/generalScript.js" defer></script>
-    <script type="text/javascript" src="./js/ingredientScript.js" defer></script>
+foreach ($tab_ingredient as $ingredient) {
+    $raw_idIngredient = rawurlencode($ingredient->get($primary));
+    $spe_idIngredient = htmlspecialchars($ingredient->get($primary));
+    $spe_nomIngredient = htmlspecialchars($ingredient->get('nomIngredient'));
 
-    <div id="divCreateIngredient">
-
-    </div>
-
-    <div id="divListIngredient">
-        <p>Aucun ingrédient disponible. </p>
-    </div>
+    echo <<< EOT
+        <li>
+            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idIngredient}">
+               {$spe_nomIngredient}
+            </a> 
+            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
+                <button type="button">Modifier</button>
+            </a> 
+            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
+                <button type="button">Supprimer</button>
+            </a> 
+        </li>
 
 EOT;
+
+}
+
+echo '  </ul>
+    </div>'
 
 ?>

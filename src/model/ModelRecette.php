@@ -9,7 +9,7 @@ class ModelRecette extends Model {
     private $nomRecette;
     private $nbCouvert;
     private $descriptif;
-    private $coeicient;
+    private $coefficient;
     private $chargeSalariale;
 
     protected static $nomTable = 'recette';
@@ -17,13 +17,13 @@ class ModelRecette extends Model {
     protected static $object= 'Recette';
 
 
-    public function __construct($idRecette=NULL, $nomRecette=NULL, $nbCouvert=NULL, $descriptif=NULL, $coeicient=NULL, $chargeSalariale=NULL) {
-        if (!is_null($idRecette) && !is_null($nomRecette) && !is_null($nbCouvert) && !is_null($descriptif) && !is_null($coeicient) && !is_null($chargeSalariale)) {
+    public function __construct($idRecette=NULL, $nomRecette=NULL, $nbCouvert=NULL, $descriptif=NULL, $coefficient=NULL, $chargeSalariale=NULL) {
+        if (!is_null($idRecette) && !is_null($nomRecette) && !is_null($nbCouvert) && !is_null($descriptif) && !is_null($coefficient) && !is_null($chargeSalariale)) {
             $this->idRecette = $idRecette;
             $this->nomRecette = $nomRecette;
             $this->nbCouvert = $nbCouvert;
             $this->descriptif = $descriptif;
-            $this->coeicient = $coeicient;
+            $this->coefficient = $coefficient;
             $this->chargeSalariale = $chargeSalariale;
         }
     }

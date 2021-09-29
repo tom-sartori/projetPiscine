@@ -37,7 +37,7 @@ class ControllerAllergene {
 
 
     public static function delete() {
-        $id = ModelAllergene::delete($_GET['idAllergene']);
+        ModelAllergene::delete($_GET['idAllergene']);
 
         $tab_allergene = ModelAllergene::selectAll();
 
@@ -81,20 +81,19 @@ class ControllerAllergene {
 
     public static function created(){
         $data = array(
-            'idAllergene' => 'NULL',
             'nomAllergene' => $_POST['nomAllergene']);
 
         $erreur = ModelAllergene::save($data);
 
         if ($erreur == 0) {
-            $view='error';
-            $pagetitle='Erreur de création';
+            $view = 'error';
+            $pagetitle = 'Erreur de création';
         }
         else{
-            $tab_ingredient = ModelAllergene::selectAll();
+            $tab_allergene = ModelAllergene::selectAll();
 
-            $view='created';
-            $pagetitle='Création validée';
+            $view = 'created';
+            $pagetitle = 'Création validée';
 
             require_once(File::build_path(array('view', 'view.php')));
         }
@@ -112,7 +111,7 @@ class ControllerAllergene {
             $pagetitle='Erreur mise à jour';
         }
         else{
-            $tab_b = ModelAllergene::selectAll();
+            $tab_allergene = ModelAllergene::selectAll();
 
             $view = 'updated';
             $pagetitle = 'Mise à jour effectuée';

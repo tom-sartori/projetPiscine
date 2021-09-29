@@ -1,5 +1,8 @@
 <?php
 
+// ReadMe : old file unused
+
+
 if (isset($_POST['controller'])) {
     $controller = $_POST['controller'];
     $modelClass = "Model" . $controller;

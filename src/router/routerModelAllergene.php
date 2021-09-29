@@ -1,5 +1,8 @@
 <?php
 
+// ReadMe : old file unused
+
+
 // TODO Supprimer cette page pour utiliser uniquement routerModel.php.
 
 if (isset($_POST['request'])) {

@@ -110,13 +110,15 @@ class Model{
         $table_name = static::$nomTable;
         $sql = "INSERT INTO $table_name (";
         foreach ($data as $key => $value) {
-            $sql = $sql . "$key ,";
+            $sql = $sql . "$key,";
         }
-        $sql = rtrim($sql, ',') . ") VALUES(";
+        $sql = rtrim($sql, ',') . ') VALUES(';
         foreach ($data as $key => $value) {
             $sql = $sql . "'$value',";
         }
-        $sql = rtrim($sql, ',') . ")";
+        $sql = rtrim($sql, ',') . ')';
+
+
         try {
             $prep = Model::$pdo->prepare($sql);
             $prep->execute();

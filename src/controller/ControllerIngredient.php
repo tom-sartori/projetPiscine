@@ -36,7 +36,7 @@ class ControllerIngredient {
     }
 
     public static function delete() {
-        $id = ModelIngredient::delete($_GET['idAllergene']);
+        ModelIngredient::delete($_GET['idIngredient']);
 
         $tab_ingredient = ModelIngredient::selectAll();
 
@@ -54,8 +54,14 @@ class ControllerIngredient {
     }
 
     public static function create(){
+        $idIngredient = '';
+        $nomIngredient = '';
+        $quantiteAchat = '';
+        $idUniteQuantite = '';
+        $prixHT = '';
+        $idTaxe = '';
+        $idCategorieIngredient = '';
         $idAllergene = '';
-        $nomAllergene = '';
 
         $view = 'update';
         $pagetitle = 'Formulaire d\'ajout d\'ingrédient';
@@ -86,7 +92,6 @@ class ControllerIngredient {
 
     public static function created(){
         $data = array(
-            'idIngredient' => 'NULL',
             'nomIngredient' => $_POST['nomIngredient'] ,
             'quantiteAchat' => $_POST['quantiteAchat'] ,
             'idUniteQuantite' => $_POST['idUniteQuantite'],
@@ -129,7 +134,7 @@ class ControllerIngredient {
             $pagetitle='Erreur mise à jour';
         }
         else{
-            $tab_b = ModelIngredient::selectAll();
+            $tab_ingredient = ModelIngredient::selectAll();
 
             $view = 'updated';
             $pagetitle = 'Mise à jour effectuée';

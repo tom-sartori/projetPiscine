@@ -1,5 +1,8 @@
 <?php
 
+// ReadMe : old file unused
+
+
 if (isset($_GET['controller'])) {
     $controller = $_GET['controller'];
     $controllerClass = "Controller" . ucfirst($controller);
