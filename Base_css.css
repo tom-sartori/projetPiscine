@@ -1,0 +1,68 @@
+/* Ici commence le css du menu*/
+nav, .list {
+    list-style-type: none;
+    background-color: white;
+    max-width: 500px;
+    margin: auto;
+}
+
+nav > ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav > ul > li {
+    float: left;
+    border-style: solid;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+li a:hover, .deroulant:hover .dropbtn {
+    background-color: lightgrey;
+}
+
+.deroulant {
+    display: inline-block;
+}
+
+.deroule {
+    display: none;
+    position: absolute;
+    background-color: darkgrey;
+    min-width: 150px;
+}
+
+.deroule a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.deroule a:hover {background-color: lightgrey;}
+
+.deroulant:hover .deroule {
+    display: block;
+}
+/* Ici se termine le css du menu*/
+
+h1 {
+    margin: auto;
+    padding-top: 100px;
+    padding-left: 10px;
+}
+
+h1 > a {
+    border-style: dashed;
+}
+
+ {
+
+}
