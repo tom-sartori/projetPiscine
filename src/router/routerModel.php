@@ -9,6 +9,9 @@ if (isset($_POST['controller'])) {
         require_once '../model/' . $modelClass . '.php';
 
         if ($request == 'list') {
+            if (isset($_POST['order'])) {
+                $tab = $modelClass::selectAllOrderer($_POST['order']);
+            }
             $tab = $modelClass::selectAll();
             echo json_encode($tab);
         }

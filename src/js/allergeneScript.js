@@ -8,10 +8,14 @@ const divList = document.getElementById('divList' + controller);
 const idInputCreation = getPrefixIdInput() + 'Creation';
 const idButtonCreation = 'buttonCreate' + controller;
 
+const idDivSearch = 'divRecherche';
 
 window.onload = function () {
     showCreation();
-    ajaxList();
+    document.getElementById(idDivSearch).appendChild(createSelectOrderBy());
+    // FIXME
+    // ajaxListOrdered(document.getElementById(idSelectOrderBy).value);
+    ajaxListOrdered('idAllergene');
 }
 
 
@@ -83,6 +87,36 @@ function showList(ajaxResponse) {
         }
     }
 }
+
+const idSelectOrderBy = 'select' + controller + 'orderBy';
+
+function createSelectOrderBy () {
+    let select = document.createElement('select');
+    select.id = idSelectOrderBy;
+
+    select.appendChild(createOption('Alpha asc', 'id' + controller + ' ASC'))
+    select.appendChild(createOption('Alpha desc', 'id' + controller + ' DESC'))
+
+    return select;
+}
+
+function createOption (innerText, value) {
+    let option = document.createElement('option');
+    option.innerText = innerText;
+    option.value = value;
+
+    option.
+    option.ontimeupdate = function () {
+        console.log('jhfbaulidbjlza');
+    }
+
+    return option;
+}
+
+function getOrderBy () {
+    return document.getElementById(idSelectOrderBy).value;
+}
+
 
 /**
  * Create and add to the html page a label, input and button, used to add an allergen to the db.

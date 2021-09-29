@@ -27,6 +27,10 @@ function ajaxList() {
     ajaxPost(urlRouterModel, 'controller=' + controller + '&request=list', showList);
 }
 
+function ajaxListOrdered (order) {
+    ajaxPost(urlRouterModel, 'controller=' + controller + '&request=list&order=' + order, showList);
+}
+
 /**
  * Make an ajax request to delete an element on the db.
  * Refresh the page with ajaxList after that.

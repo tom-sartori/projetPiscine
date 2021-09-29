@@ -40,6 +40,14 @@ class Model {
         return $req->fetchAll();
     }
 
+    public static function selectAllOrderer ($order) {
+        // FIXME Preparer
+        $sql = 'SELECT * FROM ' . static::$tableName . ' ORDER BY ' . $order . ';';
+        $req = Model::$pdo->query($sql);
+        $req->setFetchMode(PDO::FETCH_OBJ);
+        return $req->fetchAll();
+    }
+
     public static function delete ($id) {
         $sql = 'DELETE FROM ' . static::$tableName . ' WHERE ' . static::$primaryKey . ' =:valId';
 
