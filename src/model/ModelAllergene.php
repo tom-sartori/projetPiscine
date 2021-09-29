@@ -5,46 +5,31 @@ require_once 'Model.php';
 
 class ModelAllergene extends Model {
 
-    protected static $tableName = 'allergene';
-    protected static $primaryKey = 'idAllergene';
-    protected static $nomAllergene = 'nomAllergene';
+    private $idAllergene;
+    private $nomAllergene;
+
+    protected static $nomTable = 'allergene';
+    protected static $primary = 'idAllergene';
+    protected static $object= 'Allergene';
 
 
-    public static function update ($id, $nom) {
-        try {
-            $sql =
-                'UPDATE ' . static::$tableName .
-                ' SET ' . static::$nomAllergene . ' =:valNom ' .
-                ' WHERE ' . static::$primaryKey . ' =:valId; ';
-
-            $req_prep = Model::$pdo->prepare($sql);
-            $value = array(
-                "valId" => $id,
-                'valNom' => $nom
-            );
-            $req_prep->execute($value);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
+    public function __construct($idAllergene=NULL, $nomAllergene=NULL) {
+        if (!is_null($idAllergene) && !is_null($nomAllergene)) {
+            $this->idAllergene = $idAllergene;
+            $this->nomAllergene = $nomAllergene;
         }
-        return 1;
     }
 
-    public static function save ($nom) {
-        try {
-            $sql =
-                'INSERT INTO ' . static::$tableName . ' (' . static::$primaryKey . ' , ' . static::$nomAllergene . ' ) VALUES ( NULL, :valNom );';
+    public function get($nom_attribut) {
+        if (property_exists($this, $nom_attribut))
+            return $this->$nom_attribut;
+        return false;
+    }
 
-            $req_prep = Model::$pdo->prepare($sql);
-            $value = array(
-                'valNom' => $nom
-            );
-            $req_prep->execute($value);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        return 1;
+    public function set($nom_attribut, $valeur) {
+        if (property_exists($this, $nom_attribut))
+            $this->$nom_attribut = $valeur;
+        return false;
     }
 }
 

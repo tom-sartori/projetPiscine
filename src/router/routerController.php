@@ -11,7 +11,7 @@ if (isset($_GET['controller'])) {
 }
 else {
     // TODO Page erreur / accueil
-    require_once File::build_path(array('controller', 'controllerAccueil.php'));
+    require_once File::build_path(array('controller', 'ControllerAccueil.php'));
 }
 
 
