@@ -12,6 +12,7 @@
         <nav>
             <a href="index.php?controller=Recette&action=readAll">Recette</a>
             <a href="index.php?controller=Ingredient&action=readAll">Ingrédient</a>
+            <a href="index.php?controller=Ingredient&action=create">AjouterIngrédient</a>
             <a href="index.php?controller=Allergene&action=readAll">Allergene</a>
             <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
         </nav>
