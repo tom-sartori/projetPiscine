@@ -70,9 +70,6 @@ class ControllerAllergene {
 
         $nomAllergene = htmlspecialchars("{$allergene->get('nomAllergene')}");
 
-
-        $tab_allergene = ModelAllergene::selectAll();
-
         $view = 'update';
         $pagetitle = 'Formulaire de mise à jour';
 

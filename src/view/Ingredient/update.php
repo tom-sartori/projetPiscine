@@ -1,5 +1,5 @@
 <?php
-$object = static::$object;
+
 $idIngredient = $_GET['idIngredient'];
 
 $isUpdate = $_GET['action'] == 'update';
@@ -12,7 +12,7 @@ $isUpdate = $_GET['action'] == 'update';
 
 <div class = ajoutbox>
 
-    <form method="post" action="index.php?controller=<?=$object?>&action=<?=$isUpdate?'updated':'created' ?>">
+    <form method="post" action="index.php?controller=<?=static::$object?>&action=<?=$isUpdate?'updated':'created' ?>">
 
         <div class="field-ingr">
             <label for="nomIngredient">Nom de l'ingrédient </label>
@@ -73,10 +73,7 @@ $isUpdate = $_GET['action'] == 'update';
 
         <div>
             <input hidden name="idIngredient" value="<?=$idIngredient?>">
-        </div>
-
-        <div>
-            <input type="hidden" name="controller" value="<?=$object?>"/>
+            <input type="hidden" name="controller" value="<?=static::$object?>"/>
             <input type="submit" value="Envoyer"/>
         </div>
 

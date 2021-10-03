@@ -58,8 +58,8 @@ class ControllerRecette {
         $nomRecette = '';
         $nbCouvert = '';
         $descriptif = '';
-        $coefficient = '';
-        $chargeSalariale = '';
+        $coefficient = '1';
+        $chargeSalariale = '0';
 
         $view = 'update';
         $pagetitle = 'Formulaire d\'ajout de recette';
@@ -76,9 +76,6 @@ class ControllerRecette {
         $descriptif = htmlspecialchars("{$recette->get('descriptif')}");
         $coefficient = htmlspecialchars("{$recette->get('coefficient')}");
         $chargeSalariale = htmlspecialchars("{$recette->get('chargeSalariale')}");
-
-
-        $tab_recette = ModelRecette::selectAll();
 
         $view = 'update';
         $pagetitle = 'Formulaire de mise à jour';
@@ -100,7 +97,8 @@ class ControllerRecette {
             $view='error';
             $pagetitle='Erreur de création';
         }
-        else{
+        else {
+            // FIXME addCategorieRecette. $idRecette ?
             $tab_recette = ModelRecette::selectAll();
 
             $view='created';
@@ -125,7 +123,22 @@ class ControllerRecette {
             $view='error';
             $pagetitle='Erreur mise à jour';
         }
-        else{
+        else {
+            if (isset($_POST['idCategorieRecette'])) {
+                require_once File::build_path(array('controller', 'ControllerAsso_recette_categorieRecette.php'));
+                ControllerAsso_recette_categorieRecette::updateCategorieRecette($idRecette, $_POST['idCategorieRecette']);
+            }
+            if (isset($_POST['idUtilisateur'])) {
+                require_once File::build_path(array('controller', 'ControllerAsso_recette_utilisateur.php'));
+                ControllerAsso_recette_utilisateur::updateUtilisateurRecette($idRecette, $_POST['idUtilisateur']);
+            }
+            var_dump($_POST['idIngredient']);
+            if (isset($_POST['idIngredient'])) {
+                require_once File::build_path(array('controller', 'ControllerAsso_recette_ingredient.php'));
+                ControllerAsso_recette_ingredient::updateIngredientRecette($idRecette, $_POST['idIngredient']);
+            }
+
+
             $tab_recette = ModelRecette::selectAll();
 
             $view = 'updated';
