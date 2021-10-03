@@ -82,8 +82,6 @@ class ControllerIngredient {
         $idAllergene = htmlspecialchars("{$ingredient->get('idAllergene')}");
 
 
-        $tab_ingredient = ModelIngredient::selectAll();
-
         $view = 'update';
         $pagetitle = 'Formulaire de mise à jour';
 
