@@ -3,6 +3,24 @@
 $object = static::$object;
 $primary = 'idUtilisateur';
 
+
+echo <<< EOT
+    <div id="divCreation{$object}"> 
+        <form method="post" action="index.php?controller={$object}&action=created">
+            <label for="nom{$object}" >Nom : </label>
+            <input type="text" name="nom{$object}" required>
+            
+            <label for="prenom{$object}" >Prénom : </label>
+            <input type="text" name="prenom{$object}" required>
+            
+            <input type="hidden" name="controller" value="{$object}"/>
+            <input type="submit" value="Ajouter"/>
+        </form>
+    </div>
+        
+EOT;
+
+
 echo <<< EOT
     <div id="divList{$object}"> 
         <ul>
