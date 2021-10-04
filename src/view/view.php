@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/menu.css">
         <meta charset="UTF-8">
         <title>
             <?= $pagetitle; ?>
@@ -10,14 +11,22 @@
 
     <body>
         <nav>
-            <a href="index.php?controller=accueil">Accueil</a>
-            <a href="index.php?controller=allergene&action=list">Allergene</a>
+            <a href="index.php?controller=Recette&action=readAll">Recette</a>
+            <a href="index.php?controller=Recette&action=create">AjouterRecette</a>
+            <a href="index.php?controller=CategorieRecette&action=readAll">CategorieRecette</a>
+
+            <a href="index.php?controller=Ingredient&action=readAll">Ingrédient</a>
+            <a href="index.php?controller=Ingredient&action=create">AjouterIngrédient</a>
+            <a href="index.php?controller=CategorieIngredient&action=readAll">CategorieIngredient</a>
+
+            <a href="index.php?controller=Allergene&action=readAll">Allergene</a>
+
+            <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
         </nav>
 
         <main>
             <?php
-            $filepath = File::build_path(array("view", $object, "$view.php"));
-            require $filepath;
+                require File::build_path(array('view', static::$object, "$view.php"));
             ?>
         </main>
 

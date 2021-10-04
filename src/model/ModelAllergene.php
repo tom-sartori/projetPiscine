@@ -5,68 +5,31 @@ require_once 'Model.php';
 
 class ModelAllergene extends Model {
 
-    private static $tableName = 'allergene';
-    private static $primaryKey = 'idAllergene';
-    private static $nomAllergene = 'nomAllergene';
+    private $idAllergene;
+    private $nomAllergene;
 
-    public static function getAllergene() {
-        $sql = 'SELECT * FROM ' . static::$tableName . ';';
-        $req = Model::$pdo->query($sql);
-        $req->setFetchMode(PDO::FETCH_OBJ);
-        return $req->fetchAll();
+    protected static $nomTable = 'allergene';
+    protected static $primary = 'idAllergene';
+    protected static $object= 'Allergene';
+
+
+    public function __construct($idAllergene=NULL, $nomAllergene=NULL) {
+        if (!is_null($idAllergene) && !is_null($nomAllergene)) {
+            $this->idAllergene = $idAllergene;
+            $this->nomAllergene = $nomAllergene;
+        }
     }
 
-    public static function delete($id) {
-        $sql = 'DELETE FROM ' . static::$tableName . ' WHERE ' . static::$primaryKey . ' =:valId';
-
-        try {
-            $req_prep = Model::$pdo->prepare($sql);
-            $value = array(
-                "valId" => $id
-            );
-            $req_prep->execute($value);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        return 1;
+    public function get($nom_attribut) {
+        if (property_exists($this, $nom_attribut))
+            return $this->$nom_attribut;
+        return false;
     }
 
-    public static function update ($id, $nom) {
-        try {
-            $sql =
-                'UPDATE ' . static::$tableName .
-                ' SET ' . static::$nomAllergene . ' =:valNom ' .
-                ' WHERE ' . static::$primaryKey . ' =:valId; ';
-
-            $req_prep = Model::$pdo->prepare($sql);
-            $value = array(
-                "valId" => $id,
-                'valNom' => $nom
-            );
-            $req_prep->execute($value);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        return 1;
-    }
-
-    public static function save ($nom) {
-        try {
-            $sql =
-                'INSERT INTO ' . static::$tableName . ' (' . static::$primaryKey . ' , ' . static::$nomAllergene . ' ) VALUES ( NULL, :valNom );';
-
-            $req_prep = Model::$pdo->prepare($sql);
-            $value = array(
-                'valNom' => $nom
-            );
-            $req_prep->execute($value);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        return 1;
+    public function set($nom_attribut, $valeur) {
+        if (property_exists($this, $nom_attribut))
+            $this->$nom_attribut = $valeur;
+        return false;
     }
 }
 
