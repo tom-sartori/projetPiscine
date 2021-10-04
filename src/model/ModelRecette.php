@@ -39,6 +39,14 @@ class ModelRecette extends Model {
             $this->$nom_attribut = $valeur;
         return false;
     }
+
+    public static function getLastId () {
+        $sql = 'SELECT MAX(' . static::$primary . ') FROM ' . static::$nomTable . ';';
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_NUM);
+        return $req_prep->fetchAll();
+    }
 }
 
 ?>

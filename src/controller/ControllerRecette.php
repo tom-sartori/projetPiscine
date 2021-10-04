@@ -98,7 +98,9 @@ class ControllerRecette {
             $pagetitle='Erreur de création';
         }
         else {
-            // FIXME addCategorieRecette. $idRecette ?
+            $idRecette = self::getLastId();
+            self::updateAssoTable();
+
             $tab_recette = ModelRecette::selectAll();
 
             $view='created';
@@ -124,20 +126,7 @@ class ControllerRecette {
             $pagetitle='Erreur mise à jour';
         }
         else {
-            if (isset($_POST['idCategorieRecette'])) {
-                require_once File::build_path(array('controller', 'ControllerAsso_recette_categorieRecette.php'));
-                ControllerAsso_recette_categorieRecette::updateCategorieRecette($idRecette, $_POST['idCategorieRecette']);
-            }
-            if (isset($_POST['idUtilisateur'])) {
-                require_once File::build_path(array('controller', 'ControllerAsso_recette_utilisateur.php'));
-                ControllerAsso_recette_utilisateur::updateUtilisateurRecette($idRecette, $_POST['idUtilisateur']);
-            }
-            var_dump($_POST['idIngredient']);
-            if (isset($_POST['idIngredient'])) {
-                require_once File::build_path(array('controller', 'ControllerAsso_recette_ingredient.php'));
-                ControllerAsso_recette_ingredient::updateIngredientRecette($idRecette, $_POST['idIngredient']);
-            }
-
+            self::updateAssoTable();
 
             $tab_recette = ModelRecette::selectAll();
 
@@ -147,4 +136,25 @@ class ControllerRecette {
             require_once(File::build_path(array('view', 'view.php')));
         }
     }
+
+    private static function updateAssoTable () {
+        if (isset($_POST['idCategorieRecette'])) {
+            require_once File::build_path(array('controller', 'ControllerAsso_recette_categorieRecette.php'));
+            ControllerAsso_recette_categorieRecette::updateCategorieRecette($idRecette, $_POST['idCategorieRecette']);
+        }
+        if (isset($_POST['idUtilisateur'])) {
+            require_once File::build_path(array('controller', 'ControllerAsso_recette_utilisateur.php'));
+            ControllerAsso_recette_utilisateur::updateUtilisateurRecette($idRecette, $_POST['idUtilisateur']);
+        }
+        if (isset($_POST['idIngredient'])) {
+            require_once File::build_path(array('controller', 'ControllerAsso_recette_ingredient.php'));
+            ControllerAsso_recette_ingredient::updateIngredientRecette($idRecette, $_POST['idIngredient']);
+        }
+    }
+    private static function getLastId () {
+        $idRecette = ModelRecette::getLastId();
+        $idRecette = (int)$idRecette[0][0];
+        return $idRecette;
+    }
+
 }
