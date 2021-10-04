@@ -3,6 +3,14 @@
 $object = static::$object;
 $primary = 'idAllergene';
 
+$isUpdate = false;
+$idToUpdate = '';
+if ($_GET['action'] == 'readAll' && isset($primary)) {
+    $isUpdate = true;
+    $idToUpdate = $_GET[$primary];
+}
+
+
 echo <<< EOT
     <div id="divCreation{$object}"> 
         <form method="post" action="index.php?controller={$object}&action=created">
@@ -23,25 +31,60 @@ echo <<< EOT
 EOT;
 
 foreach ($tab_allergene as $allergene) {
+    if ($allergene->get($primary) == 0) {continue;}
+
     $raw_idAllergene = rawurlencode($allergene->get($primary));
     $spe_idAllergene = htmlspecialchars($allergene->get($primary));
     $spe_nomAllergene = htmlspecialchars($allergene->get('nomAllergene'));
 
-    echo <<< EOT
+    if ($isUpdate && ($idToUpdate == $allergene->get($primary))) {
+        echo <<< EOT
         <li>
-            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idAllergene}">
-               {$spe_nomAllergene}
-            </a> 
-            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idAllergene}">
+            <form method="post" action="index.php?controller={$object}&action=updated">
+                <label for="nom{$object}">Nom : </label>
+                <input type="text" name="nom{$object}" value="{$spe_nomAllergene}">
+                
+                <input hidden name="{$primary}" value="{$spe_idAllergene}">
+                <input type="hidden" name="controller" value="<?=static::$object?>"/>
+                <input type="submit" value="Valider"/>
+          
+                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+                    <button type="button">Supprimer</button>
+                </a> 
+            </form>
+        </li>
+EOT;
+    }
+    else {
+
+        echo <<< EOT
+        <li>
+           {$spe_nomAllergene}
+            <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
                 <button type="button">Modifier</button>
-            </a> 
+            </a>
             <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
                 <button type="button">Supprimer</button>
-            </a> 
+            </a>
         </li>
-
 EOT;
 
+//        echo <<< EOT
+//        <li>
+//            <label for="nom{$object}" >Nom : </label>
+//            <input type="text" name="nom{$object}" value="{$spe_nomAllergene}" readonly>
+//
+//            <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
+//                <button type="button">Modifier</button>
+//            </a>
+//
+//            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+//                <button type="button">Supprimer</button>
+//            </a>
+//        </li>
+//EOT;
+
+    }
 }
 
 echo '  </ul>
