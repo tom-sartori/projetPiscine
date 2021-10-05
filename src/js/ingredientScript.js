@@ -4,6 +4,7 @@ const select = document.getElementById('selectOrderIngredient');
 const nameList = document.getElementsByClassName("dataline");
 const tabIngredient = [];
 
+const researchBar = document.getElementById('inputSearchIngredient')
 
 select.addEventListener('change',sortTable);
 
@@ -72,6 +73,19 @@ function updateView(){
     for(i=0;i<tabIngredient.length;i++){
         table.childNodes[1].appendChild(tabIngredient[i].thelement);
     }
+}
+
+researchBar.onkeyup = sortByResearch;
+
+function sortByResearch(a) {
+    for(i=0;i<tabIngredient.length;i++){
+        if(!tabIngredient[i].name.toLowerCase().includes(researchBar.value)){
+            tabIngredient[i].thelement.style.display='none';
+        } else {
+            tabIngredient[i].thelement.style.display = 'table-row';
+        }
+    }
+    updateView();
 }
 
 sortTable();
