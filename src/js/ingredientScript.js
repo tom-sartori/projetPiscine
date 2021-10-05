@@ -48,7 +48,6 @@ function sortByPriceDESC(a, b) {
 }
 
 function sortTable(){
-    let tabName = [];
     if (select.value == "nomIngredientASC"){
         tabIngredient.sort(sortByNameASC);
         updateView();
