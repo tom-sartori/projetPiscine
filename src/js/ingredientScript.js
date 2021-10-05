@@ -74,3 +74,5 @@ function updateView(){
         table.childNodes[1].appendChild(tabIngredient[i].thelement);
     }
 }
+
+sortTable();
