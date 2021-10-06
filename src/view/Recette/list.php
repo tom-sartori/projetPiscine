@@ -27,6 +27,12 @@ echo <<< EOT
         <ul>
 EOT;
 
+echo <<< EOT
+    <div id="divPrintButton{$object}">
+    <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
+    </div>
+EOT;
+
 foreach ($tab_recette as $recette) {
     $raw_idRecette = rawurlencode($recette->get($primary));
     $spe_idRecette = htmlspecialchars($recette->get($primary));
