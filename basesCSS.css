@@ -36,3 +36,16 @@ input {
     outline: none;
     background: transparent;
 }
+
+.selectbox select {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background-color: #83a8a8 ;
+    border: none;
+    padding: 5px 8px;
+    width: 100%;
+    box-shadow: 0 4px 4px 2px #1c5656 ;
+
+}
+
+
