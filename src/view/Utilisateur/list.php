@@ -5,7 +5,7 @@ $primary = 'idUtilisateur';
 
 $isUpdate = false;
 $idToUpdate = '';
-if ($_GET['action'] == 'readAll' && isset($primary)) {
+if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $isUpdate = true;
     $idToUpdate = $_GET[$primary];
 }
