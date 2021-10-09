@@ -10,7 +10,7 @@ $isUpdate = $_GET['action'] == 'update';
 
 <h1> <?=$isUpdate?'Modifier':'Ajouter'?> un ingrédient </h1>
 
-<div class = ajoutbox>
+<div>
 
     <form method="post" action="index.php?controller=<?=static::$object?>&action=<?=$isUpdate?'updated':'created' ?>">
 
@@ -50,7 +50,7 @@ $isUpdate = $_GET['action'] == 'update';
 
             <label for="idUniteQuantite"></label>
 <!--            TODO Check la valeur préremplie pour update. -->
-            <select name="idUniteQuantite" required>
+            <select class="unité" name="idUniteQuantite" required>
                 <option value="1">Kg</option>
                 <option value="2">L</option>
                 <option value="3">U</option>
@@ -71,10 +71,12 @@ $isUpdate = $_GET['action'] == 'update';
             </select>
         </div>
 
-        <div>
+        <div >
             <input hidden name="idIngredient" value="<?=$idIngredient?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
-            <input type="submit" value="Envoyer"/>
+            <div class="field-ingr">
+                <input type="submit" value="Envoyer"/>
+            </div>
         </div>
 
     </form>

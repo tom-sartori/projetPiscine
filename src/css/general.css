@@ -105,3 +105,57 @@ form{
 table tr:nth-child(odd){
     background-color:lightgrey;
 }
+
+
+
+/*----------------modif pauline------------------*/
+
+
+h1{
+    text-align : center;
+    font-family : sans-serif;
+    margin-bottom : 5%;
+}
+
+/*---------------------pages ajouter ingr/recette*/
+
+div{
+    margin-bottom:25px;
+}
+
+.field-ingr input[type=submit]{
+    border-radius: 5px;
+    width: 10%;
+    height: 25px;
+}
+
+/*-----------marche pas jsp pq-------------*/
+input[type=sumit]:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+.field-ingr input{
+    /*----pour centrer le bouton envoyer---------*/
+    display: block;
+    text-align : center;
+    margin-left: auto;
+    margin-right: auto;
+    /***********************************************/
+}
+
+.field-ingr label{
+    position: absolute;
+    margin-left: -30%  ;
+}
+
+
+.field-ingr select{
+    background-color: white;
+    border-radius: px;
+    display: block;
+    text-align : center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
