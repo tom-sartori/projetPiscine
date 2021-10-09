@@ -8,12 +8,12 @@ main {
     background-color: #ececec;
 }
 
-#divCreationUtilisateur{
-    border: 2px solid rgb(92, 137, 238);
-    padding: 10px;
-    border-radius: 3px;
-    align-content: center;
-}
+/*#divCreationUtilisateur{*/
+/*    border: 2px solid rgb(92, 137, 238);*/
+/*    padding: 10px;*/
+/*    border-radius: 3px;*/
+/*    align-content: center;*/
+/*}*/
 
 
 
@@ -52,7 +52,7 @@ button:hover{
 }
 
 li{
-    padding: 4px;
+    padding: 7px;
     list-style-type: none;
 }
 
@@ -77,7 +77,13 @@ th{
 
 form{
     text-align: center;
-}  /*Pour aligner la création d'ingrédient*/
+    border: 2px solid rgb(92, 137, 238);
+    padding: 10px;
+    border-radius: 3px;
+    align-content: center;
+}
+
+/*Pour aligner la création d'ingrédient*/
 
 /*label{*/
 /*    padding: 0 0 20px 0;*/
@@ -87,7 +93,7 @@ form{
 
 
 
-#divSearchIngredient{
+#divSearchIngredient, #divSearchRecette{
     text-align: right ;
 }
 
@@ -106,7 +112,36 @@ table tr:nth-child(odd){
     background-color:lightgrey;
 }
 
+.class12{
+    font-size: larger;
+    font-family: Serif;
+    font-weight: bold;
+}
 
+#inputSearchRecette, #inputSearchIngredient{
+    border: 3px cornflowerblue solid;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#inputSearchRecette:hover, #inputSearchIngredient:hover{
+    background-color: lightskyblue;
+}
+
+
+/*bouton envoyer pour les pages utilisateurs, liste allergene*/
+.submit:hover{
+    background-color: cadetblue;
+}
+
+
+.listeEspace{
+    border-bottom: 3px darkgrey solid;
+}
+
+.buttonsupprimer:hover{
+    background-color: indianred;
+}
 
 /*----------------modif pauline------------------*/
 
@@ -152,7 +187,6 @@ input[type=sumit]:hover {
 
 .field-ingr select{
     background-color: white;
-    border-radius: px;
     display: block;
     text-align : center;
     margin-left: auto;

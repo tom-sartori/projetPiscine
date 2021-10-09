@@ -15,7 +15,7 @@ echo <<< EOT
             <label for="nomCategorieRecette" >Ajouter une catégorie : </label>
             <input type="text" name="nomCategorieRecette">
             <input type="hidden" name="controller" value="{$object}"/>
-            <input type="submit" value="Envoyer"/>
+            <input class="submit" type="submit" value="Envoyer"/>
         </form>
     </div>
         
@@ -59,7 +59,7 @@ EOT;
                     <button type="button">Modifier</button>
                 </a>
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
-                    <button type="button">Supprimer</button>
+                    <button class="buttonsupprimer" type="button">Supprimer</button>
                 </a>
             </li>
 EOT;

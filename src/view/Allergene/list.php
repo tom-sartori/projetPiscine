@@ -17,7 +17,7 @@ echo <<< EOT
             <label for="nomAllergene" >Ajouter un {$object} : </label>
             <input type="text" name="nomAllergene" id="nomAllergene">
             <input type="hidden" name="controller" value="{$object}"/>
-            <input type="submit" value="Envoyer"/>
+            <input class="submit" type="submit" value="Envoyer"/>
         </form>
     </div>
         
@@ -58,13 +58,13 @@ EOT;
     else {
 
         echo <<< EOT
-        <li>
+        <li class="listeEspace">
            {$spe_nomAllergene}
             <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
                 <button type="button">Modifier</button>
             </a>
             <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
-                <button type="button">Supprimer</button>
+                <button class="buttonsupprimer" type="button">Supprimer</button>
             </a>
         </li>
 EOT;

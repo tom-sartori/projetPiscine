@@ -21,7 +21,7 @@ echo <<< EOT
             <input type="text" name="prenom{$object}" required>
             
             <input type="hidden" name="controller" value="{$object}"/>
-            <button type="submit" value="Ajouter">Ajouter</button>
+            <button class="submit" type="submit" value="Ajouter">Ajouter</button>
         </form>
     </div>
         
@@ -75,7 +75,7 @@ EOT;
             </a> 
             
             <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
-                <button type="button">Supprimer</button>
+                <button class="buttonsupprimer" type="button">Supprimer</button>
             </a> 
         </li>
 EOT;

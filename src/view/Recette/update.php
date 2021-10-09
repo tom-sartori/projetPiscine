@@ -83,7 +83,7 @@ $isUpdate = $_GET['action'] == 'update';
             <input hidden name="idRecette" value="<?=$idRecette?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
             <div class="field-ingr">
-                <input type="submit" value="Envoyer"/>
+                <input class="submit" type="submit" value="Envoyer"/>
             </div>
         </div>
     </form>
