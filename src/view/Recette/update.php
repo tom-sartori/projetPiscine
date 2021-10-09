@@ -74,10 +74,10 @@ $isUpdate = $_GET['action'] == 'update';
             </select>
         </div>
 
-        <div>
+        <div >
             <input hidden name="idRecette" value="<?=$idRecette?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
-            <input type="submit" value="Envoyer"/>
+            <input class="envoyer" type="submit" value="Envoyer"/>
         </div>
     </form>
 </div>

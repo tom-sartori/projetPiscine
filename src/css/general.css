@@ -1,0 +1,85 @@
+html{
+    font-family: sans-serif;
+    height: 100%;
+}
+
+nav{
+    margin-bottom: 2%;
+}
+body {
+    font-family: sans-serif;
+}
+
+h1{
+    margin: 30px;
+    color: #fff;
+    text-align: center;
+}
+
+label {
+    padding: 10px ;
+    font-size: 16px;
+    color: #fff;
+}
+
+
+ul li {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.5;
+    padding: 0.5em ;
+}
+
+/* affichage de la box */
+.ajoutbox {
+    position: absolute;
+    background : #525e5e;
+    height: 75%;
+    width: 90%;
+    margin-left: 4%;
+    border-radius: 10px;
+    box-shadow: 0 8px 8px 8px rgba(0,0,0,.6);
+}
+
+.ajoutbox label {
+
+}
+
+.envoyer{
+    /*position: absolute;*/
+
+    margin-left: 42.5%;
+    border: none;
+    border-radius: 40px;
+    font-size: 22px;
+    background-color: #83a8a8;
+    color: #fff;
+    width: 15%;
+    height: 50px;
+}
+
+.imrpimer{
+    /*position: absolute;*/
+    margin-right: 10%;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    background-color: #525e5e;
+    color: #fff;
+    width: 10%;
+    height: 40px;
+}
+
+.remplir{
+    cursor: text;
+    border: none;
+    border-radius: 40px;
+    width: 10%;
+    height: ;
+}
+
+
+
+
+
+

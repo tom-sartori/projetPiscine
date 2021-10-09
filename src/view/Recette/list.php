@@ -7,7 +7,7 @@ $primary = 'idRecette';
 echo <<< EOT
     <div id="divSearch{$object}">
         <label>Recherche </label>
-        <input id="inputSearch{$object}" name="nom{$object}" type="text">
+        <input class="remplir" id="inputSearch{$object}" name="nom{$object}" type="text">
     </div>
 EOT;
 
@@ -28,7 +28,7 @@ echo <<< EOT
 EOT;
 
 echo <<< EOT
-    <div id="divPrintButton{$object}">
+    <div id="divPrintButton{$object} "class="imprimer">
     <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
     </div>
 EOT;

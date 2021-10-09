@@ -4,6 +4,11 @@
     padding: 10px;
 }
 
+body {
+    font-family: sans-serif;
+    background: linear-gradient(#83a8a8, #1c5656);
+}
+
 ul {
     list-style-type: none;
     margin: 0;
