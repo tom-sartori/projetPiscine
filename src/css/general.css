@@ -9,20 +9,18 @@ main {
 }
 
 #divCreationUtilisateur{
-    border: 2px solid;
+    border: 2px solid rgb(92, 137, 238);
     padding: 10px;
     border-radius: 3px;
     align-content: center;
 }
 
-form{
-
-}
 
 
 input {
     background-color: lightgrey;
     border: none;
+    margin-right: 25px;
 }
 
 input:read-only {
@@ -31,6 +29,7 @@ input:read-only {
 
 input:read-write:hover{
     background-color: white;
+    border-bottom: 2px solid blue;
 
 }
 
@@ -62,13 +61,47 @@ tr {
     text-align: center;
 }
 
-td{
+.dataline{
     border: 3px black double;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 th{
     font-size: larger;
-    text-decoration: underline;
 }
 
+
+
+
+/**********************Mes modifications,SALIM****************************/
+
+form{
+    text-align: center;
+}  /*Pour aligner la création d'ingrédient*/
+
+/*label{*/
+/*    padding: 0 0 20px 0;*/
+/*}*/
+
+
+
+
+
+#divSearchIngredient{
+    text-align: right ;
+}
+
+.idIngr{
+    font-weight: bold;
+    color: red;
+}
+
+.nom{
+    font-family: serif;
+    font-style : italic;
+}
+
+/*Pour colorier une fois sur deux la ligne du tableau de la liste des ingredients*/
+table tr:nth-child(odd){
+    background-color:lightgrey;
+}

@@ -37,14 +37,14 @@ echo <<< EOT
     <table id="table{$object}"> 
         
         <tr>
-            <th>idIngredient</th>
-            <th>nomIngredient</th>
-            <th>quantiteAchat</th>
-            <th>idUniteQuantite</th>
-            <th>prixHT</th>
-            <th>idTaxe</th>
-            <th>idCategorieIngredient</th>
-            <th>idAllergene</th>
+            <th>ID INGREDIENT</th>
+            <th>NOM INGREDIENT</th>
+            <th>QUANTITE ACHAT</th>
+            <th>ID UNITE QUANTITE</th>
+            <th>PRIX HT</th>
+            <th>ID TAXE</th>
+            <th>ID CATEGORIE INGREDIENT</th>
+            <th>ID ALLERGENE</th>
         </tr>
 EOT;
 
@@ -63,9 +63,9 @@ foreach ($tab_ingredient as $ingredient) {
 
     echo <<< EOT
         <tr id="dataline$spe_idIngredient" class="dataline">
-            <td>{$spe_idIngredient}</td>
-            <td name="nomIngredient">{$spe_nomIngredient}</td>
-            <td>{$spe_quantiteAchat}</td>
+            <td class="idIngr">{$spe_idIngredient}</td>
+            <td class="nom" name="nomIngredient">{$spe_nomIngredient}</td>
+            <td >{$spe_quantiteAchat}</td>
             <td>{$spe_idUniteIngredient}</td>
             <td>{$spe_prixHT}</td>
             <td>{$spe_idTaxe}</td>

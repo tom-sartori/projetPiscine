@@ -48,7 +48,7 @@ foreach ($tab_allergene as $allergene) {
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
                 <input type="submit" value="Valider"/>
           
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
                     <button type="button">Supprimer</button>
                 </a> 
             </form>
@@ -60,10 +60,10 @@ EOT;
         echo <<< EOT
         <li>
            {$spe_nomAllergene}
-            <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
                 <button type="button">Modifier</button>
             </a>
-            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
                 <button type="button">Supprimer</button>
             </a>
         </li>

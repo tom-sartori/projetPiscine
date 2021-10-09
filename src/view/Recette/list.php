@@ -40,13 +40,13 @@ foreach ($tab_recette as $recette) {
 
     echo <<< EOT
         <li>
-            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
                {$spe_nomRecette}
             </a> 
-            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
                 <button type="button">Modifier</button>
             </a> 
-            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
                 <button type="button">Supprimer</button>
             </a> 
         </li>
