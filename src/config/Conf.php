@@ -12,7 +12,7 @@ class Conf {
         'hostname' => 'localhost',
         'database' => 'projetPiscine',
         'login'    => 'root',
-        'password' => 'root'
+        'password' => ''
     );
 
   static public function getLogin() {

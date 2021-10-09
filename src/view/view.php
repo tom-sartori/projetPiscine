@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/menu.css">
-        <meta charset="UTF-8">
-        <title>
-            <?= $pagetitle; ?>
-        </title>
-    </head>
+<head>
+    <link rel="stylesheet" href="css/general.css">
+    <!-- <link rel="stylesheet" href="css/css_menu.css"> -->
+    <meta charset="UTF-8">
+    <title>
+        <?= $pagetitle; ?>
+    </title>
 
-    <body>
-        <nav>
-            <a href="index.php?controller=Recette&action=readAll">Recette</a>
-            <a href="index.php?controller=Recette&action=create">AjouterRecette</a>
-            <a href="index.php?controller=CategorieRecette&action=readAll">CategorieRecette</a>
+</head>
+<body>
 
-            <a href="index.php?controller=Ingredient&action=readAll">Ingrédient</a>
-            <a href="index.php?controller=Ingredient&action=create">AjouterIngrédient</a>
-            <a href="index.php?controller=CategorieIngredient&action=readAll">CategorieIngredient</a>
+<!-- Ici commence le menu-->
+<div class="center">
+    <nav>
+        <ul>
 
-            <a href="index.php?controller=Allergene&action=readAll">Allergene</a>
+            <li>
+                <a href="">Accueil</a>
+            </li>
 
-            <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
-        </nav>
+            <li class="deroulant">
+                <a class="dropbtn">Recettes</a>
+                <div class="deroule">
+                    <a href="index.php?controller=Recette&action=readAll">Voir la liste</a>
+                    <a href="index.php?controller=Recette&action=create">Ajouter/modifier les recettes</a>
+                    <a href="index.php?controller=CategorieRecette&action=readAll">Catégories</a>
+                </div>
+            </li>
 
-        <main>
-            <?php
-                require File::build_path(array('view', static::$object, "$view.php"));
-            ?>
-        </main>
+            <li class="deroulant">
+                <a class="dropbtn">Ingrédients</a>
+                <div class="deroule">
+                    <a href="index.php?controller=Ingredient&action=readAll">Voir la liste</a>
+                    <a href="index.php?controller=Ingredient&action=create">Ajouter/modifier les ingrédients</a>
+                    <a href="index.php?controller=CategorieIngredient&action=readAll">Catégories</a>
+                </div>
+            </li>
 
-        <footer>
+            <li>
+                <a href="index.php?controller=Allergene&action=readAll">Allergenes</a>
+            </li>
 
-        </footer>
+            <li>
+                <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Ici se termine le menu-->
+<main>
+    <?php
+        require File::build_path(array('view', static::$object, "$view.php"));
+    ?>
+</main>
 
-    </body>
+<footer>
+
+</footer>
+
+</body>
 </html>
-

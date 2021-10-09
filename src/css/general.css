@@ -1,0 +1,74 @@
+html{
+    /*background-color: lightblue;*/
+    max-width: 1000px;
+    margin: auto;
+}
+
+main {
+    background-color: #ececec;
+}
+
+#divCreationUtilisateur{
+    border: 2px solid;
+    padding: 10px;
+    border-radius: 3px;
+    align-content: center;
+}
+
+form{
+
+}
+
+input {
+    background-color: lightgrey;
+    border: none;
+}
+
+input:read-only {
+    background-color: darkgray;
+}
+
+input:read-write:hover{
+    background-color: white;
+
+}
+
+input:read-write:focus{
+    background-color: white;
+}
+
+button {
+    border: none;
+    background-color: darkgray;
+    border-radius: 3px;
+}
+
+button:hover{
+    background-color: lightgrey;
+}
+
+.parentButton{
+    text-decoration: none;
+}
+
+li{
+    padding: 4px;
+    list-style-type: none;
+}
+
+
+tr {
+    font-family: Verdana;
+    text-align: center;
+}
+
+td{
+    border: 3px black double;
+    border-radius: 10px;
+}
+
+th{
+    font-size: larger;
+    text-decoration: underline;
+}
+

@@ -21,7 +21,7 @@ echo <<< EOT
             <input type="text" name="prenom{$object}" required>
             
             <input type="hidden" name="controller" value="{$object}"/>
-            <input type="submit" value="Ajouter"/>
+            <button type="submit" value="Ajouter">Ajouter</button>
         </form>
     </div>
         
@@ -51,9 +51,9 @@ foreach ($tab_utilisateur as $utilisateur) {
                 
                 <input hidden name="{$primary}" value="{$spe_iUtilisateur}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                <input type="submit" value="Valider"/>
+                <button type="submit" value="Valider">Valider </button>
                 
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
+                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
                     <button type="button">Supprimer</button>
                 </a> 
             </form>
@@ -70,11 +70,11 @@ EOT;
             <label for="prenom{$object}" >Prénom : </label>
             <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
             
-            <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
                 <button type="button">Modifier</button>
             </a> 
             
-            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
                 <button type="button">Supprimer</button>
             </a> 
         </li>
