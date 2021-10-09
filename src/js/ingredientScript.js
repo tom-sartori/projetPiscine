@@ -15,7 +15,7 @@ function Ingredient(id, nom, prix, thelement){
     this.thelement = thelement;
 }
 
-for (let i = 0; i < nameList.length; i++) {
+for (let i = 0; i < nameList.length; i++) {  //construction de tabIngredient : Ingredient[]
     tabIngredient.push(new Ingredient(
         nameList.item(i).childNodes[1].innerHTML,
         nameList.item(i).childNodes[3].innerHTML.split('<td name="nomIngredient"> ').pop(),
@@ -24,29 +24,6 @@ for (let i = 0; i < nameList.length; i++) {
     ));
 }
 
-function sortByNameASC(a, b) {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-    else if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
-    else return 1;
-}
-
-function sortByNameDESC(a, b) {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
-    else if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
-    else return -1;
-}
-
-function sortByPriceASC(a, b) {
-    if (parseInt(a.price) < parseInt(b.price)) return -1;
-    else if (parseInt(a.price) == parseInt(b.price)) return 0;
-    else return 1;
-}
-
-function sortByPriceDESC(a, b) {
-    if (parseInt(a.price) < parseInt(b.price)) return 1;
-    else if (parseInt(a.price) == parseInt(b.price)) return 0;
-    else return -1;
-}
 
 function sortTable(){
     if (select.value == "nomIngredientASC"){
@@ -77,7 +54,7 @@ function updateView(){
 
 researchBar.onkeyup = sortByResearch;
 
-function sortByResearch(a) {
+function sortByResearch() {
     for(i=0;i<tabIngredient.length;i++){
         if(!tabIngredient[i].name.toLowerCase().includes(researchBar.value)){
             tabIngredient[i].thelement.style.display='none';
@@ -88,4 +65,17 @@ function sortByResearch(a) {
     updateView();
 }
 
+
+function getAllUnite(){
+    AJAXQueryAll('unitequantite',changeIdUniteQuantite)
+}
+
+function changeIdUniteQuantite(responseText){
+    let tabUnite = JSON.parse(responseText);
+    tabIngredient.forEach(element => {
+        element.thelement.childNodes[7].innerHTML=tabUnite[element.thelement.childNodes[7].innerHTML-1].nomUnite
+    })
+}
+
 sortTable();
+getAllUnite();
