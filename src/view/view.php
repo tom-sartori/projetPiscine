@@ -10,19 +10,37 @@
     </head>
 
     <body>
-        <nav>
-            <a href="index.php?controller=Recette&action=readAll">Recette</a>
-            <a href="index.php?controller=Recette&action=create">AjouterRecette</a>
-            <a href="index.php?controller=CategorieRecette&action=readAll">CategorieRecette</a>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li class="deroulant">
+                        <a href="index.php?controller=Recette&action=readAll" class="dropbtn">Recettes</a>
+                        <div class="deroule">
+                            <a href="index.php?controller=Recette&action=readAll">Voir la liste</a>
+                            <a href="index.php?controller=Recette&action=create">Ajouter une recette</a>
+                            <a href="index.php?controller=CategorieRecette&action=readAll">Catégories</a>
+                        </div>
+                    </li>
 
-            <a href="index.php?controller=Ingredient&action=readAll">Ingrédient</a>
-            <a href="index.php?controller=Ingredient&action=create">AjouterIngrédient</a>
-            <a href="index.php?controller=CategorieIngredient&action=readAll">CategorieIngredient</a>
+                    <li class="deroulant">
+                        <a href="index.php?controller=Ingredient&action=readAll" class="dropbtn">Ingrédients</a>
+                        <div class="deroule">
+                            <a href="index.php?controller=Ingredient&action=readAll">Voir la liste</a>
+                            <a href="index.php?controller=Ingredient&action=create">Ajouter un ingrédient</a>
+                            <a href="index.php?controller=CategorieIngredient&action=readAll">Catégories</a>
+                        </div>
+                    </li>
 
-            <a href="index.php?controller=Allergene&action=readAll">Allergene</a>
+                    <li>
+                        <a href="index.php?controller=Allergene&action=readAll">Allergenes</a>
+                    </li>
 
-            <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
-        </nav>
+                    <li>
+                        <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
         <main>
             <?php
