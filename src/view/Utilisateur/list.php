@@ -51,7 +51,7 @@ foreach ($tab_utilisateur as $utilisateur) {
                 
                 <input hidden name="{$primary}" value="{$spe_iUtilisateur}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                <input type="submit" value="Valider"/>
+                <button type="submit">Ajouter</button>
                 
                 <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
                     <button type="button">Supprimer</button>

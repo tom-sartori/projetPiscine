@@ -41,7 +41,7 @@ foreach ($tab_categorieRecette as $categorieRecette) {
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieRecette}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                    <input type="submit" value="Valider"/>
+                    <button type="submit">Ajouter</button>
               
                     <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
                         <button type="button">Supprimer</button>

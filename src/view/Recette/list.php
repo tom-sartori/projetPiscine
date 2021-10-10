@@ -23,14 +23,14 @@ echo <<< EOT
 EOT;
 
 echo <<< EOT
-    <div id="divList{$object}"> 
-        <ul>
+    <div id="divPrintButton{$object}">
+        <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
+    </div>
 EOT;
 
 echo <<< EOT
-    <div id="divPrintButton{$object}">
-    <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
-    </div>
+    <div id="divList{$object}"> 
+        <ul>
 EOT;
 
 foreach ($tab_recette as $recette) {
