@@ -24,7 +24,7 @@ function sortByPriceDESC(a, b) {
     else return -1;
 }
 
-function AJAXQueryAll(table_name,funcToExec) {
+function AJAXQueryAll(table_name,funcToExec) {  // fait un "select * from :table_name" et le renvoie vers la fonction funcToExec
     let request = new XMLHttpRequest();
     request.open('POST', urlModel);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

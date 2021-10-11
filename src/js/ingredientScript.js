@@ -8,7 +8,7 @@ const researchBar = document.getElementById('inputSearchIngredient')
 
 select.addEventListener('change',sortTable);
 
-function Ingredient(id, nom, prix, thelement){
+function Ingredient(id, nom, prix, thelement){ // On construit un object Ingredient qui contient sa propre balise <td> associé
     this.id = id;
     this.name = nom;
     this.price = prix;
@@ -25,7 +25,7 @@ for (let i = 0; i < nameList.length; i++) {  //construction de tabIngredient : I
 }
 
 
-function sortTable(){
+function sortTable(){ // Permet de classer les ingrédients selon le type de tri choisi
     if (select.value == "nomIngredientASC"){
         tabIngredient.sort(sortByNameASC);
         updateView();
@@ -44,7 +44,7 @@ function sortTable(){
     }
 }
 
-function updateView(){
+function updateView(){ // Cela adapte la view au nouvel ordre de tabIngredient[]
     table.childNodes[1].innerHTML=""
     table.childNodes[1].appendChild(tableheader);
     for(i=0;i<tabIngredient.length;i++){
@@ -54,7 +54,7 @@ function updateView(){
 
 researchBar.onkeyup = sortByResearch;
 
-function sortByResearch() {
+function sortByResearch() { // A chaque entrée dans la researchBar on affiche uniquement ceux qui contiennent la String donné par l'utilisateur
     for(i=0;i<tabIngredient.length;i++){
         if(!tabIngredient[i].name.toLowerCase().includes(researchBar.value)){
             tabIngredient[i].thelement.style.display='none';
@@ -66,16 +66,56 @@ function sortByResearch() {
 }
 
 
-function getAllUnite(){
+function getAllUnite(){  // permet de changer les idUnitéQuantité avec les valeurs correspondantes (nomUnite)
     AJAXQueryAll('unitequantite',changeIdUniteQuantite)
 }
 
-function changeIdUniteQuantite(responseText){
-    let tabUnite = JSON.parse(responseText);
+function changeIdUniteQuantite(responseText){ // Met à jour la view en fonction des données de responseText
+    let tabUnite = JSON.parse(responseText); 
     tabIngredient.forEach(element => {
         element.thelement.childNodes[7].innerHTML=tabUnite[element.thelement.childNodes[7].innerHTML-1].nomUnite
     })
 }
 
+
+function getAllTaxes(){
+    AJAXQueryAll('taxe',changeIdTaxe)
+}
+
+function changeIdTaxe(responseText){
+    let tabTaxe = JSON.parse(responseText);
+    tabIngredient.forEach(element => {
+        element.thelement.childNodes[11].innerHTML=tabTaxe[element.thelement.childNodes[11].innerHTML-1].montantTaxe + "%"
+    });
+}
+
+
+function getAllCategories(){
+    AJAXQueryAll('categorieIngredient',changeIdCategorie)
+}
+
+function changeIdCategorie(responseText){
+    let tabCategorie = JSON.parse(responseText);
+    tabIngredient.forEach(element => {
+        element.thelement.childNodes[13].innerHTML = tabCategorie[element.thelement.childNodes[13].innerHTML - 1].nomCategorieIngredient;
+    })
+}
+
+function getAllAllergenes(){
+    AJAXQueryAll('allergene',changeIdAllergene)
+}
+
+function changeIdAllergene(responseText){
+    let tabAllergene = JSON.parse(responseText);
+    console.log(tabAllergene);
+    tabIngredient.forEach(element => {
+        element.thelement.childNodes[15].innerHTML = tabAllergene[element.thelement.childNodes[15].innerHTML].nomAllergene;
+    })
+}
+
+
 sortTable();
-getAllUnite();
+getAllAllergenes();
+getAllCategories();
+getAllUnite(); 
+getAllTaxes();
