@@ -193,3 +193,17 @@ input[type=sumit]:hover {
     margin-right: auto;
 }
 
+
+/*---------------------pages allergène*/
+
+.buttonAlign {
+    display: inline-block;
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.decalLabel {
+    margin-right: 50px;
+    text-decoration: none;
+}
+

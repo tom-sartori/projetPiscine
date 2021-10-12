@@ -38,8 +38,7 @@ foreach ($tab_categorieIngredient as $categorieIngredient) {
         echo <<< EOT
             <li>
                 <form method="post" action="index.php?controller={$object}&action=updated">
-                    <label for="nom{$object}">Catégorie : </label>
-                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieIngredient}">
+
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieIngredient}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
@@ -47,7 +46,12 @@ foreach ($tab_categorieIngredient as $categorieIngredient) {
               
                     <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
                         <button type="button">Supprimer</button>
-                    </a> 
+                    </a>
+
+                    <!-- pareil que allergene : pour aligner boutons-->
+
+                    <label for="nom{$object}">Catégorie : </label>
+                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieIngredient}">
                 </form>
             </li>
 EOT;
@@ -56,13 +60,15 @@ EOT;
 
         echo <<< EOT
             <li>
-               {$spe_nomCategorieIngredient}
-                <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
+
+                <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
                     <button type="button">Modifier</button>
                 </a>
-                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
+                <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
                     <button class="buttonsupprimer" type="button">Supprimer</button>
                 </a>
+
+                {$spe_nomCategorieIngredient}
             </li>
 EOT;
 

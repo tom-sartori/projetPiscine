@@ -36,8 +36,7 @@ foreach ($tab_categorieRecette as $categorieRecette) {
         echo <<< EOT
             <li>
                 <form method="post" action="index.php?controller={$object}&action=updated">
-                    <label for="nom{$object}">Catégorie : </label>
-                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieRecette}">
+
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieRecette}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
@@ -45,7 +44,11 @@ foreach ($tab_categorieRecette as $categorieRecette) {
               
                     <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
                         <button type="button">Supprimer</button>
-                    </a> 
+                    </a>
+
+                    <!-- pour ordre et alignement-->
+                    <label for="nom{$object}">Catégorie : </label>
+                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieRecette}">
                 </form>
             </li>
 EOT;
@@ -54,13 +57,15 @@ EOT;
 
         echo <<< EOT
             <li>
-               {$spe_nomCategorieRecette}
-                <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieRecette}">
+
+                <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieRecette}">
                     <button type="button">Modifier</button>
                 </a>
-                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
+                <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
                     <button class="buttonsupprimer" type="button">Supprimer</button>
                 </a>
+
+                {$spe_nomCategorieRecette}
             </li>
 EOT;
 

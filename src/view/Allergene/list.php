@@ -41,8 +41,7 @@ foreach ($tab_allergene as $allergene) {
         echo <<< EOT
         <li>
             <form method="post" action="index.php?controller={$object}&action=updated">
-                <label for="nom{$object}">Nom : </label>
-                <input type="text" name="nom{$object}" value="{$spe_nomAllergene}">
+
                 
                 <input hidden name="{$primary}" value="{$spe_idAllergene}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
@@ -50,7 +49,13 @@ foreach ($tab_allergene as $allergene) {
           
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
                     <button type="button">Supprimer</button>
-                </a> 
+                </a>
+
+                <!-- pour aligner les boutons modif et sup  et les mettre avant texte: ordre modifié-->
+
+                <label for="nom{$object}">Nom : </label>
+                <input type="text" name="nom{$object}" value="{$spe_nomAllergene}">
+
             </form>
         </li>
 EOT;
@@ -59,13 +64,14 @@ EOT;
 
         echo <<< EOT
         <li class="listeEspace">
-           {$spe_nomAllergene}
-            <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
+
+            <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
                 <button type="button">Modifier</button>
             </a>
-            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+            <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
                 <button class="buttonsupprimer" type="button">Supprimer</button>
             </a>
+            {$spe_nomAllergene}
         </li>
 EOT;
 
