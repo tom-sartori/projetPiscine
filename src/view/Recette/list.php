@@ -3,6 +3,9 @@
 $object = static::$object;
 $primary = 'idRecette';
 
+echo <<< EOT
+    <script type="text/javascript" src="js/recetteScript.js" defer></script>
+EOT;
 
 echo <<< EOT
     <div id="divSearch{$object}">
@@ -12,11 +15,17 @@ echo <<< EOT
 EOT;
 
 echo <<< EOT
+    <div id="divPrintButton{$object}">
+    <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
+    </div>
+EOT;
+
+echo <<< EOT
     <div id="divOrder{$object}">
         <label for="order{$object}">Trier </label>
         <select name="order{$object}" id="selectOrder{$object}">
-            <option value="nom{$object} ASC">Ordre alphabétique</option>
-            <option value="nom{$object} DESC">Ordre anti-alphabétique</option>
+            <option value="nom{$object}ASC">Ordre alphabétique</option>
+            <option value="nom{$object}DESC">Ordre anti-alphabétique</option>
 <!--            TODO Par catégorie-->
         </select>
     </div>
@@ -33,6 +42,7 @@ echo <<< EOT
         <ul>
 EOT;
 
+
 foreach ($tab_recette as $recette) {
     $raw_idRecette = rawurlencode($recette->get($primary));
     $spe_idRecette = htmlspecialchars($recette->get($primary));
@@ -40,7 +50,7 @@ foreach ($tab_recette as $recette) {
 
     echo <<< EOT
         <li>
-            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
+            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}" class="name{$object}">
                {$spe_nomRecette}
             </a> 
             <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">

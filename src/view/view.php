@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/menu.css">
-        <meta charset="UTF-8">
-        <title>
-            <?= $pagetitle; ?>
-        </title>
-    </head>
 
+<head>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <script type="text/javascript" src="js/utils.js" defer></script>
+    <meta charset="UTF-8">
+    <title>
+        <?= $pagetitle; ?>
+    </title>
+</head>
     <body>
         <div class="menu">
             <nav>
@@ -42,16 +43,17 @@
             </nav>
         </div>
 
-        <main>
-            <?php
-                require File::build_path(array('view', static::$object, "$view.php"));
-            ?>
-        </main>
 
-        <footer>
+    <main>
+        <?php
+        require File::build_path(array('view', static::$object, "$view.php"));
+        ?>
+    </main>
 
-        </footer>
+    <footer>
 
-    </body>
+    </footer>
+
+</body>
+
 </html>
-
