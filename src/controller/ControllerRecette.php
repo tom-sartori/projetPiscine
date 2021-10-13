@@ -99,7 +99,7 @@ class ControllerRecette {
         }
         else {
             $idRecette = self::getLastId();
-            self::updateAssoTable();
+            self::updateAssoTable($idRecette);
 
             $tab_recette = ModelRecette::selectAll();
 
@@ -126,7 +126,7 @@ class ControllerRecette {
             $pagetitle='Erreur mise à jour';
         }
         else {
-            self::updateAssoTable();
+            self::updateAssoTable($idRecette);
 
             $tab_recette = ModelRecette::selectAll();
 
@@ -137,7 +137,7 @@ class ControllerRecette {
         }
     }
 
-    private static function updateAssoTable () {
+    private static function updateAssoTable ($idRecette) {
         if (isset($_POST['idCategorieRecette'])) {
             require_once File::build_path(array('controller', 'ControllerAsso_recette_categorieRecette.php'));
             ControllerAsso_recette_categorieRecette::updateCategorieRecette($idRecette, $_POST['idCategorieRecette']);

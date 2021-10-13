@@ -39,7 +39,7 @@ EOT;
 
 echo <<< EOT
     <div id="divList{$object}"> 
-        <ul>
+        <ul id="ulList{$object}">
 EOT;
 
 
