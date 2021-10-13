@@ -5,7 +5,7 @@ $primary = 'idAllergene';
 
 $isUpdate = false;
 $idToUpdate = '';
-if ($_GET['action'] == 'readAll' && isset($primary)) {
+if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $isUpdate = true;
     $idToUpdate = $_GET[$primary];
 }
@@ -17,7 +17,7 @@ echo <<< EOT
             <label for="nomAllergene" >Ajouter un {$object} : </label>
             <input type="text" name="nomAllergene" id="nomAllergene">
             <input type="hidden" name="controller" value="{$object}"/>
-            <input type="submit" value="Envoyer"/>
+            <button type="submit">Ajouter</button>
         </form>
     </div>
         

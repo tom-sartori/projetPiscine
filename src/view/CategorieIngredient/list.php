@@ -5,7 +5,7 @@ $primary = 'idCategorieIngredient';
 
 $isUpdate = false;
 $idToUpdate = '';
-if ($_GET['action'] == 'readAll' && isset($primary)) {
+if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $isUpdate = true;
     $idToUpdate = $_GET[$primary];
 }
@@ -43,7 +43,7 @@ foreach ($tab_categorieIngredient as $categorieIngredient) {
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieIngredient}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                    <input type="submit" value="Valider"/>
+                    <button type="submit">Ajouter</button>
               
                     <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
                         <button type="button">Supprimer</button>

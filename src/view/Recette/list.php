@@ -32,10 +32,15 @@ echo <<< EOT
 EOT;
 
 echo <<< EOT
-    <div id="divList{$object}"> 
-        <ul id="ulList{$object}">
+    <div id="divPrintButton{$object}">
+        <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
+    </div>
 EOT;
 
+echo <<< EOT
+    <div id="divList{$object}"> 
+        <ul>
+EOT;
 
 
 foreach ($tab_recette as $recette) {

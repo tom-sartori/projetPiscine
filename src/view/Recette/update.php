@@ -77,7 +77,7 @@ $isUpdate = $_GET['action'] == 'update';
         <div>
             <input hidden name="idRecette" value="<?=$idRecette?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
-            <input type="submit" value="Envoyer"/>
+            <button type="submit">Ajouter</button>
         </div>
     </form>
 </div>
