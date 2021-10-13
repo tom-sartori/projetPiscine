@@ -1,0 +1,30 @@
+
+body {
+    height: 100%;
+    width: 100%;
+}
+.ajoutbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+    width: 100%;
+}
+
+.headerform {
+    display: flex;
+    height: 300px;
+
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid red;
+}
+.header1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-content: space-around;
+    width: 50%;
+    border: 1px solid blue;
+}
