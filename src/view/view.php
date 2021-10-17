@@ -9,6 +9,15 @@
     <title>
         <?= $pagetitle; ?>
     </title>
+
+    <div id="divConnexion">
+        <?= (isset($_SESSION["loginUtilisateur"])) ?
+            'Bonjour ' . $_SESSION["loginUtilisateur"] . ' <a href="index.php?controller=Utilisateur&action=deconnect">Déconnexion</a>'
+            :
+            '<a href="index.php?controller=Utilisateur&action=connect">Connexion</a>';
+        ?>
+    </div>
+
 </head>
     <body>
         <div class="menu">
@@ -36,8 +45,12 @@
                         <a href="index.php?controller=Allergene&action=readAll">Allergenes</a>
                     </li>
 
-                    <li>
-                        <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
+                    <li class="deroulant">
+                        <a href="index.php?controller=Utilisateur&action=readAll">Utilisateurs</a>
+                        <div class="deroule">
+                            <a href="index.php?controller=Utilisateur&action=readAll">Voir la liste</a>
+                            <a href="index.php?controller=Utilisateur&action=create">Ajouter un utilisateur</a>
+                        </div>
                     </li>
                 </ul>
             </nav>

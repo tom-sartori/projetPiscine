@@ -5,18 +5,18 @@ require_once 'Model.php';
 
 class ModelUtilisateur extends Model {
 
-    private $idUtilisateur;
+    private $loginUtilisateur;
     private $nomUtilisateur;
     private $prenomUtilisateur;
 
     protected static $nomTable = 'utilisateur';
-    protected static $primary = 'idUtilisateur';
+    protected static $primary = 'loginUtilisateur';
     protected static $object= 'Utilisateur';
 
 
-    public function __construct($idUtilisateur=NULL, $nomUtilisateur=NULL, $prenomUtilisateur=NULL) {
-        if (!is_null($idUtilisateur) && !is_null($nomUtilisateur) && !is_null($prenomUtilisateur)) {
-            $this->idUtilisateur = $idUtilisateur;
+    public function __construct($loginUtilisateur=NULL, $nomUtilisateur=NULL, $prenomUtilisateur=NULL) {
+        if (!is_null($loginUtilisateur) && !is_null($nomUtilisateur) && !is_null($prenomUtilisateur)) {
+            $this->loginUtilisateur = $loginUtilisateur;
             $this->nomUtilisateur = $nomUtilisateur;
             $this->prenomUtilisateur = $prenomUtilisateur;
         }
@@ -32,6 +32,28 @@ class ModelUtilisateur extends Model {
         if (property_exists($this, $nom_attribut))
             $this->$nom_attribut = $valeur;
         return false;
+    }
+
+    public static function checkPassword ($loginUtilisateur, $hashedPassword) {
+        try{
+            $sql = '
+                SELECT COUNT(*) 
+                FROM ' . static::$nomTable . ' 
+                WHERE loginUtilisateur =:login AND mdpUtilisateur = :mdp;';
+
+            $values = array(
+                "login" => $loginUtilisateur,
+                "mdp" => $hashedPassword
+            );
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+            $result = $req_prep->fetch()['COUNT(*)'];
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+        return $result == 1;
     }
 }
 

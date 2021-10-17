@@ -1,6 +1,6 @@
 <?php
 require_once (File::build_path(array('model', 'ModelUtilisateur.php')));
-//require_once(File::build_path(Array('lib', 'Security.php')));// chargement du modèle
+require_once(File::build_path(Array('lib', 'Security.php')));
 
 
 class ControllerUtilisateur {
@@ -18,8 +18,8 @@ class ControllerUtilisateur {
     }
 
     public static function read(){
-        $idUtilisateur = $_GET['idUtilisateur'];
-        $utilisateur = ModelUtilisateur::select($idUtilisateur);
+        $loginUtilisateur = htmlspecialchars($_GET['loginUtilisateur']);
+        $utilisateur = ModelUtilisateur::select($loginUtilisateur);
 
         if($utilisateur == null){
             $view='error';
@@ -28,7 +28,7 @@ class ControllerUtilisateur {
             require_once(File::build_path(array('view', 'view.php')));
         }
         else {
-            $view = 'detail';
+            $view = 'update';
             $pagetitle = 'Détail utilisateur';
 
             require_once(File::build_path(array('view', 'view.php')));
@@ -36,7 +36,7 @@ class ControllerUtilisateur {
     }
 
     public static function delete() {
-        ModelUtilisateur::delete($_GET['idUtilisateur']);
+        ModelUtilisateur::delete($_GET['loginUtilisateur']);
 
         $tab_utilisateur = ModelUtilisateur::selectAll();
 
@@ -54,7 +54,7 @@ class ControllerUtilisateur {
     }
 
     public static function create(){
-        $idUtilisateur = '';
+        $loginUtilisateur = '';
         $nomUtilisateur = '';
         $prenomUtilisateur = '';
 
@@ -65,8 +65,8 @@ class ControllerUtilisateur {
     }
 
     public static function update(){
-        $idUtilisateur = htmlspecialchars("" . $_GET['idUtilisateur']);
-        $utilisateur = ModelUtilisateur::select($idUtilisateur);
+        $loginUtilisateur = htmlspecialchars("" . $_GET['loginUtilisateur']);
+        $utilisateur = ModelUtilisateur::select($loginUtilisateur);
 
         $nomUtilisateur = htmlspecialchars("{$utilisateur->get('nomUtilisateur')}");
         $prenomUtilisateur = htmlspecialchars("{$utilisateur->get('prenomUtilisateur')}");
@@ -82,8 +82,11 @@ class ControllerUtilisateur {
 
     public static function created(){
         $data = array(
-            'nomUtilisateur' => $_POST['nomUtilisateur'] ,
-            'prenomUtilisateur' => $_POST['prenomUtilisateur']);
+            'loginUtilisateur' => $_POST['loginUtilisateur'],
+            'nomUtilisateur' => $_POST['nomUtilisateur'],
+            'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+            'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
+        );
 
         $erreur = ModelUtilisateur::save($data);
 
@@ -103,11 +106,14 @@ class ControllerUtilisateur {
 
     public static function updated(){
         $data = array(
+            'loginUtilisateur' => $_POST['loginUtilisateur'],
             'nomUtilisateur' => $_POST['nomUtilisateur'] ,
-            'prenomUtilisateur' => $_POST['prenomUtilisateur']);
+            'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+            'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
+        );
 
-        $idUtilisateur = $_POST['idUtilisateur'];
-        $erreur = ModelUtilisateur::update($data, $idUtilisateur);
+        $loginUtilisateur = $_POST['loginUtilisateur'];
+        $erreur = ModelUtilisateur::update($data, $loginUtilisateur);
 
         if($erreur==0) {
             $view='error';
@@ -121,5 +127,43 @@ class ControllerUtilisateur {
 
             require_once(File::build_path(array('view', 'view.php')));
         }
+    }
+
+    public static function connect() {
+        $view = 'connect';
+        $pagetitle = 'Page de connexion';
+
+        require_once(File::build_path(array('view', 'view.php')));
+    }
+
+    public static function connected () {
+        $loginUtilisateur = $_POST['loginUtilisateur'];
+        $mdpUtilisateur = $_POST['mdpUtilisateur'];
+
+        $userExists = ModelUtilisateur::checkPassword($loginUtilisateur, Security::hasher($mdpUtilisateur));
+
+        if ($userExists) {
+            $utilisateur = ModelUtilisateur::select($loginUtilisateur);
+            $_SESSION['loginUtilisateur'] = $loginUtilisateur;
+
+            $view = 'detail';
+            $pagetitle = 'Profil';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            $errorId = 'Identifiant ou mot de passe incorrect. ';
+            $view = 'connect';
+            $pagetitle = 'Page de connexion';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+    }
+
+    public static function deconnect() {
+        session_unset();
+        session_destroy();
+        setcookie(session_name(), '', time()-1);
+        ControllerRecette::readAll();
     }
 }
