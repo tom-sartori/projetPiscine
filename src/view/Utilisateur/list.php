@@ -25,20 +25,21 @@ foreach ($tab_utilisateur as $utilisateur) {
         <label for="prenom{$object}" >Prénom : </label>
         <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
 EOT;
-    if ($isUser) {
+    if ($isUser || Session::isAdmin()) {
         echo <<< EOT
         <a href = "./index.php?controller=Utilisateur&action=update&loginUtilisateur={$raw_loginUtilisateur}" >
             <button type = "button" > Modifier</button >
-        </a > 
-        
+        </a >
+EOT;
+    }
+    if (Session::isAdmin()) {
+        echo <<< EOT
         <a href = "./index.php?controller={$object}&action=delete&{$primary}={$raw_loginUtilisateur}" >
             <button type = "button" > Supprimer</button >
         </a > 
     </li >
 EOT;
-
-}
-
+    }
 
 }
 

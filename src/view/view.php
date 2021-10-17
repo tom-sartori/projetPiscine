@@ -1,3 +1,11 @@
+<?php
+
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -49,7 +57,7 @@
                         <a href="index.php?controller=Utilisateur&action=readAll">Utilisateurs</a>
                         <div class="deroule">
                             <a href="index.php?controller=Utilisateur&action=readAll">Voir la liste</a>
-                            <a href="index.php?controller=Utilisateur&action=create">Ajouter un utilisateur</a>
+                            <?= $isConnected ? '<a href="index.php?controller=Utilisateur&action=create">Ajouter un utilisateur</a>' : '' ?>
                         </div>
                     </li>
                 </ul>

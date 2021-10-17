@@ -6,6 +6,7 @@ $primary = 'loginUtilisateur';
 $isUpdate = $_GET['action'] == 'update';
 $action = ($isUpdate)?'updated':'created';
 $valueSubmitButton = ($isUpdate)?'Modifier':'Ajouter';
+$readOnlyOnUpdate = ($isUpdate)?'readonly':'';
 
 
 echo <<< EOT
@@ -13,7 +14,7 @@ echo <<< EOT
     <form method="post" action="index.php?controller={$object}&action={$action}">
     
         <label for="login{$object}" >Login : </label>
-        <input type="text" name="login{$object}" value="$loginUtilisateur" required>
+        <input type="text" name="login{$object}" value="$loginUtilisateur" required {$readOnlyOnUpdate}>
         
         <label for="nom{$object}" >Nom : </label>
         <input type="text" name="nom{$object}" value="{$nomUtilisateur}" required>

@@ -39,8 +39,12 @@ class ControllerUtilisateur {
         $loginUtilisateur = $_GET['loginUtilisateur'];
 
         // On vérifie que l'utilisateur qui supprime est bien celui supprimé.
-        if (Session::isUser($loginUtilisateur)) {
+        if (Session::isAdmin()) {
             ModelUtilisateur::delete($loginUtilisateur);
+
+            if ($loginUtilisateur == $_SESSION['loginUtilisateur']) {
+                self::deconnect();
+            }
 
             $tab_utilisateur = ModelUtilisateur::selectAll();
 
@@ -48,6 +52,9 @@ class ControllerUtilisateur {
             $pagetitle = 'Utilisateur supprimé';
 
             require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
         }
     }
 
@@ -59,19 +66,24 @@ class ControllerUtilisateur {
     }
 
     public static function create(){
-        $loginUtilisateur = '';
-        $nomUtilisateur = '';
-        $prenomUtilisateur = '';
+        if (Session::isConnected()) {
+            $loginUtilisateur = '';
+            $nomUtilisateur = '';
+            $prenomUtilisateur = '';
 
-        $view = 'update';
-        $pagetitle = 'Formulaire d\'ajout';
+            $view = 'update';
+            $pagetitle = 'Formulaire d\'ajout';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function update(){
         $loginUtilisateur = htmlspecialchars("" . $_GET['loginUtilisateur']);
-        if (Session::isUser($loginUtilisateur)) {
+        if (Session::isUser($loginUtilisateur) || Session::isAdmin()) {
             $utilisateur = ModelUtilisateur::select($loginUtilisateur);
 
             $nomUtilisateur = htmlspecialchars("{$utilisateur->get('nomUtilisateur')}");
@@ -91,26 +103,30 @@ class ControllerUtilisateur {
     }
 
     public static function created(){
-        $data = array(
-            'loginUtilisateur' => $_POST['loginUtilisateur'],
-            'nomUtilisateur' => $_POST['nomUtilisateur'],
-            'prenomUtilisateur' => $_POST['prenomUtilisateur'],
-            'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
-        );
+        if (Session::isConnected()) {
+            $data = array(
+                'loginUtilisateur' => $_POST['loginUtilisateur'],
+                'nomUtilisateur' => $_POST['nomUtilisateur'],
+                'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+                'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
+            );
 
-        $erreur = ModelUtilisateur::save($data);
+            $erreur = ModelUtilisateur::save($data);
 
-        if ($erreur == 0) {
-            $view='error';
-            $pagetitle='Erreur de création';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur de création';
+            } else {
+                $tab_utilisateur = ModelUtilisateur::selectAll();
+
+                $view = 'created';
+                $pagetitle = 'Création validée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
-        else{
-            $tab_utilisateur = ModelUtilisateur::selectAll();
-
-            $view='created';
-            $pagetitle='Création validée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+        else {
+            self::error();
         }
     }
 
@@ -118,7 +134,7 @@ class ControllerUtilisateur {
         $loginUtilisateur = $_POST['loginUtilisateur'];
 
         // On vérifie que l'utilisateur qui modifie conincide avec celui modifié.
-        if (Session::isUser($loginUtilisateur)) {
+        if (Session::isUser($loginUtilisateur) || Session::isAdmin()) {
 
             $data = array(
                 'loginUtilisateur' => $_POST['loginUtilisateur'],
@@ -141,6 +157,9 @@ class ControllerUtilisateur {
                 require_once(File::build_path(array('view', 'view.php')));
             }
         }
+        else {
+            self::error();
+        }
     }
 
     public static function connect() {
@@ -159,6 +178,7 @@ class ControllerUtilisateur {
         if ($userExists) {
             $utilisateur = ModelUtilisateur::select($loginUtilisateur);
             $_SESSION['loginUtilisateur'] = $loginUtilisateur;
+            $_SESSION['adminUtilisateur'] = ModelUtilisateur::getAdminUtilisateur($loginUtilisateur) == 1;
 
             $view = 'detail';
             $pagetitle = 'Profil';

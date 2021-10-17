@@ -8,6 +8,7 @@ class ModelUtilisateur extends Model {
     private $loginUtilisateur;
     private $nomUtilisateur;
     private $prenomUtilisateur;
+    private $adminUtilisateur;
 
     protected static $nomTable = 'utilisateur';
     protected static $primary = 'loginUtilisateur';
@@ -54,6 +55,27 @@ class ModelUtilisateur extends Model {
             return false;
         }
         return $result == 1;
+    }
+
+    public static function getAdminUtilisateur ($loginUtilisateur) {
+        try{
+            $sql = '
+                SELECT adminUtilisateur
+                FROM ' . static::$nomTable . ' 
+                WHERE loginUtilisateur =:login;';
+
+            $values = array(
+                "login" => $loginUtilisateur
+            );
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+            $result = $req_prep->fetch()['adminUtilisateur'];
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return 0;
+        }
+        return $result;
     }
 }
 
