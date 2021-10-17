@@ -59,7 +59,7 @@ EOT;
     else {
 
         echo <<< EOT
-            <li>
+            <li class="listeEspace">
 
                 <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
                     <button type="button">Modifier</button>

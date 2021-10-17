@@ -14,10 +14,10 @@
 <!-- Ici commence le menu-->
 <div class="center">
     <nav>
-        <ul>
+        <ul class="ulmenu">
 
-            <li>
-                <a href="">Accueil</a>
+            <li class="limenu">
+                <a class="amenu" href="">Accueil</a>
             </li>
 
             <li class="deroulant">
@@ -38,12 +38,12 @@
                 </div>
             </li>
 
-            <li>
-                <a href="index.php?controller=Allergene&action=readAll">Allergenes</a>
+            <li class="limenu">
+                <a class="amenu" href="index.php?controller=Allergene&action=readAll">Allergenes</a>
             </li>
 
-            <li>
-                <a href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
+            <li class="limenu">
+                <a class="amenu" href="index.php?controller=Utilisateur&action=readAll">Utilisateur</a>
             </li>
         </ul>
     </nav>

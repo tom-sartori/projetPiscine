@@ -43,10 +43,10 @@ foreach ($tab_utilisateur as $utilisateur) {
         echo <<< EOT
         <li>
             <form method="post" action="index.php?controller={$object}&action=updated">                 
-                <label for="nom{$object}" >Nom : </label>
+                <label class="saut" for="nom{$object}" >Nom : </label>
                 <input type="text" name="nom{$object}" value="{$spe_nomUtilisateur}">
                 
-                <label for="prenom{$object}" >Prénom : </label>
+                <label class="saut" for="prenom{$object}" >Prénom : </label>
                 <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}">
                 
                 <input hidden name="{$primary}" value="{$spe_iUtilisateur}">
