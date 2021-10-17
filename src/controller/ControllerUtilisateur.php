@@ -36,14 +36,19 @@ class ControllerUtilisateur {
     }
 
     public static function delete() {
-        ModelUtilisateur::delete($_GET['loginUtilisateur']);
+        $loginUtilisateur = $_GET['loginUtilisateur'];
 
-        $tab_utilisateur = ModelUtilisateur::selectAll();
+        // On vérifie que l'utilisateur qui supprime est bien celui supprimé.
+        if (Session::isUser($loginUtilisateur)) {
+            ModelUtilisateur::delete($loginUtilisateur);
 
-        $view = 'deleted';
-        $pagetitle = 'Utilisateur supprimé';
+            $tab_utilisateur = ModelUtilisateur::selectAll();
 
-        require_once(File::build_path(array('view', 'view.php')));
+            $view = 'deleted';
+            $pagetitle = 'Utilisateur supprimé';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
     }
 
     public static function error(){
@@ -66,18 +71,23 @@ class ControllerUtilisateur {
 
     public static function update(){
         $loginUtilisateur = htmlspecialchars("" . $_GET['loginUtilisateur']);
-        $utilisateur = ModelUtilisateur::select($loginUtilisateur);
+        if (Session::isUser($loginUtilisateur)) {
+            $utilisateur = ModelUtilisateur::select($loginUtilisateur);
 
-        $nomUtilisateur = htmlspecialchars("{$utilisateur->get('nomUtilisateur')}");
-        $prenomUtilisateur = htmlspecialchars("{$utilisateur->get('prenomUtilisateur')}");
+            $nomUtilisateur = htmlspecialchars("{$utilisateur->get('nomUtilisateur')}");
+            $prenomUtilisateur = htmlspecialchars("{$utilisateur->get('prenomUtilisateur')}");
 
 
-        $tab_utilisateur = ModelUtilisateur::selectAll();
+            $tab_utilisateur = ModelUtilisateur::selectAll();
 
-        $view = 'update';
-        $pagetitle = 'Formulaire de mise à jour';
+            $view = 'update';
+            $pagetitle = 'Formulaire de mise à jour';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::connect();
+        }
     }
 
     public static function created(){
@@ -105,27 +115,31 @@ class ControllerUtilisateur {
     }
 
     public static function updated(){
-        $data = array(
-            'loginUtilisateur' => $_POST['loginUtilisateur'],
-            'nomUtilisateur' => $_POST['nomUtilisateur'] ,
-            'prenomUtilisateur' => $_POST['prenomUtilisateur'],
-            'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
-        );
-
         $loginUtilisateur = $_POST['loginUtilisateur'];
-        $erreur = ModelUtilisateur::update($data, $loginUtilisateur);
 
-        if($erreur==0) {
-            $view='error';
-            $pagetitle='Erreur mise à jour';
-        }
-        else{
-            $tab_utilisateur = ModelUtilisateur::selectAll();
+        // On vérifie que l'utilisateur qui modifie conincide avec celui modifié.
+        if (Session::isUser($loginUtilisateur)) {
 
-            $view = 'updated';
-            $pagetitle = 'Mise à jour effectuée';
+            $data = array(
+                'loginUtilisateur' => $_POST['loginUtilisateur'],
+                'nomUtilisateur' => $_POST['nomUtilisateur'],
+                'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+                'mdpUtilisateur' => Security::hasher($_POST['mdpUtilisateur'])
+            );
 
-            require_once(File::build_path(array('view', 'view.php')));
+            $erreur = ModelUtilisateur::update($data, $loginUtilisateur);
+
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur mise à jour';
+            } else {
+                $tab_utilisateur = ModelUtilisateur::selectAll();
+
+                $view = 'updated';
+                $pagetitle = 'Mise à jour effectuée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
     }
 
