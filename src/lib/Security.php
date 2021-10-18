@@ -2,12 +2,12 @@
 
 class Security {
 
-    private static $seed="idfhdfhfsdbfsdhfSDFGJSFIGQFI86453456486";
+    // Seed ajouté au début du mdp afin d'éviter les attaques dictionnaires.
+    private static $seed="Nf0J51GSPVtbz6F6tRU7";
 
-    public static function hacher($texte_en_clair) {
-        $textebis= self::$seed . $texte_en_clair;
-        $texte_hache = hash('sha256', $textebis);
-        return $texte_hache;
+    // Permet de "hasher" le mdp en param.
+    public static function hasher ($clearPassword) {
+        return hash('sha256', self::$seed . $clearPassword);
     }
 }
 

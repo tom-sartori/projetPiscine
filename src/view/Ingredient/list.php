@@ -3,6 +3,9 @@
 $object = static::$object;
 $primary = 'idIngredient';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
 echo <<< EOT
     <script type="text/javascript" src="js/ingredientScript.js" defer></script>
 EOT;
@@ -71,26 +74,27 @@ foreach ($tab_ingredient as $ingredient) {
             <td>{$spe_idCategorieIngredient}</td>
             <td>{$spe_idAllergene}</td>
             <td> 
-                <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
-                    <button type="button">Modifier</button>
-                </a> 
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
-                    <button type="button">Supprimer</button>
-                </a> 
-            </td>
-        </tr>   
-
 EOT;
+    if ($isConnected) {
+        echo <<< EOT
+            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
+                <button type="button">Modifier</button>
+            </a> 
+EOT;
+    }
+    if ($isAdmin) {
+        echo <<< EOT
+            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
+                <button type="button">Supprimer</button>
+            </a> 
+EOT;
+    }
 
+    echo '
+            </td>
+        </tr>';
 }
 
+echo '</table>';
 
-
-echo '  </ul>
-    </div>';
-
-
-echo <<< EOT
-    </table> 
-EOT;
 ?>
