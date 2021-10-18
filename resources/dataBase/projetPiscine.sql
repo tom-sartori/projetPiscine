@@ -2,22 +2,22 @@
 -- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Oct 13, 2021 at 09:08 PM
--- Server version: 5.7.32
--- PHP Version: 7.4.12
+-- Hôte : localhost:8889
+-- Généré le : lun. 18 oct. 2021 à 06:00
+-- Version du serveur :  5.7.32
+-- Version de PHP : 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `projetPiscine`
+-- Base de données : `projetPiscine`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `allergene`
+-- Structure de la table `allergene`
 --
 
 CREATE TABLE `allergene` (
@@ -26,7 +26,7 @@ CREATE TABLE `allergene` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `allergene`
+-- Déchargement des données de la table `allergene`
 --
 
 INSERT INTO `allergene` (`idAllergene`, `nomAllergene`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `allergene` (`idAllergene`, `nomAllergene`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asso_etape_ingredient`
+-- Structure de la table `asso_etape_ingredient`
 --
 
 CREATE TABLE `asso_etape_ingredient` (
@@ -62,7 +62,7 @@ CREATE TABLE `asso_etape_ingredient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `asso_etape_ingredient`
+-- Déchargement des données de la table `asso_etape_ingredient`
 --
 
 INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALUES
@@ -87,7 +87,7 @@ INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asso_recette_categorieRecette`
+-- Structure de la table `asso_recette_categorieRecette`
 --
 
 CREATE TABLE `asso_recette_categorieRecette` (
@@ -96,7 +96,7 @@ CREATE TABLE `asso_recette_categorieRecette` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `asso_recette_categorieRecette`
+-- Déchargement des données de la table `asso_recette_categorieRecette`
 --
 
 INSERT INTO `asso_recette_categorieRecette` (`idRecette`, `idCategorieRecette`) VALUES
@@ -111,7 +111,7 @@ INSERT INTO `asso_recette_categorieRecette` (`idRecette`, `idCategorieRecette`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asso_recette_etape`
+-- Structure de la table `asso_recette_etape`
 --
 
 CREATE TABLE `asso_recette_etape` (
@@ -121,7 +121,7 @@ CREATE TABLE `asso_recette_etape` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `asso_recette_etape`
+-- Déchargement des données de la table `asso_recette_etape`
 --
 
 INSERT INTO `asso_recette_etape` (`idRecette`, `idEtape`, `ordre`) VALUES
@@ -138,31 +138,18 @@ INSERT INTO `asso_recette_etape` (`idRecette`, `idEtape`, `ordre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asso_recette_utilisateur`
+-- Structure de la table `asso_recette_utilisateur`
 --
 
 CREATE TABLE `asso_recette_utilisateur` (
   `idRecette` int(11) NOT NULL,
-  `idUtilisateur` int(11) NOT NULL
+  `loginUtilisateur` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `asso_recette_utilisateur`
---
-
-INSERT INTO `asso_recette_utilisateur` (`idRecette`, `idUtilisateur`) VALUES
-(1, 2),
-(1, 5),
-(2, 3),
-(3, 5),
-(3, 2),
-(4, 4),
-(5, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorieIngredient`
+-- Structure de la table `categorieIngredient`
 --
 
 CREATE TABLE `categorieIngredient` (
@@ -171,7 +158,7 @@ CREATE TABLE `categorieIngredient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categorieIngredient`
+-- Déchargement des données de la table `categorieIngredient`
 --
 
 INSERT INTO `categorieIngredient` (`idCategorieIngredient`, `nomCategorieIngredient`) VALUES
@@ -184,7 +171,7 @@ INSERT INTO `categorieIngredient` (`idCategorieIngredient`, `nomCategorieIngredi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorieRecette`
+-- Structure de la table `categorieRecette`
 --
 
 CREATE TABLE `categorieRecette` (
@@ -193,7 +180,7 @@ CREATE TABLE `categorieRecette` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categorieRecette`
+-- Déchargement des données de la table `categorieRecette`
 --
 
 INSERT INTO `categorieRecette` (`idCategorieRecette`, `nomCategorieRecette`) VALUES
@@ -211,7 +198,7 @@ INSERT INTO `categorieRecette` (`idCategorieRecette`, `nomCategorieRecette`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etape`
+-- Structure de la table `etape`
 --
 
 CREATE TABLE `etape` (
@@ -222,7 +209,7 @@ CREATE TABLE `etape` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `etape`
+-- Déchargement des données de la table `etape`
 --
 
 INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES
@@ -239,7 +226,7 @@ INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ingredient`
+-- Structure de la table `ingredient`
 --
 
 CREATE TABLE `ingredient` (
@@ -254,7 +241,7 @@ CREATE TABLE `ingredient` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `ingredient`
+-- Déchargement des données de la table `ingredient`
 --
 
 INSERT INTO `ingredient` (`idIngredient`, `nomIngredient`, `quantiteAchat`, `idUniteQuantite`, `prixHT`, `idTaxe`, `idCategorieIngredient`, `idAllergene`) VALUES
@@ -461,7 +448,7 @@ INSERT INTO `ingredient` (`idIngredient`, `nomIngredient`, `quantiteAchat`, `idU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recette`
+-- Structure de la table `recette`
 --
 
 CREATE TABLE `recette` (
@@ -474,7 +461,7 @@ CREATE TABLE `recette` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `recette`
+-- Déchargement des données de la table `recette`
 --
 
 INSERT INTO `recette` (`idRecette`, `nomRecette`, `nbCouvert`, `descriptif`, `coefficient`, `chargeSalariale`) VALUES
@@ -487,7 +474,7 @@ INSERT INTO `recette` (`idRecette`, `nomRecette`, `nbCouvert`, `descriptif`, `co
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taxe`
+-- Structure de la table `taxe`
 --
 
 CREATE TABLE `taxe` (
@@ -496,7 +483,7 @@ CREATE TABLE `taxe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `taxe`
+-- Déchargement des données de la table `taxe`
 --
 
 INSERT INTO `taxe` (`idTaxe`, `montantTaxe`) VALUES
@@ -507,7 +494,7 @@ INSERT INTO `taxe` (`idTaxe`, `montantTaxe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uniteQuantite`
+-- Structure de la table `uniteQuantite`
 --
 
 CREATE TABLE `uniteQuantite` (
@@ -516,7 +503,7 @@ CREATE TABLE `uniteQuantite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `uniteQuantite`
+-- Déchargement des données de la table `uniteQuantite`
 --
 
 INSERT INTO `uniteQuantite` (`idUnite`, `nomUnite`) VALUES
@@ -530,84 +517,88 @@ INSERT INTO `uniteQuantite` (`idUnite`, `nomUnite`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateur`
+-- Structure de la table `utilisateur`
 --
 
 CREATE TABLE `utilisateur` (
-  `idUtilisateur` int(11) NOT NULL,
+  `loginUtilisateur` varchar(64) NOT NULL,
   `nomUtilisateur` varchar(50) NOT NULL,
-  `prenomUtilisateur` varchar(50) NOT NULL
+  `prenomUtilisateur` varchar(50) NOT NULL,
+  `mdpUtilisateur` varchar(64) NOT NULL,
+  `adminUtilisateur` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `utilisateur`
+-- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`idUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`) VALUES
-(1, 'Croche', 'Sarah'),
-(2, 'Dubois', 'Marie'),
-(3, 'Onette', 'Camille'),
-(4, 'Bricot', 'Judas'),
-(5, 'Masse', 'Lallie');
+INSERT INTO `utilisateur` (`loginUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `mdpUtilisateur`, `adminUtilisateur`) VALUES
+('bricotj', 'Bricot', 'Judas', '9c1e0b27da16fca1caabdffb0e426d307ce2a4daae84b3a49fe3ce276fca86e4', 0),
+('croches', 'Croche', 'Sarah', 'c02675866546acb53b0f1e4090c4a1efddbf64a9be9adc442a241388964b0715', 0),
+('duboism', 'Dubois', 'Marie', '6d8943fba71433f4382c66aa57115e9022b352f93c6575052271d22afc6b3893', 1),
+('lassaucej', 'Lassauce', 'Jean', 'bdee40d35638fdede616eeb1a05aaa524d31986a8e1ab78a0fbbeabdc5df26ce', 0),
+('massel', 'Masse', 'Lalie', '69ba25bbedd860b66fecfb31e38bbe97807ad03fd267a7c8429d8834bc0e914b', 0),
+('onettec', 'Onette', 'Camille', '8eb98f6fcfa3ea3e28c54ee29ee3dc5cfd1f61afae07713a9224099e130af8d8', 0),
+('test', 'test', 'test', 'dfe57541d66b7426a43d4d7a0c4ed447c1b6d8ccf63c61b298399f18bbec067d', 0);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `allergene`
+-- Index pour la table `allergene`
 --
 ALTER TABLE `allergene`
   ADD PRIMARY KEY (`idAllergene`);
 
 --
--- Indexes for table `asso_etape_ingredient`
+-- Index pour la table `asso_etape_ingredient`
 --
 ALTER TABLE `asso_etape_ingredient`
   ADD KEY `idEtape` (`idEtape`),
   ADD KEY `idIngredient` (`idIngredient`);
 
 --
--- Indexes for table `asso_recette_categorieRecette`
+-- Index pour la table `asso_recette_categorieRecette`
 --
 ALTER TABLE `asso_recette_categorieRecette`
   ADD KEY `idRecette` (`idRecette`),
   ADD KEY `idCategorieRecette` (`idCategorieRecette`);
 
 --
--- Indexes for table `asso_recette_etape`
+-- Index pour la table `asso_recette_etape`
 --
 ALTER TABLE `asso_recette_etape`
   ADD KEY `idRecette` (`idRecette`),
   ADD KEY `idEtape` (`idEtape`);
 
 --
--- Indexes for table `asso_recette_utilisateur`
+-- Index pour la table `asso_recette_utilisateur`
 --
 ALTER TABLE `asso_recette_utilisateur`
   ADD KEY `idRecette` (`idRecette`),
-  ADD KEY `idUtilisateur` (`idUtilisateur`);
+  ADD KEY `loginUtilisateur` (`loginUtilisateur`);
 
 --
--- Indexes for table `categorieIngredient`
+-- Index pour la table `categorieIngredient`
 --
 ALTER TABLE `categorieIngredient`
   ADD PRIMARY KEY (`idCategorieIngredient`);
 
 --
--- Indexes for table `categorieRecette`
+-- Index pour la table `categorieRecette`
 --
 ALTER TABLE `categorieRecette`
   ADD PRIMARY KEY (`idCategorieRecette`);
 
 --
--- Indexes for table `etape`
+-- Index pour la table `etape`
 --
 ALTER TABLE `etape`
   ADD PRIMARY KEY (`idEtape`);
 
 --
--- Indexes for table `ingredient`
+-- Index pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
   ADD PRIMARY KEY (`idIngredient`),
@@ -617,121 +608,115 @@ ALTER TABLE `ingredient`
   ADD KEY `idUniteQuantite` (`idUniteQuantite`);
 
 --
--- Indexes for table `recette`
+-- Index pour la table `recette`
 --
 ALTER TABLE `recette`
   ADD PRIMARY KEY (`idRecette`);
 
 --
--- Indexes for table `taxe`
+-- Index pour la table `taxe`
 --
 ALTER TABLE `taxe`
   ADD PRIMARY KEY (`idTaxe`);
 
 --
--- Indexes for table `uniteQuantite`
+-- Index pour la table `uniteQuantite`
 --
 ALTER TABLE `uniteQuantite`
   ADD PRIMARY KEY (`idUnite`);
 
 --
--- Indexes for table `utilisateur`
+-- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`idUtilisateur`);
+  ADD PRIMARY KEY (`loginUtilisateur`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `allergene`
+-- AUTO_INCREMENT pour la table `allergene`
 --
 ALTER TABLE `allergene`
-  MODIFY `idAllergene` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idAllergene` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT for table `categorieIngredient`
+-- AUTO_INCREMENT pour la table `categorieIngredient`
 --
 ALTER TABLE `categorieIngredient`
   MODIFY `idCategorieIngredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `categorieRecette`
+-- AUTO_INCREMENT pour la table `categorieRecette`
 --
 ALTER TABLE `categorieRecette`
   MODIFY `idCategorieRecette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `etape`
+-- AUTO_INCREMENT pour la table `etape`
 --
 ALTER TABLE `etape`
   MODIFY `idEtape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `ingredient`
+-- AUTO_INCREMENT pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
   MODIFY `idIngredient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
--- AUTO_INCREMENT for table `recette`
+-- AUTO_INCREMENT pour la table `recette`
 --
 ALTER TABLE `recette`
-  MODIFY `idRecette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idRecette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `taxe`
+-- AUTO_INCREMENT pour la table `taxe`
 --
 ALTER TABLE `taxe`
   MODIFY `idTaxe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `uniteQuantite`
+-- AUTO_INCREMENT pour la table `uniteQuantite`
 --
 ALTER TABLE `uniteQuantite`
   MODIFY `idUnite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `utilisateur`
---
-ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `asso_etape_ingredient`
+-- Contraintes pour la table `asso_etape_ingredient`
 --
 ALTER TABLE `asso_etape_ingredient`
   ADD CONSTRAINT `fk_asso_ingredient_idEtape` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_asso_ingredient_idIngredient` FOREIGN KEY (`idIngredient`) REFERENCES `ingredient` (`idIngredient`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `asso_recette_categorieRecette`
+-- Contraintes pour la table `asso_recette_categorieRecette`
 --
 ALTER TABLE `asso_recette_categorieRecette`
   ADD CONSTRAINT `fk_asso_idCategorieRecette` FOREIGN KEY (`idCategorieRecette`) REFERENCES `categorieRecette` (`idCategorieRecette`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_asso_idRecette` FOREIGN KEY (`idRecette`) REFERENCES `recette` (`idRecette`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `asso_recette_etape`
+-- Contraintes pour la table `asso_recette_etape`
 --
 ALTER TABLE `asso_recette_etape`
   ADD CONSTRAINT `fk_asso_etape_idEtape` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_asso_etape_idRecette` FOREIGN KEY (`idRecette`) REFERENCES `recette` (`idRecette`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `asso_recette_utilisateur`
+-- Contraintes pour la table `asso_recette_utilisateur`
 --
 ALTER TABLE `asso_recette_utilisateur`
   ADD CONSTRAINT `fk_asso_RU_idRecette` FOREIGN KEY (`idRecette`) REFERENCES `recette` (`idRecette`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_asso_RU_idUtilisateur` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_asso_RU_loginUtilisateur` FOREIGN KEY (`loginUtilisateur`) REFERENCES `utilisateur` (`loginUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `ingredient`
+-- Contraintes pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
   ADD CONSTRAINT `fk_idAllergene ` FOREIGN KEY (`idAllergene`) REFERENCES `allergene` (`idAllergene`) ON DELETE CASCADE ON UPDATE CASCADE,
