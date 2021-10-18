@@ -35,7 +35,7 @@ $isAdmin = Session::isAdmin();
                         <a href="index.php?controller=Recette&action=readAll" class="dropbtn">Recettes</a>
                         <div class="deroule">
                             <a href="index.php?controller=Recette&action=readAll">Voir la liste</a>
-                            <a href="index.php?controller=Recette&action=create">Ajouter une recette</a>
+                            <?= $isConnected ? '<a href="index.php?controller=Recette&action=create">Ajouter une recette</a>' : '' ?>
                             <a href="index.php?controller=CategorieRecette&action=readAll">Catégories</a>
                         </div>
                     </li>
