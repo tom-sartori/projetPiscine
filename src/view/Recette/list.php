@@ -35,12 +35,6 @@ echo <<< EOT
 EOT;
 
 echo <<< EOT
-    <div id="divPrintButton{$object}">
-        <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
-    </div>
-EOT;
-
-echo <<< EOT
     <div id="divList{$object}"> 
         <ul id="ulList{$object}">
 EOT;
@@ -55,7 +49,7 @@ foreach ($tab_recette as $recette) {
 
     if ($isConnected) {
         echo <<< EOT
-            <a class="buttonAlign" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
+            <a class="buttonAlign name{$object}" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
                 <button class ="buttonModSize">
                     <img class = "iconMod" src="image/edit.png" alt="Modifier" />
                 </button>

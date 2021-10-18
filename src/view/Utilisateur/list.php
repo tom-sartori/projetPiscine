@@ -27,7 +27,7 @@ foreach ($tab_utilisateur as $utilisateur) {
 EOT;
     if ($isUser || Session::isAdmin()) {
         echo <<< EOT
-            <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_loginUtilisateur}">
                 <button class ="buttonModSize">
                     <img class = "iconMod" src="image/edit.png" alt="Modifier" />
                 </button>
@@ -37,7 +37,7 @@ EOT;
   
     if (Session::isAdmin()) {
         echo <<< EOT
-            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
+            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_loginUtilisateur}">
                 <button class="buttonSupSize">
                     <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
                 </button>

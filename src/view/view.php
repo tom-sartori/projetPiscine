@@ -55,7 +55,7 @@ $isAdmin = Session::isAdmin();
                     </li>
 
                     <li class="deroulant">
-                        <a href="index.php?controller=Utilisateur&action=readAll">Chefs</a>
+                        <a href="index.php?controller=Utilisateur&action=readAll" class="dropbtn">Chefs</a>
                         <div class="deroule">
                             <a href="index.php?controller=Utilisateur&action=readAll">Voir la liste</a>
                             <?= $isConnected ? '<a href="index.php?controller=Utilisateur&action=create">Ajouter un chef</a>' : '' ?>
