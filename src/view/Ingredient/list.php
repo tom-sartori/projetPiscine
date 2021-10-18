@@ -13,14 +13,14 @@ EOT;
 
 echo <<< EOT
     <div id="divSearch{$object}">
-        <label>Recherche </label>
+        <label class="class12">Recherche </label>
         <input id="inputSearch{$object}" name="nom{$object}" type="text">
     </div>
 EOT;
 
 echo <<< EOT
     <div id="divOrder{$object}">
-        <label for="order{$object}">Trier </label>
+        <label class="class12" for="order{$object}">Trier </label>
         <select name="order{$object}" id="selectOrder{$object}" value="nom{$object}ASC">
             <option value="nom{$object}ASC">Ordre alphabétique</option>
             <option value="nom{$object}DESC">Ordre anti-alphabétique</option>
@@ -75,18 +75,24 @@ foreach ($tab_ingredient as $ingredient) {
             <td>{$spe_idAllergene}</td>
             <td> 
 EOT;
+  
     if ($isConnected) {
         echo <<< EOT
-            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
-                <button type="button">Modifier</button>
-            </a> 
+                <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
+                    <button class ="buttonModSizeIngr">
+                        <img class = "iconModIngr" src="image/edit.png" alt="Modifier" />
+                    </button>
+                </a>
 EOT;
     }
+  
     if ($isAdmin) {
         echo <<< EOT
-            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
-                <button type="button">Supprimer</button>
-            </a> 
+                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
+                    <button class ="buttonSupSizeIngr">
+                        <img class = "iconSupIngr" src="image/sup.png" alt="Supprimer" />
+                    </button>
+                </a> 
 EOT;
     }
 

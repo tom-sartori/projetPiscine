@@ -19,24 +19,29 @@ foreach ($tab_utilisateur as $utilisateur) {
 
     echo <<< EOT
     <li>
-        <label for="nom{$object}">Nom : </label>
-        <input type="text" name="nom{$object}" value="{$spe_nomUtilisateur}" readonly>
-        
-        <label for="prenom{$object}" >Prénom : </label>
-        <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
+            <label for="nom{$object}" >Nom : </label>
+            <input type="text" name="nom{$object}" value="{$spe_nomUtilisateur}" readonly>
+            
+            <label for="prenom{$object}" >Prénom : </label>
+            <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
 EOT;
     if ($isUser || Session::isAdmin()) {
         echo <<< EOT
-        <a href = "./index.php?controller=Utilisateur&action=update&loginUtilisateur={$raw_loginUtilisateur}" >
-            <button type = "button" > Modifier</button >
-        </a >
+            <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="image/edit.png" alt="Modifier" />
+                </button>
+            </a>
 EOT;
     }
+  
     if (Session::isAdmin()) {
         echo <<< EOT
-        <a href = "./index.php?controller={$object}&action=delete&{$primary}={$raw_loginUtilisateur}" >
-            <button type = "button" > Supprimer</button >
-        </a > 
+            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
+                </button>
+            </a> 
     </li >
 EOT;
     }

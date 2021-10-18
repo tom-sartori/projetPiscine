@@ -11,7 +11,7 @@ if ($isUpdate) {
 
 <h1> <?=$isUpdate?'Modifier':'Ajouter'?> un ingrédient </h1>
 
-<div class = ajoutbox>
+<div>
 
     <form method="post" action="index.php?controller=<?=static::$object?>&action=<?=$isUpdate?'updated':'created' ?>">
 
@@ -51,7 +51,7 @@ if ($isUpdate) {
 
             <label for="idUniteQuantite"></label>
 <!--            TODO Check la valeur préremplie pour update. -->
-            <select name="idUniteQuantite" required>
+            <select class="unité" name="idUniteQuantite" required>
                 <option value="1">Kg</option>
                 <option value="2">L</option>
                 <option value="3">U</option>
@@ -72,10 +72,12 @@ if ($isUpdate) {
             </select>
         </div>
 
-        <div>
+        <div >
             <input hidden name="idIngredient" value="<?=$idIngredient?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
-            <button type="submit">Ajouter</button>
+            <div class="field-ingr">
+                <input class="submit" type="submit" value="Envoyer"/>
+            </div>
         </div>
 
     </form>

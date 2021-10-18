@@ -43,38 +43,48 @@ foreach ($tab_allergene as $allergene) {
 
     if ($isUpdate && ($idToUpdate == $allergene->get($primary))) {
         echo <<< EOT
-            <li>
-                <form method="post" action="index.php?controller={$object}&action=updated">
-                    <label for="nom{$object}">Nom : </label>
-                    <input type="text" name="nom{$object}" value="{$spe_nomAllergene}">
-                    
-                    <input hidden name="{$primary}" value="{$spe_idAllergene}">
-                    <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                    <input type="submit" value="Valider"/>
-                </form>
-            </li>
+        <li>
+            <form method="post" action="index.php?controller={$object}&action=updated">
+
+                
+                <input hidden name="{$primary}" value="{$spe_idAllergene}">
+                <input type="hidden" name="controller" value="<?=static::$object?>"/>
+
+                <button class="buttonCheckSize">
+                    <img class = "iconCheck" src="image/check.png" alt="Valider"/> </button>
+                </button> 
+
+                <!-- pour aligner les boutons modif et sup  et les mettre avant texte: ordre modifié-->
+
+                <label for="nom{$object}">Nom : </label>
+                <input type="text" name="nom{$object}" value="{$spe_nomAllergene}">
+
+            </form>
+        </li>
 EOT;
     }
     else {
-        echo <<< EOT
-            <li>
-               {$spe_nomAllergene}
-EOT;
+        echo '<li class="listeEspace">';
+      
         if ($isConnected) {
             echo <<< EOT
-                <a href = "./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
-                    <button type = "button" > Modifier</button>
-                </a>
+            <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="image/edit.png" alt="Modifier" />
+                </button>
+            </a>
 EOT;
         }
         if ($isAdmin){
             echo <<< EOT
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
-                    <button type="button">Supprimer</button>
-                </a>
+            <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
+                </button>
+            </a>
 EOT;
         }
-        echo '</li>';
+        echo $spe_nomAllergene . '</li>';
     }
 }
 

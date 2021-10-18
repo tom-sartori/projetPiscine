@@ -11,8 +11,9 @@ $isAdmin = Session::isAdmin();
 
 <head>
     <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <!-- <link rel="stylesheet" href="css/css_menu.css"> -->
     <script type="text/javascript" src="js/utils.js" defer></script>
+
     <meta charset="UTF-8">
     <title>
         <?= $pagetitle; ?>
@@ -28,9 +29,9 @@ $isAdmin = Session::isAdmin();
 
 </head>
     <body>
-        <div class="menu">
+        <div class="center">
             <nav>
-                <ul>
+                <ul class="ulmenu">
                     <li class="deroulant">
                         <a href="index.php?controller=Recette&action=readAll" class="dropbtn">Recettes</a>
                         <div class="deroule">
@@ -49,8 +50,8 @@ $isAdmin = Session::isAdmin();
                         </div>
                     </li>
 
-                    <li>
-                        <a href="index.php?controller=Allergene&action=readAll">Allergenes</a>
+                    <li class="limenu">
+                        <a class="amenu" href="index.php?controller=Allergene&action=readAll">Allergenes</a>
                     </li>
 
                     <li class="deroulant">
@@ -76,5 +77,4 @@ $isAdmin = Session::isAdmin();
     </footer>
 
 </body>
-
 </html>

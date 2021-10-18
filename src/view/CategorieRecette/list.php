@@ -41,43 +41,52 @@ foreach ($tab_categorieRecette as $categorieRecette) {
         echo <<< EOT
             <li>
                 <form method="post" action="index.php?controller={$object}&action=updated">
-                    <label for="nom{$object}">Catégorie : </label>
-                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieRecette}">
+
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieRecette}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                    <button type="submit">Valider</button>
+                    <button class="buttonCheckSize">
+                        <img class = "iconCheck" src="image/check.png" alt="Valider"/> </button>
+                    </button>
+
               
-                    <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
-                        <button type="button">Supprimer</button>
-                    </a> 
+                    <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
+                        <button class ="buttonSupSize">
+                            <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
+                        </button>
+                    </a>
+
+                    <!-- pour ordre et alignement-->
+                    <label for="nom{$object}">Catégorie : </label>
+                    <input type="text" name="nom{$object}" value="{$spe_nomCategorieRecette}">
                 </form>
             </li>
 EOT;
     }
     else {
-        echo <<< EOT
-            <li>
-               {$spe_nomCategorieRecette}
-EOT;
+        echo '<li class="listeEspace">'; 
 
         if ($isConnected) {
             echo <<< EOT
-                <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieRecette}">
-                    <button type="button">Modifier</button>
+                <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieRecette}">
+                    <button class ="buttonModSize">
+                        <img class = "iconMod" src="image/edit.png" alt="Modifier" />
+                    </button>
                 </a>
 EOT;
         }
 
         if ($isAdmin) {
             echo <<< EOT
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
-                    <button type="button">Supprimer</button>
+                <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
+                    <button class="buttonSupSize">
+                        <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
+                    </button>
                 </a>
 EOT;
         }
 
-        echo '</li>';
+        echo $spe_nomCategorieRecette . '</li>';
     }
 }
 

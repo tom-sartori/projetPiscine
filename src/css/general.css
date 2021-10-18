@@ -1,0 +1,384 @@
+html{
+    /*background-color: lightblue;*/
+    max-width: 1000px;
+    margin: auto;
+}
+
+main {
+    background-color: #ececec;
+}
+
+
+input {
+    background-color: lightgrey;
+    border: none;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+input:read-only {
+    background-color: darkgray;
+}
+
+input:read-write:hover{
+    background-color: white;
+    border-bottom: 2px solid blue;
+}
+
+input:read-write:focus{
+    background-color: white;
+}
+
+button {
+    border: none;
+    background-color: darkgray;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/*---------------------------------------------mini déroulants pour choix multiples : select----------------------*/
+
+select {
+    border: 2px cornflowerblue solid;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: lightgrey;
+}
+
+.parentButton{
+    text-decoration: none;
+}
+
+li{
+    padding: 7px;
+    list-style-type: none;
+}
+
+
+tr {
+    text-align: center;
+}
+
+.dataline{
+    border: 3px black double;
+    /*border-radius: 10px;*/
+}
+
+th{
+    font-size: larger;
+}
+
+
+
+
+/**********************Mes modifications,SALIM****************************/
+
+#divCreationUtilisateur, #divCreationAllergene{
+    text-align: center;
+    border: 2px solid rgb(92, 137, 238);
+    padding: 10px;
+    border-radius: 3px;
+    align-content: center;
+}
+
+
+
+
+
+#divSearchIngredient, #divSearchRecette{
+    text-align: right ;
+}
+
+.idIngr{
+    font-weight: bold;
+    color: red;
+}
+
+.nom{
+    font-family: Serif;
+    font-style : italic;
+}
+
+/*Pour colorier une fois sur deux la ligne du tableau de la liste des ingredients*/
+table tr:nth-child(odd){
+    background-color:lightgrey;
+}
+
+.class12{
+    font-size: larger;
+    font-family: Serif;
+    font-weight: bold;
+}
+
+#inputSearchRecette, #inputSearchIngredient{
+    border: 3px cornflowerblue solid;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#inputSearchRecette:hover, #inputSearchIngredient:hover{
+    background-color: lightskyblue;
+    cursor: text;
+}
+
+
+/*bouton envoyer pour les pages utilisateurs, liste allergene*/
+.submit:hover{
+    background-color: cadetblue;
+}
+
+
+.listeEspace{
+    border-bottom: 3px darkgrey solid;
+}
+
+
+/*----------------modif pauline------------------*/
+
+
+h1{
+    text-align : center;
+    font-family : "Copperplate Gothic Light";
+    margin-bottom : 5%;
+}
+
+/*---------------------pages ajouter ingr/recette*/
+
+div{
+    margin-bottom:25px;
+}
+
+.field-ingr input[type=submit]{
+    border-radius: 5px;
+    width: 10%;
+    height: 25px;
+}
+
+/*-----------marche pas jsp pq-------------*/
+
+/*input[type=sumit]:hover {*/
+/*    background-color: red;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.field-ingr input{
+    /*----pour centrer le bouton envoyer---------*/
+    display: block;
+    text-align : center;
+    margin-left: auto;
+    margin-right: auto;
+    /***********************************************/
+}
+
+.field-ingr label{
+    position: absolute;
+    margin-left: 5%  ;
+}
+
+
+.field-ingr select{
+    background-color: white;
+    display: block;
+    text-align : center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*    page allergène     */
+
+.buttonAlign {
+    /*display: inline-block;*/
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.decalLabel {
+    margin-right: 50px;
+    text-decoration: none;
+}
+
+/******** MENU DEROULANT ***/
+
+.center {
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+.ulmenu{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.limenu, .deroulant{
+    float: left;
+    border: 2px solid;
+    background-color: lightgrey;
+}
+
+.amenu, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.limenu:hover, .deroulant:hover, .deroule {
+    background-color: cornflowerblue;
+}
+
+li.deroulant {
+    display: inline-block;
+}
+
+.deroule {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.deroule a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.deroule a:hover {
+    background-color: #f1f1f1;
+}
+
+.deroulant:hover .deroule {
+    display: block;
+}
+
+/******  Fin du CSS menu déroulant  ****/
+
+
+/**   Media Queries pour la page responsive **/
+
+@media all and (max-width: 900px)
+{
+    nav ul{
+          flex-direction: column;
+          display: flex;
+      }
+
+      nav{
+          width: auto;
+          text-align: center;
+      }
+
+      nav li{
+          padding-left: 4px;
+      }
+
+      nav a{
+          font-size: 1.1em;
+      }
+
+      nav a:hover{
+          border-bottom: 0;
+      }
+
+    #divSearchIngredient, #divSearchRecette{
+        text-align: center ;
+        padding: 20px;
+    }
+
+    .class12{
+        align-content: center;
+        padding: 20px;
+    }
+}
+
+
+/*-------------------------essai icon modif et supp-----------toutes les pages sauf LISTE INGREDIENTS-------------------*/
+
+.iconMod{
+    width: 86%;
+}
+
+.iconSup{
+    width: 100%;
+}
+
+.iconCheck{
+    width: 100%;
+}
+
+.buttonModSize{
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+}
+
+.buttonModSize:hover{
+    background-color:  cornflowerblue;
+    cursor: pointer;
+}
+
+.buttonSupSize{
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+}
+
+.buttonSupSize:hover{
+    background-color:  indianred;
+    cursor: pointer;
+}
+
+.buttonCheckSize{
+    height: 35px;
+    width: 35px;
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.buttonCheckSize:hover{
+    background-color:  lightgreen;
+    cursor: pointer;
+}
+
+
+
+/*----------------------------------------modif et supp page LISTE INGR-----------------------------------------*/
+
+
+.iconModIngr{
+    width: 100%;
+
+}
+
+.iconSupIngr{
+    width: 100%;
+}
+
+.buttonModSizeIngr{
+    width: 30%;
+    text-decoration: none;
+}
+
+.buttonModSizeIngr:hover{
+    background-color:  cornflowerblue;
+    cursor: pointer;
+}
+
+.buttonSupSizeIngr{
+    width: 34%;
+    text-decoration: none;
+}
+.buttonSupSizeIngr:hover{
+    background-color:  indianred;
+    cursor: pointer;
+}
