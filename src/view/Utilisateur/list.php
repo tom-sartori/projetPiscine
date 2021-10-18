@@ -52,12 +52,12 @@ foreach ($tab_utilisateur as $utilisateur) {
                 <input hidden name="{$primary}" value="{$spe_iUtilisateur}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
                 <button class="buttonCheckSize">
-                    <img class = "iconCheck" src="check.png" alt="Modifier"/> </button>
+                    <img class = "iconCheck" src="image/check.png" alt="Valider"/> </button>
                 </button>
                 
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
                     <button class="buttonSupSize">
-                        <img class = "iconSup" src="sup.png" alt="Supprimer"/>
+                        <img class = "iconSup" src="image/sup.png" alt="Supprimer"/>
                     </button>
                 </a> 
             </form>
@@ -76,13 +76,13 @@ EOT;
             
             <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
                 <button class ="buttonModSize">
-                    <img class = "iconMod" src="edit.png" alt="Modifier" />
+                    <img class = "iconMod" src="image/edit.png" alt="Modifier" />
                 </button>
             </a>
             
             <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
                 <button class="buttonSupSize">
-                    <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                    <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
                 </button>
             </a> 
         </li>

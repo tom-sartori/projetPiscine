@@ -43,12 +43,12 @@ foreach ($tab_recette as $recette) {
 
             <a class="buttonAlign" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
                 <button class ="buttonModSize">
-                    <img class = "iconMod" src="edit.png" alt="Modifier" />
+                    <img class = "iconMod" src="image/edit.png" alt="Modifier" />
                 </button>
             </a> 
             <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
                 <button class="buttonSupSize">
-                    <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                    <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
                 </button>
             </a>
             <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">

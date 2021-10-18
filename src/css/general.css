@@ -365,8 +365,8 @@ li.deroulant {
 }
 
 .buttonModSizeIngr{
-    height: 30%;
     width: 30%;
+    text-decoration: none;
 }
 
 .buttonModSizeIngr:hover{
@@ -375,8 +375,8 @@ li.deroulant {
 }
 
 .buttonSupSizeIngr{
-    height: 30%;
-    width: 30%;
+    width: 34%;
+    text-decoration: none;
 }
 .buttonSupSizeIngr:hover{
     background-color:  indianred;
