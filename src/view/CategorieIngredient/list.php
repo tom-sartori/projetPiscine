@@ -3,6 +3,9 @@
 $object = static::$object;
 $primary = 'idCategorieIngredient';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
 $isUpdate = false;
 $idToUpdate = '';
 if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
@@ -10,17 +13,18 @@ if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $idToUpdate = $_GET[$primary];
 }
 
-echo <<< EOT
-    <div id="divCreation{$object}"> 
-        <form method="post" action="index.php?controller={$object}&action=created">
-            <label for="nomCategorieIngredient" >Ajouter une catégorie : </label>
-            <input type="text" name="nomCategorieIngredient">
-            <input type="hidden" name="controller" value="{$object}"/>
-            <input type="submit" value="Envoyer"/>
-        </form>
-    </div>
-        
+if ($isConnected) {
+    echo <<< EOT
+        <div id="divCreation{$object}"> 
+            <form method="post" action="index.php?controller={$object}&action=created">
+                <label for="nomCategorieIngredient" >Ajouter une catégorie : </label>
+                <input type="text" name="nomCategorieIngredient">
+                <input type="hidden" name="controller" value="{$object}"/>
+                <input type="submit" value="Envoyer"/>
+            </form>
+        </div>
 EOT;
+}
 
 
 echo <<< EOT
@@ -53,19 +57,23 @@ foreach ($tab_categorieIngredient as $categorieIngredient) {
 EOT;
     }
     else {
+        echo '<li>' .  $spe_nomCategorieIngredient;
 
-        echo <<< EOT
-            <li>
-               {$spe_nomCategorieIngredient}
+        if ($isConnected) {
+            echo <<< EOT
                 <a href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
                     <button type="button">Modifier</button>
                 </a>
+EOT;
+        }
+        if ($isAdmin) {
+            echo <<< EOT
                 <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
                     <button type="button">Supprimer</button>
                 </a>
-            </li>
 EOT;
-
+        }
+        echo '</li>';
     }
 }
 

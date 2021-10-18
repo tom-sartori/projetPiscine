@@ -44,7 +44,7 @@ $isAdmin = Session::isAdmin();
                         <a href="index.php?controller=Ingredient&action=readAll" class="dropbtn">Ingrédients</a>
                         <div class="deroule">
                             <a href="index.php?controller=Ingredient&action=readAll">Voir la liste</a>
-                            <a href="index.php?controller=Ingredient&action=create">Ajouter un ingrédient</a>
+                            <?= $isConnected ? '<a href="index.php?controller=Ingredient&action=create">Ajouter un ingrédient</a>' : '' ?>
                             <a href="index.php?controller=CategorieIngredient&action=readAll">Catégories</a>
                         </div>
                     </li>
