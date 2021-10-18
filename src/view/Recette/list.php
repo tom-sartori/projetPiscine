@@ -40,15 +40,20 @@ foreach ($tab_recette as $recette) {
 
     echo <<< EOT
         <li class="listeEspace">
+
+            <a class="buttonAlign" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="edit.png" alt="Modifier" />
+                </button>
+            </a> 
+            <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                </button>
+            </a>
             <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
-               {$spe_nomRecette}
-            </a> 
-            <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
-                <button type="button">Modifier</button>
-            </a> 
-            <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
-                <button class="buttonsupprimer" type="button">Supprimer</button>
-            </a> 
+                           {$spe_nomRecette}
+            </a>
         </li>
 
 EOT;

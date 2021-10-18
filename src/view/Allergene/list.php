@@ -45,10 +45,16 @@ foreach ($tab_allergene as $allergene) {
                 
                 <input hidden name="{$primary}" value="{$spe_idAllergene}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                <input type="submit" value="Valider"/>
+
+                <button class="buttonCheckSize">
+                    <img class = "iconCheck" src="check.png" alt="Valider"/> </button>
+                </button>
+
           
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
-                    <button type="button">Supprimer</button>
+                    <button class ="buttonSupSize">
+                        <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                    </button>
                 </a>
 
                 <!-- pour aligner les boutons modif et sup  et les mettre avant texte: ordre modifié-->
@@ -66,10 +72,14 @@ EOT;
         <li class="listeEspace">
 
             <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idAllergene}">
-                <button type="button">Modifier</button>
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="edit.png" alt="Modifier" />
+                </button>
             </a>
             <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idAllergene}">
-                <button class="buttonsupprimer" type="button">Supprimer</button>
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                </button>
             </a>
             {$spe_nomAllergene}
         </li>

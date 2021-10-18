@@ -13,6 +13,7 @@ input {
     background-color: lightgrey;
     border: none;
     margin-right: 25px;
+    cursor: pointer;
 }
 
 input:read-only {
@@ -22,7 +23,6 @@ input:read-only {
 input:read-write:hover{
     background-color: white;
     border-bottom: 2px solid blue;
-
 }
 
 input:read-write:focus{
@@ -33,6 +33,13 @@ button {
     border: none;
     background-color: darkgray;
     border-radius: 3px;
+    cursor: pointer;
+}
+/*---------------------------------------------mini déroulants pour choix multiples : select----------------------*/
+
+select {
+    border: 2px cornflowerblue solid;
+    cursor: pointer;
 }
 
 button:hover{
@@ -89,7 +96,7 @@ th{
 }
 
 .nom{
-    font-family: serif;
+    font-family: Serif;
     font-style : italic;
 }
 
@@ -112,6 +119,7 @@ table tr:nth-child(odd){
 
 #inputSearchRecette:hover, #inputSearchIngredient:hover{
     background-color: lightskyblue;
+    cursor: text;
 }
 
 
@@ -125,18 +133,13 @@ table tr:nth-child(odd){
     border-bottom: 3px darkgrey solid;
 }
 
-.buttonsupprimer:hover{
-    background-color: indianred;
-}
-
-
 
 /*----------------modif pauline------------------*/
 
 
 h1{
     text-align : center;
-    font-family : sans-serif;
+    font-family : "Copperplate Gothic Light";
     margin-bottom : 5%;
 }
 
@@ -153,10 +156,11 @@ div{
 }
 
 /*-----------marche pas jsp pq-------------*/
-input[type=sumit]:hover {
-    background-color: red;
-    cursor: pointer;
-}
+
+/*input[type=sumit]:hover {*/
+/*    background-color: red;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .field-ingr input{
     /*----pour centrer le bouton envoyer---------*/
@@ -185,7 +189,7 @@ input[type=sumit]:hover {
 /*    page allergène     */
 
 .buttonAlign {
-    display: inline-block;
+    /*display: inline-block;*/
     margin-left: 5%;
     text-decoration: none;
 }
@@ -295,4 +299,86 @@ li.deroulant {
         align-content: center;
         padding: 20px;
     }
+}
+
+
+/*-------------------------essai icon modif et supp-----------toutes les pages sauf LISTE INGREDIENTS-------------------*/
+
+.iconMod{
+    width: 86%;
+}
+
+.iconSup{
+    width: 100%;
+}
+
+.iconCheck{
+    width: 100%;
+}
+
+.buttonModSize{
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+}
+
+.buttonModSize:hover{
+    background-color:  cornflowerblue;
+    cursor: pointer;
+}
+
+.buttonSupSize{
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+}
+
+.buttonSupSize:hover{
+    background-color:  indianred;
+    cursor: pointer;
+}
+
+.buttonCheckSize{
+    height: 35px;
+    width: 35px;
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.buttonCheckSize:hover{
+    background-color:  lightgreen;
+    cursor: pointer;
+}
+
+
+
+/*----------------------------------------modif et supp page LISTE INGR-----------------------------------------*/
+
+
+.iconModIngr{
+    width: 100%;
+
+}
+
+.iconSupIngr{
+    width: 100%;
+}
+
+.buttonModSizeIngr{
+    height: 30%;
+    width: 30%;
+}
+
+.buttonModSizeIngr:hover{
+    background-color:  cornflowerblue;
+    cursor: pointer;
+}
+
+.buttonSupSizeIngr{
+    height: 30%;
+    width: 30%;
+}
+.buttonSupSizeIngr:hover{
+    background-color:  indianred;
+    cursor: pointer;
 }

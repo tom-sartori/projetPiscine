@@ -73,10 +73,14 @@ foreach ($tab_ingredient as $ingredient) {
             <td>{$spe_idAllergene}</td>
             <td> 
                 <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
-                    <button type="button">Modifier</button>
-                </a> 
+                    <button class ="buttonModSizeIngr">
+                        <img class = "iconModIngr" src="edit.png" alt="Modifier" />
+                    </button>
+                </a>
                 <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
-                    <button class="buttonsupprimer" type="button">Supprimer</button>
+                    <button class ="buttonSupSizeIngr">
+                        <img class = "iconSupIngr" src="sup.png" alt="Supprimer" />
+                    </button>
                 </a> 
             </td>
         </tr>   

@@ -51,10 +51,14 @@ foreach ($tab_utilisateur as $utilisateur) {
                 
                 <input hidden name="{$primary}" value="{$spe_iUtilisateur}">
                 <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                <button type="submit" value="Valider">Valider </button>
+                <button class="buttonCheckSize">
+                    <img class = "iconCheck" src="check.png" alt="Modifier"/> </button>
+                </button>
                 
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
-                    <button type="button">Supprimer</button>
+                    <button class="buttonSupSize">
+                        <img class = "iconSup" src="sup.png" alt="Supprimer"/>
+                    </button>
                 </a> 
             </form>
         </li>
@@ -71,11 +75,15 @@ EOT;
             <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
             
             <a class="parentButton" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idUtilisateur}">
-                <button type="button">Modifier</button>
-            </a> 
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="edit.png" alt="Modifier" />
+                </button>
+            </a>
             
             <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idUtilisateur}">
-                <button class="buttonsupprimer" type="button">Supprimer</button>
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                </button>
             </a> 
         </li>
 EOT;

@@ -40,10 +40,15 @@ foreach ($tab_categorieRecette as $categorieRecette) {
                     
                     <input hidden name="{$primary}" value="{$spe_idCategorieRecette}">
                     <input type="hidden" name="controller" value="<?=static::$object?>"/>
-                    <input type="submit" value="Valider"/>
+                    <button class="buttonCheckSize">
+                        <img class = "iconCheck" src="check.png" alt="Valider"/> </button>
+                    </button>
+
               
                     <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
-                        <button type="button">Supprimer</button>
+                        <button class ="buttonSupSize">
+                            <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                        </button>
                     </a>
 
                     <!-- pour ordre et alignement-->
@@ -59,10 +64,14 @@ EOT;
             <li class="listeEspace">
 
                 <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieRecette}">
-                    <button type="button">Modifier</button>
+                    <button class ="buttonModSize">
+                        <img class = "iconMod" src="edit.png" alt="Modifier" />
+                    </button>
                 </a>
                 <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieRecette}">
-                    <button class="buttonsupprimer" type="button">Supprimer</button>
+                    <button class="buttonSupSize">
+                        <img class = "iconSup" src="sup.png" alt="Supprimer" />
+                    </button>
                 </a>
 
                 {$spe_nomCategorieRecette}
