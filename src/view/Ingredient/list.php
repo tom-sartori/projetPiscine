@@ -3,6 +3,9 @@
 $object = static::$object;
 $primary = 'idIngredient';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
 echo <<< EOT
     <script type="text/javascript" src="js/ingredientScript.js" defer></script>
 EOT;
@@ -37,14 +40,13 @@ echo <<< EOT
     <table id="table{$object}"> 
         
         <tr>
-            <th>ID INGREDIENT</th>
-            <th>NOM INGREDIENT</th>
-            <th>QUANTITE ACHAT</th>
-            <th>ID UNITE QUANTITE</th>
-            <th>PRIX HT</th>
-            <th>ID TAXE</th>
-            <th>ID CATEGORIE INGREDIENT</th>
-            <th>ID ALLERGENE</th>
+            <th>nomIngredient</th>
+            <th>quantiteAchat</th>
+            <th>idUniteQuantite</th>
+            <th>prixHT</th>
+            <th>idTaxe</th>
+            <th>idCategorieIngredient</th>
+            <th>idAllergene</th>
         </tr>
 EOT;
 
@@ -63,39 +65,42 @@ foreach ($tab_ingredient as $ingredient) {
 
     echo <<< EOT
         <tr id="dataline$spe_idIngredient" class="dataline">
-            <td class="idIngr">{$spe_idIngredient}</td>
-            <td class="nom" name="nomIngredient">{$spe_nomIngredient}</td>
-            <td >{$spe_quantiteAchat}</td>
+            <td hidden>{$spe_idIngredient}</td>
+            <td name="nomIngredient">{$spe_nomIngredient}</td>
+            <td>{$spe_quantiteAchat}</td>
             <td>{$spe_idUniteIngredient}</td>
             <td>{$spe_prixHT}</td>
             <td>{$spe_idTaxe}</td>
             <td>{$spe_idCategorieIngredient}</td>
             <td>{$spe_idAllergene}</td>
             <td> 
+EOT;
+  
+    if ($isConnected) {
+        echo <<< EOT
                 <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
                     <button class ="buttonModSizeIngr">
                         <img class = "iconModIngr" src="image/edit.png" alt="Modifier" />
                     </button>
                 </a>
+EOT;
+    }
+  
+    if ($isAdmin) {
+        echo <<< EOT
                 <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
                     <button class ="buttonSupSizeIngr">
                         <img class = "iconSupIngr" src="image/sup.png" alt="Supprimer" />
                     </button>
                 </a> 
-            </td>
-        </tr>   
-
 EOT;
+    }
 
+    echo '
+            </td>
+        </tr>';
 }
 
+echo '</table>';
 
-
-echo '  </ul>
-    </div>';
-
-
-echo <<< EOT
-    </table> 
-EOT;
 ?>

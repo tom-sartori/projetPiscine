@@ -3,24 +3,28 @@
 $object = static::$object;
 $primary = 'idCategorieIngredient';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
 $isUpdate = false;
 $idToUpdate = '';
-if ($_GET['action'] == 'readAll' && isset($primary)) {
+if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $isUpdate = true;
     $idToUpdate = $_GET[$primary];
 }
 
-echo <<< EOT
-    <div id="divCreation{$object}"> 
-        <form method="post" action="index.php?controller={$object}&action=created">
-            <label for="nomCategorieIngredient" >Ajouter une catégorie : </label>
-            <input type="text" name="nomCategorieIngredient">
-            <input type="hidden" name="controller" value="{$object}"/>
-            <input class="submit" type="submit" value="Envoyer"/>
-        </form>
-    </div>
-        
+if ($isConnected) {
+    echo <<< EOT
+        <div id="divCreation{$object}"> 
+            <form method="post" action="index.php?controller={$object}&action=created">
+                <label for="nomCategorieIngredient" >Ajouter une catégorie : </label>
+                <input type="text" name="nomCategorieIngredient">
+                <input type="hidden" name="controller" value="{$object}"/>
+                <input type="submit" value="Envoyer"/>
+            </form>
+        </div>
 EOT;
+}
 
 
 echo <<< EOT
@@ -62,25 +66,27 @@ foreach ($tab_categorieIngredient as $categorieIngredient) {
 EOT;
     }
     else {
+        echo '<li class="listeEspace">';
 
-        echo <<< EOT
-            <li class="listeEspace">
-
+        if ($isConnected) {
+            echo <<< EOT
                 <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
                     <button class ="buttonModSize">
                         <img class = "iconMod" src="image/edit.png" alt="Modifier" />
                     </button>
                 </a>
+EOT;
+        }
+        if ($isAdmin) {
+            echo <<< EOT
                 <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">
                     <button class ="buttonSupSize">
                         <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
                     </button>
                 </a>
-
-                {$spe_nomCategorieIngredient}
-            </li>
 EOT;
-
+        }
+        echo $spe_nomCategorieIngredient . '</li>';
     }
 }
 

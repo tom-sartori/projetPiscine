@@ -1,8 +1,9 @@
 <?php
 
-$idIngredient = $_GET['idIngredient'];
-
 $isUpdate = $_GET['action'] == 'update';
+if ($isUpdate) {
+    $idIngredient = $_GET['idIngredient'];
+}
 
 
 ?>

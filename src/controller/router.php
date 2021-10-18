@@ -1,6 +1,5 @@
 <?php
 
-//require_once File::build_path(array('controller', 'ControllerAccueil.php'));
 require_once File::build_path(array('controller', 'ControllerAllergene.php'));
 require_once File::build_path(array('controller', 'ControllerIngredient.php'));
 require_once File::build_path(array('controller', 'ControllerRecette.php'));

@@ -1,7 +1,9 @@
 <?php
 
-$idRecette = $_GET['idRecette'];
 $isUpdate = $_GET['action'] == 'update';
+if ($isUpdate) {
+    $idRecette = $_GET['idRecette'];
+}
 
 ?>
 
