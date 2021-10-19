@@ -69,6 +69,11 @@ class ControllerIngredient {
             $idCategorieIngredient = '';
             $idAllergene = '';
 
+            $tabCategorieIngredient = ModelCategorieIngredient::selectAll();
+            $tabAllergene = ModelAllergene::selectAll();
+            $tabUniteQuantite = ModelUniteQuantite::selectAll();
+            $tabTaxe = ModelTaxe::selectAll();
+
             $view = 'update';
             $pagetitle = 'Formulaire d\'ajout d\'ingrédient';
 
@@ -92,6 +97,10 @@ class ControllerIngredient {
             $idCategorieIngredient = htmlspecialchars("{$ingredient->get('idCategorieIngredient')}");
             $idAllergene = htmlspecialchars("{$ingredient->get('idAllergene')}");
 
+            $tabCategorieIngredient = ModelCategorieIngredient::selectAll();
+            $tabAllergene = ModelAllergene::selectAll();
+            $tabUniteQuantite = ModelUniteQuantite::selectAll();
+            $tabTaxe = ModelTaxe::selectAll();
 
             $view = 'update';
             $pagetitle = 'Formulaire de mise à jour';
