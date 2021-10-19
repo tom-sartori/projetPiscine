@@ -79,8 +79,8 @@ EOT;
     if ($isConnected) {
         echo <<< EOT
                 <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
-                    <button class ="buttonModSizeIngr">
-                        <img class = "iconModIngr" src="image/edit.png" alt="Modifier" />
+                    <button class ="buttonModSize">
+                        <img src="image/edit.png" alt="Modifier" />
                     </button>
                 </a>
 EOT;
@@ -89,8 +89,8 @@ EOT;
     if ($isAdmin) {
         echo <<< EOT
                 <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
-                    <button class ="buttonSupSizeIngr">
-                        <img class = "iconSupIngr" src="image/sup.png" alt="Supprimer" />
+                    <button class ="buttonSupSize">
+                        <img src="image/sup.png" alt="Supprimer" />
                     </button>
                 </a> 
 EOT;

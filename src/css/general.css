@@ -23,6 +23,7 @@ input:read-only {
 input:read-write:hover{
     background-color: white;
     border-bottom: 2px solid blue;
+    cursor: text;
 }
 
 input:read-write:focus{
@@ -202,9 +203,8 @@ div{
 /******** MENU DEROULANT ***/
 
 .center {
-    margin: auto;
-    width: 70%;
-    padding: 10px;
+    display : block;
+    margin-left: 25%;
 }
 
 .ulmenu{
@@ -304,21 +304,12 @@ li.deroulant {
 
 /*-------------------------essai icon modif et supp-----------toutes les pages sauf LISTE INGREDIENTS-------------------*/
 
-.iconMod{
-    width: 86%;
+.buttonModSize, .buttonSupSize{
+    text-decoration: none;
 }
 
-.iconSup{
-    width: 100%;
-}
-
-.iconCheck{
-    width: 100%;
-}
-
-.buttonModSize{
-    height: 40px;
-    width: 40px;
+.buttonCheckSize{
+    margin-left: 5%;
     text-decoration: none;
 }
 
@@ -327,58 +318,12 @@ li.deroulant {
     cursor: pointer;
 }
 
-.buttonSupSize{
-    height: 40px;
-    width: 40px;
-    text-decoration: none;
-}
-
 .buttonSupSize:hover{
     background-color:  indianred;
     cursor: pointer;
 }
 
-.buttonCheckSize{
-    height: 35px;
-    width: 35px;
-    margin-left: 5%;
-    text-decoration: none;
-}
-
 .buttonCheckSize:hover{
     background-color:  lightgreen;
-    cursor: pointer;
-}
-
-
-
-/*----------------------------------------modif et supp page LISTE INGR-----------------------------------------*/
-
-
-.iconModIngr{
-    width: 100%;
-
-}
-
-.iconSupIngr{
-    width: 100%;
-}
-
-.buttonModSizeIngr{
-    width: 30%;
-    text-decoration: none;
-}
-
-.buttonModSizeIngr:hover{
-    background-color:  cornflowerblue;
-    cursor: pointer;
-}
-
-.buttonSupSizeIngr{
-    width: 34%;
-    text-decoration: none;
-}
-.buttonSupSizeIngr:hover{
-    background-color:  indianred;
     cursor: pointer;
 }
