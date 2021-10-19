@@ -40,13 +40,13 @@ echo <<< EOT
     <table id="table{$object}"> 
         
         <tr>
-            <th>nomIngredient</th>
-            <th>quantiteAchat</th>
-            <th>idUniteQuantite</th>
-            <th>prixHT</th>
-            <th>idTaxe</th>
-            <th>idCategorieIngredient</th>
-            <th>idAllergene</th>
+            <th>Nom</th>
+            <th>Quantité d'achat</th>
+            <th>Unité quantité</th>
+            <th>Prix HT</th>
+            <th>Taxe</th>
+            <th>Catégorie d'ingrédient</th>
+            <th>Allergène</th>
         </tr>
 EOT;
 
