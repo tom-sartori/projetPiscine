@@ -43,7 +43,7 @@ foreach ($tab_allergene as $allergene) {
 
     if ($isUpdate && ($idToUpdate == $allergene->get($primary))) {
         echo <<< EOT
-        <li>
+        <li class="listeEspace">
             <form method="post" action="index.php?controller={$object}&action=updated">
 
                 
