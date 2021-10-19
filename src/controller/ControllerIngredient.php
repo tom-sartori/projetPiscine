@@ -172,4 +172,61 @@ class ControllerIngredient {
             self::error();
         }
     }
+
+    public static function taxeUnite () {
+        if (Session::isConnected()) {
+            $tabUnite = ModelUniteQuantite::selectAll();
+            $tabTaxe = ModelTaxe::selectAll();
+
+            $view = 'taxeUnite';
+            $pagetitle = 'Taxes et unitées';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
+    }
+
+    public static function createTaxe () {
+        if (Session::isConnected()) {
+            ModelTaxe::save(array('montantTaxe' => $_POST['montantTaxe']));
+
+            self::taxeUnite();
+        }
+        else {
+            self::error();
+        }
+    }
+
+    public static function updateTaxe () {
+        if (Session::isConnected()) {
+            ModelTaxe::update(array('montantTaxe' => $_POST['montantTaxe']), $_POST['idTaxe']);
+            self::taxeUnite();
+        }
+        else {
+            self::error();
+        }
+    }
+
+    public static function createUnite () {
+        if (Session::isConnected()) {
+            ModelUniteQuantite::save(array('nomUnite' => $_POST['nomUnite']));
+
+            self::taxeUnite();
+        }
+        else {
+            self::error();
+        }
+    }
+
+    public static function updateUnite () {
+        if (Session::isConnected()) {
+            ModelUniteQuantite::update(array('nomUnite' => $_POST['nomUnite']), $_POST['idUnite']);
+            self::taxeUnite();
+        }
+        else {
+            self::error();
+        }
+    }
 }
