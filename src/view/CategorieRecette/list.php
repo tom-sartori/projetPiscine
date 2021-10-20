@@ -1,5 +1,9 @@
 <?php
 
+echo <<< EOT
+     <h1>Liste des catégories de recette</h1>
+EOT;
+
 $object = static::$object;
 $primary = 'idCategorieRecette';
 

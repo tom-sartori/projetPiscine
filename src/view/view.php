@@ -21,9 +21,9 @@ $isAdmin = Session::isAdmin();
 
     <div id="divConnexion">
         <?= (isset($_SESSION["loginUtilisateur"])) ?
-            'Bonjour ' . $_SESSION["loginUtilisateur"] . ' <a href="index.php?controller=Utilisateur&action=deconnect">Déconnexion</a>'
+            'Bonjour ' . $_SESSION["loginUtilisateur"] . ' <a class="connexion" href="index.php?controller=Utilisateur&action=deconnect">Déconnexion</a>'
             :
-            '<a href="index.php?controller=Utilisateur&action=connect">Connexion</a>';
+            '<a class="connexion" href="index.php?controller=Utilisateur&action=connect">Connexion</a>';
         ?>
     </div>
 

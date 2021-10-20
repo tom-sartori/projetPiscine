@@ -10,6 +10,9 @@ echo <<< EOT
     <script type="text/javascript" src="js/ingredientScript.js" defer></script>
 EOT;
 
+echo <<< EOT
+     <h1>Liste des ingrédients</h1>
+EOT;
 
 echo <<< EOT
     <div id="divSearch{$object}">
@@ -78,7 +81,7 @@ EOT;
   
     if ($isConnected) {
         echo <<< EOT
-                <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
+                <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
                     <button class ="buttonModSize">
                         <img src="image/edit.png" alt="Modifier" />
                     </button>
@@ -88,7 +91,7 @@ EOT;
   
     if ($isAdmin) {
         echo <<< EOT
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
+                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
                     <button class ="buttonSupSize">
                         <img src="image/sup.png" alt="Supprimer" />
                     </button>

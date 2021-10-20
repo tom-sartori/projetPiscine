@@ -1,5 +1,9 @@
 <?php
 
+echo <<< EOT
+    <h1>Liste des chefs</h1>
+EOT;
+
 $object = static::$object;
 $primary = 'loginUtilisateur';
 

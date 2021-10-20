@@ -7,6 +7,10 @@ $isConnected = Session::isConnected();
 $isAdmin = Session::isAdmin();
 
 echo <<< EOT
+      <h1>Liste des recettes</h1>
+EOT;
+
+echo <<< EOT
     <script type="text/javascript" src="js/recetteScript.js" defer></script>
 EOT;
 
