@@ -1,6 +1,8 @@
 <?php
 
 require_once 'Model.php';
+require_once File::build_path(array('model', 'ModelUniteQuantite.php'));
+require_once File::build_path(array('model', 'ModelTaxe.php'));
 
 
 class ModelIngredient extends Model {
