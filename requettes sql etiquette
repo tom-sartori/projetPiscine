@@ -1,0 +1,11 @@
+#on récupère la liste des ingrédients présents dans la recette et les identifiants des allergènes
+SELECT idIngredient, idAllergene FROM ingredient i
+JOIN asso_etape_ingredient ei ON ei.idIngredient=i.idIngredient
+JOIN etape e ON e.idEtape=ei.idEtape
+JOIN asso_recette_etape re ON re.idEtape=ei.idEtape
+JOIN recette r ON r.idRecette=re.idRecette
+WHERE r.idRecette='le truc';
+
+#on récupère la liste des allergènes
+SELECT DISTINCT nomAllergene FROM allergene
+WHERE idAllergene!=0 ;
