@@ -15,7 +15,7 @@ echo <<< EOT
 EOT;
 
 
-echo '<p>Attention, la modification d\'une des ces valeurs, la modifira pour tous les ingrédients. </p>';
+echo '<p>Attention, la modification d\'une de ces valeurs, la modifiera pour tous les ingrédients. </p>';
 
 foreach ($tabTaxe as $taxe) {
     $spe_idTaxe = $taxe->get('idTaxe');
@@ -59,7 +59,7 @@ echo <<< EOT
 EOT;
 
 
-echo '<p>Attention, la modification d\'une des ces valeurs, la modifira pour tous les ingrédients. </p>';
+echo '<p>Attention, la modification d\'une de ces valeurs, la modifiera pour tous les ingrédients. </p>';
 
 foreach ($tabUnite as $unite) {
     $spe_idUnite = $unite->get('idUnite');
