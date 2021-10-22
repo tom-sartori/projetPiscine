@@ -22,7 +22,7 @@ input:read-only {
 
 input:read-write:hover{
     background-color: white;
-    border-bottom: 2px solid blue;
+    /* border-bottom: 2px solid blue; */
     cursor: text;
 }
 
@@ -133,6 +133,7 @@ table tr:nth-child(odd){
 .listeEspace{
     border-bottom: 3px darkgrey solid;
 }
+
 
 
 /*----------------modif pauline------------------*/

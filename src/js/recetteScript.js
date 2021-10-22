@@ -39,7 +39,8 @@ researchBar.onkeyup = sortByResearch;
 
 function sortByResearch() {
     for (i = 0; i < tabRecette.length; i++) {
-        if (!tabRecette[i].name.toLowerCase().includes(researchBar.value)) {
+        console.log(tabRecette[i].name.toLowerCase());
+        if (!tabRecette[i].name.toLowerCase().includes(researchBar.value.toLowerCase())) {
             tabRecette[i].lielement.style.display = 'none';
         } else {
             tabRecette[i].lielement.style.display = '';
