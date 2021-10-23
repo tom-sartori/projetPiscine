@@ -28,8 +28,9 @@ class ControllerRecette {
             require_once(File::build_path(array('view', 'view.php')));
         }
         else {
-            $view = 'detail';
+            $view = 'update';
             $pagetitle = 'Recette détaillée';
+            $type='detail';
 
             require_once(File::build_path(array('view', 'view.php')));
         }
@@ -57,13 +58,12 @@ class ControllerRecette {
         $idRecette = '';
         $nomRecette = '';
         $nbCouvert = '';
-        $descriptif = '';
+        $descriptif = 'Descriptif de la recette';
         $coefficient = '1';
         $chargeSalariale = '0';
-
         $view = 'update';
         $pagetitle = 'Formulaire d\'ajout de recette';
-
+        $type = 'create';
         require_once(File::build_path(array('view', 'view.php')));
     }
 
@@ -79,7 +79,7 @@ class ControllerRecette {
 
         $view = 'update';
         $pagetitle = 'Formulaire de mise à jour';
-
+        $type = 'update';
         require_once(File::build_path(array('view', 'view.php')));
     }
 

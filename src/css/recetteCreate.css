@@ -1,12 +1,12 @@
 
 body {
     height: 100%;
-    width: 100%;
+
 }
-.ajoutbox {
+#ajoutbox {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     height: 80%;
     width: 100%;
 }
@@ -14,7 +14,6 @@ body {
 .headerform {
     display: flex;
     height: 300px;
-
     flex-direction: row;
     width: 100%;
     border: 1px solid red;
@@ -27,4 +26,130 @@ body {
     align-content: space-around;
     width: 50%;
     border: 1px solid blue;
+}
+
+.descriptif {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 3%;
+}
+
+.descriptif input {
+    height: 100%;
+    width: 80%;
+    
+}
+
+.etape {
+    display: flex;
+    height: 400px;
+    border: 1px solid cyan;
+    margin-top: 1%;
+    margin-bottom: 3%;
+}
+
+.etape .descriptifetape {
+    width: 30%;
+}
+
+.etape .denomationetape {
+    width: 25%;
+
+}
+
+.etape .informationsEtape {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.etape .informationsEtape .ingredient {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.etape .valorisationIngredient {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.etape .denomationIngredient {
+    width: 50%;
+}
+
+
+.etape .descriptifetape textarea {
+    height: 50%;
+    width: 97%;
+}
+
+.quantiteIngredient{
+    width: 25%;
+}
+
+.quantiteIngredient input{
+    width:75%;
+}
+
+
+.uniteIngredient {
+    width: 25%;
+}
+
+
+.prixUniteIngredient {
+    width: 25%;
+}
+
+.prixHTIngredient {
+    width: 25%;
+}
+
+ .entete {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+ }
+
+ .entete_valorisation {
+     display: flex;
+     flex-direction: column;
+ }
+
+ .sousvalorisation {
+     display: flex;
+     flex-direction: row;
+    text-align: center;
+ }
+.entete_progression {
+    width: 30%;
+    border: 1px solid black;
+}
+
+.entete_denomination {
+    width: 35%;
+    border: 1px solid black;
+}
+
+.entetevalorisation {
+    width: 35%;
+    border: 1px solid black;
+}
+
+.entetequantite {
+    width: 25%;
+}
+.enteteUnite {
+    width: 50%;
+}
+
+.enteteprixUnitaire {
+    width: 50%;
+}
+.enteteprixHT {
+    width: 50%;
 }
