@@ -11,7 +11,8 @@ $isAdmin = Session::isAdmin();
 
 <head>
     <link rel="stylesheet" href="css/general.css">
-    <!-- <link rel="stylesheet" href="css/css_menu.css"> -->
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/recetteCreate.css">
     <script type="text/javascript" src="js/utils.js" defer></script>
 
     <meta charset="UTF-8">
