@@ -56,7 +56,7 @@ researchBar.onkeyup = sortByResearch;
 
 function sortByResearch() { // A chaque entrée dans la researchBar on affiche uniquement ceux qui contiennent la String donné par l'utilisateur
     for(i=0;i<tabIngredient.length;i++){
-        if(!tabIngredient[i].name.toLowerCase().includes(researchBar.value)){
+        if(!tabIngredient[i].name.toLowerCase().includes(researchBar.value.toLowerCase())){
             tabIngredient[i].thelement.style.display='none';
         } else {
             tabIngredient[i].thelement.style.display = 'table-row';

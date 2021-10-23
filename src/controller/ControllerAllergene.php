@@ -1,6 +1,5 @@
 <?php
 require_once (File::build_path(array('model', 'ModelAllergene.php')));
-//require_once(File::build_path(Array('lib', 'Security.php')));// chargement du modèle
 
 
 class ControllerAllergene {
@@ -37,14 +36,19 @@ class ControllerAllergene {
 
 
     public static function delete() {
-        ModelAllergene::delete($_GET['idAllergene']);
+        if (Session::isAdmin()) {
+            ModelAllergene::delete($_GET['idAllergene']);
 
-        $tab_allergene = ModelAllergene::selectAll();
+            $tab_allergene = ModelAllergene::selectAll();
 
-        $view = 'deleted';
-        $pagetitle = 'Allergène supprimé';
+            $view = 'deleted';
+            $pagetitle = 'Allergène supprimé';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function error(){
@@ -55,65 +59,83 @@ class ControllerAllergene {
     }
 
     public static function create(){
-        $idAllergene = '';
-        $nomAllergene = '';
+        if (Session::isConnected()) {
+            $idAllergene = '';
+            $nomAllergene = '';
 
-        $view = 'update';
-        $pagetitle = 'Formulaire d\'ajout d\'allergène';
+            $view = 'update';
+            $pagetitle = 'Formulaire d\'ajout d\'allergène';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function update(){
-        $idAllergene = htmlspecialchars("" . $_GET['idAllergene']);
-        $allergene = ModelAllergene::select($idAllergene);
+        if (Session::isConnected()) {
+            $idAllergene = htmlspecialchars("" . $_GET['idAllergene']);
+            $allergene = ModelAllergene::select($idAllergene);
 
-        $nomAllergene = htmlspecialchars("{$allergene->get('nomAllergene')}");
+            $nomAllergene = htmlspecialchars("{$allergene->get('nomAllergene')}");
 
-        $view = 'update';
-        $pagetitle = 'Formulaire de mise à jour';
+            $view = 'update';
+            $pagetitle = 'Formulaire de mise à jour';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function created(){
-        $data = array(
-            'nomAllergene' => $_POST['nomAllergene']);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomAllergene' => $_POST['nomAllergene']);
 
-        $erreur = ModelAllergene::save($data);
+            $erreur = ModelAllergene::save($data);
 
-        if ($erreur == 0) {
-            $view = 'error';
-            $pagetitle = 'Erreur de création';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur de création';
+            } else {
+                $tab_allergene = ModelAllergene::selectAll();
+
+                $view = 'created';
+                $pagetitle = 'Création validée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
-        else{
-            $tab_allergene = ModelAllergene::selectAll();
-
-            $view = 'created';
-            $pagetitle = 'Création validée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+        else {
+            self::error();
         }
     }
 
     public static function updated(){
-        $data = array(
-            'nomAllergene' => $_POST['nomAllergene']);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomAllergene' => $_POST['nomAllergene']);
 
-        $idAllergene = $_POST['idAllergene'];
-        $erreur = ModelAllergene::update($data, $idAllergene);
+            $idAllergene = $_POST['idAllergene'];
+            $erreur = ModelAllergene::update($data, $idAllergene);
 
-        if($erreur==0) {
-            $view='error';
-            $pagetitle='Erreur mise à jour';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur mise à jour';
+            } else {
+                $tab_allergene = ModelAllergene::selectAll();
+
+                $view = 'updated';
+                $pagetitle = 'Mise à jour effectuée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
-        else{
-            $tab_allergene = ModelAllergene::selectAll();
-
-            $view = 'updated';
-            $pagetitle = 'Mise à jour effectuée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+        else {
+            self::error();
         }
     }
 }

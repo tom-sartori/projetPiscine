@@ -36,14 +36,19 @@ class ControllerCategorieIngredient {
     }
 
     public static function delete() {
-        ModelCategorieIngredient::delete($_GET['idCategorieIngredient']);
+        if (Session::isAdmin()) {
+            ModelCategorieIngredient::delete($_GET['idCategorieIngredient']);
 
-        $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
+            $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
 
-        $view = 'deleted';
-        $pagetitle = 'Catégorie supprimée';
+            $view = 'deleted';
+            $pagetitle = 'Catégorie supprimée';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function error(){
@@ -54,65 +59,83 @@ class ControllerCategorieIngredient {
     }
 
     public static function create(){
-        $idCategorieIngredient = '';
-        $nomCategorieIngredient = '';
+        if (Session::isConnected()) {
+            $idCategorieIngredient = '';
+            $nomCategorieIngredient = '';
 
-        $view = 'update';
-        $pagetitle = 'Formulaire d\'ajout de catégorie';
+            $view = 'update';
+            $pagetitle = 'Formulaire d\'ajout de catégorie';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function update(){
-        $idCategorieIngredient = htmlspecialchars("" . $_GET['idCategorieIngredient']);
-        $categorieIngredient = ModelCategorieIngredient::select($idCategorieIngredient);
+        if (Session::isConnected()) {
+            $idCategorieIngredient = htmlspecialchars("" . $_GET['idCategorieIngredient']);
+            $categorieIngredient = ModelCategorieIngredient::select($idCategorieIngredient);
 
-        $nomCategorieIngredient = htmlspecialchars("{$categorieIngredient->get('nomCategorieIngredient')}");
+            $nomCategorieIngredient = htmlspecialchars("{$categorieIngredient->get('nomCategorieIngredient')}");
 
 
-        $view = 'update';
-        $pagetitle = 'Formulaire de mise à jour';
+            $view = 'update';
+            $pagetitle = 'Formulaire de mise à jour';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function created(){
-        $data = array(
-            'nomCategorieIngredient' => $_POST['nomCategorieIngredient']);
-        $erreur = ModelCategorieIngredient::save($data);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomCategorieIngredient' => $_POST['nomCategorieIngredient']);
+            $erreur = ModelCategorieIngredient::save($data);
 
-        if ($erreur == 0) {
-            $view='error';
-            $pagetitle='Erreur de création';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur de création';
+            } else {
+                $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
+
+                $view = 'created';
+                $pagetitle = 'Création validée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
-        else{
-            $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
-
-            $view='created';
-            $pagetitle='Création validée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+        else {
+            self::error();
         }
     }
 
     public static function updated(){
-        $data = array(
-            'nomCategorieIngredient' => $_POST['nomCategorieIngredient']);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomCategorieIngredient' => $_POST['nomCategorieIngredient']);
 
-        $idCategorieIngredient = $_POST['idCategorieIngredient'];
-        $erreur = ModelCategorieIngredient::update($data, $idCategorieIngredient);
+            $idCategorieIngredient = $_POST['idCategorieIngredient'];
+            $erreur = ModelCategorieIngredient::update($data, $idCategorieIngredient);
 
-        if($erreur==0) {
-            $view='error';
-            $pagetitle='Erreur mise à jour';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur mise à jour';
+            } else {
+                $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
+
+                $view = 'updated';
+                $pagetitle = 'Mise à jour effectuée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
-        else{
-            $tab_categorieIngredient = ModelCategorieIngredient::selectAll();
-
-            $view = 'updated';
-            $pagetitle = 'Mise à jour effectuée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+        else {
+            self::error();
         }
     }
 }

@@ -3,21 +3,27 @@
 $object = static::$object;
 $primary = 'idIngredient';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
 echo <<< EOT
     <script type="text/javascript" src="js/ingredientScript.js" defer></script>
 EOT;
 
+echo <<< EOT
+     <h1>Liste des ingrédients</h1>
+EOT;
 
 echo <<< EOT
     <div id="divSearch{$object}">
-        <label>Recherche </label>
+        <label class="class12">Recherche </label>
         <input id="inputSearch{$object}" name="nom{$object}" type="text">
     </div>
 EOT;
 
 echo <<< EOT
     <div id="divOrder{$object}">
-        <label for="order{$object}">Trier </label>
+        <label class="class12" for="order{$object}">Trier </label>
         <select name="order{$object}" id="selectOrder{$object}" value="nom{$object}ASC">
             <option value="nom{$object}ASC">Ordre alphabétique</option>
             <option value="nom{$object}DESC">Ordre anti-alphabétique</option>
@@ -37,13 +43,13 @@ echo <<< EOT
     <table id="table{$object}"> 
         
         <tr>
-            <th>nomIngredient</th>
-            <th>quantiteAchat</th>
-            <th>idUniteQuantite</th>
-            <th>prixHT</th>
-            <th>idTaxe</th>
-            <th>idCategorieIngredient</th>
-            <th>idAllergene</th>
+            <th>Nom</th>
+            <th>Quantité d'achat</th>
+            <th>Unité quantité</th>
+            <th>Prix HT</th>
+            <th>Taxe</th>
+            <th>Catégorie d'ingrédient</th>
+            <th>Allergène</th>
         </tr>
 EOT;
 
@@ -71,26 +77,33 @@ foreach ($tab_ingredient as $ingredient) {
             <td>{$spe_idCategorieIngredient}</td>
             <td>{$spe_idAllergene}</td>
             <td> 
-                <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
-                    <button type="button">Modifier</button>
-                </a> 
-                <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
-                    <button type="button">Supprimer</button>
-                </a> 
-            </td>
-        </tr>   
-
 EOT;
+  
+    if ($isConnected) {
+        echo <<< EOT
+                <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
+                    <button class ="buttonModSize">
+                        <img src="image/edit.png" alt="Modifier" />
+                    </button>
+                </a>
+EOT;
+    }
+  
+    if ($isAdmin) {
+        echo <<< EOT
+                <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">
+                    <button class ="buttonSupSize">
+                        <img src="image/sup.png" alt="Supprimer" />
+                    </button>
+                </a> 
+EOT;
+    }
 
+    echo '
+            </td>
+        </tr>';
 }
 
+echo '</table>';
 
-
-echo '  </ul>
-    </div>';
-
-
-echo <<< EOT
-    </table> 
-EOT;
 ?>

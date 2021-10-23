@@ -37,14 +37,19 @@ class ControllerRecette {
     }
 
     public static function delete() {
-        ModelRecette::delete($_GET['idRecette']);
+        if (Session::isAdmin()) {
+            ModelRecette::delete($_GET['idRecette']);
 
-        $tab_recette = ModelRecette::selectAll();
+            $tab_recette = ModelRecette::selectAll();
 
-        $view = 'deleted';
-        $pagetitle = 'Recette supprimé';
+            $view = 'deleted';
+            $pagetitle = 'Recette supprimé';
 
-        require_once(File::build_path(array('view', 'view.php')));
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function error(){
@@ -55,85 +60,106 @@ class ControllerRecette {
     }
 
     public static function create(){
-        $idRecette = '';
-        $nomRecette = '';
-        $nbCouvert = '';
-        $descriptif = 'Descriptif de la recette';
-        $coefficient = '1';
-        $chargeSalariale = '0';
-        $view = 'update';
-        $pagetitle = 'Formulaire d\'ajout de recette';
-        $type = 'create';
-        require_once(File::build_path(array('view', 'view.php')));
+        if (Session::isConnected()) {
+            $idRecette = '';
+            $nomRecette = '';
+            $nbCouvert = '';
+            $descriptif = 'Descriptif de la recette';
+            $coefficient = '1';
+            $chargeSalariale = '0';
+
+            $view = 'update';
+            $pagetitle = 'Formulaire d\'ajout de recette';
+            $type = 'create';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function update(){
-        $idRecette = htmlspecialchars("" . $_GET['idRecette']);
-        $recette = ModelRecette::select($idRecette);
+        if (Session::isConnected()) {
+            $idRecette = htmlspecialchars("" . $_GET['idRecette']);
+            $recette = ModelRecette::select($idRecette);
 
-        $nomRecette = htmlspecialchars("{$recette->get('nomRecette')}");
-        $nbCouvert = htmlspecialchars("{$recette->get('nbCouvert')}");
-        $descriptif = htmlspecialchars("{$recette->get('descriptif')}");
-        $coefficient = htmlspecialchars("{$recette->get('coefficient')}");
-        $chargeSalariale = htmlspecialchars("{$recette->get('chargeSalariale')}");
+            $nomRecette = htmlspecialchars("{$recette->get('nomRecette')}");
+            $nbCouvert = htmlspecialchars("{$recette->get('nbCouvert')}");
+            $descriptif = htmlspecialchars("{$recette->get('descriptif')}");
+            $coefficient = htmlspecialchars("{$recette->get('coefficient')}");
+            $chargeSalariale = htmlspecialchars("{$recette->get('chargeSalariale')}");
 
-        $view = 'update';
-        $pagetitle = 'Formulaire de mise à jour';
-        $type = 'update';
-        require_once(File::build_path(array('view', 'view.php')));
+            $view = 'update';
+            $pagetitle = 'Formulaire de mise à jour';
+            $type = 'update';
+
+            require_once(File::build_path(array('view', 'view.php')));
+        }
+        else {
+            self::error();
+        }
     }
 
     public static function created(){
-        $data = array(
-            'nomRecette' => $_POST['nomRecette'] ,
-            'nbCouvert' => $_POST['nbCouvert'] ,
-            'descriptif' => $_POST['descriptif'],
-            'coefficient' => $_POST['coefficient'] ,
-            'chargeSalariale' => $_POST['chargeSalariale']);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomRecette' => $_POST['nomRecette'],
+                'nbCouvert' => $_POST['nbCouvert'],
+                'descriptif' => $_POST['descriptif'],
+                'coefficient' => $_POST['coefficient'],
+                'chargeSalariale' => $_POST['chargeSalariale']);
 
-        $erreur = ModelRecette::save($data);
+            $erreur = ModelRecette::save($data);
 
-        if ($erreur == 0) {
-            $view='error';
-            $pagetitle='Erreur de création';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur de création';
+            } else {
+                $idRecette = self::getLastId();
+                self::updateAssoTable($idRecette);
+
+                $tab_recette = ModelRecette::selectAll();
+
+                $view = 'created';
+                $pagetitle = 'Création validée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
         else {
-            $idRecette = self::getLastId();
-            self::updateAssoTable($idRecette);
-
-            $tab_recette = ModelRecette::selectAll();
-
-            $view='created';
-            $pagetitle='Création validée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+            self::error();
         }
     }
 
     public static function updated(){
-        $data = array(
-            'nomRecette' => $_POST['nomRecette'] ,
-            'nbCouvert' => $_POST['nbCouvert'] ,
-            'descriptif' => $_POST['descriptif'],
-            'coefficient' => $_POST['coefficient'] ,
-            'chargeSalariale' => $_POST['chargeSalariale']);
+        if (Session::isConnected()) {
+            $data = array(
+                'nomRecette' => $_POST['nomRecette'],
+                'nbCouvert' => $_POST['nbCouvert'],
+                'descriptif' => $_POST['descriptif'],
+                'coefficient' => $_POST['coefficient'],
+                'chargeSalariale' => $_POST['chargeSalariale']);
 
-        $idRecette = $_POST['idRecette'];
-        $erreur = ModelRecette::update($data, $idRecette);
+            $idRecette = $_POST['idRecette'];
+            $erreur = ModelRecette::update($data, $idRecette);
 
-        if($erreur==0) {
-            $view='error';
-            $pagetitle='Erreur mise à jour';
+            if ($erreur == 0) {
+                $view = 'error';
+                $pagetitle = 'Erreur mise à jour';
+            } else {
+                self::updateAssoTable($idRecette);
+
+                $tab_recette = ModelRecette::selectAll();
+
+                $view = 'updated';
+                $pagetitle = 'Mise à jour effectuée';
+
+                require_once(File::build_path(array('view', 'view.php')));
+            }
         }
         else {
-            self::updateAssoTable($idRecette);
-
-            $tab_recette = ModelRecette::selectAll();
-
-            $view = 'updated';
-            $pagetitle = 'Mise à jour effectuée';
-
-            require_once(File::build_path(array('view', 'view.php')));
+            self::error();
         }
     }
 
@@ -151,6 +177,7 @@ class ControllerRecette {
             ControllerAsso_recette_ingredient::updateIngredientRecette($idRecette, $_POST['idIngredient']);
         }
     }
+
     private static function getLastId () {
         $idRecette = ModelRecette::getLastId();
         $idRecette = (int)$idRecette[0][0];

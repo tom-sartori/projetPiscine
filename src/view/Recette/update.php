@@ -25,8 +25,6 @@ echo <<< EOT
             const type = "{$type}";
         </script>
 EOT;
-
-
 ?>
 
 <script type="text/javascript" src="js/recetteCreateScript.js" defer></script>

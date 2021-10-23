@@ -1,8 +1,9 @@
 <?php
 
-$idIngredient = $_GET['idIngredient'];
-
 $isUpdate = $_GET['action'] == 'update';
+if ($isUpdate) {
+    $idIngredient = $_GET['idIngredient'];
+}
 
 
 ?>
@@ -10,7 +11,7 @@ $isUpdate = $_GET['action'] == 'update';
 
 <h1> <?=$isUpdate?'Modifier':'Ajouter'?> un ingrédient </h1>
 
-<div class = ajoutbox>
+<div>
 
     <form method="post" action="index.php?controller=<?=static::$object?>&action=<?=$isUpdate?'updated':'created' ?>">
 
@@ -20,27 +21,33 @@ $isUpdate = $_GET['action'] == 'update';
         </div>
 
         <div class="field-ingr">
-<!--            TODO Check la valeur préremplie pour update. -->
             <label for="idCategorieIngredient">Catégorie de l'ingrédient </label>
             <select name="idCategorieIngredient" required>
-                <option value="" disabled selected>--Choisir une catégorie--</option>
-                <option value="1">Viandes et volailles</option>
-                <option value="2">Poissons et crustacés</option>
-                <option value="3">Crèmerie</option>
-                <option value="4">Epicerie</option>
-                <option value="5">Fruits et légumes</option>
+                <option value="" selected disabled>--Choisir une catégorie--</option>
+                <?php
+                    // Recherche de toutes les catégories d'ingrédientss en bd, afin de remplir le <select>.
+                    foreach ($tabCategorieIngredient as $categorieIngredient) {
+                        $spe_idCategorieIngredient = htmlspecialchars($categorieIngredient->get('idCategorieIngredient'));
+                        $spe_nomCategorieIngredient = htmlspecialchars($categorieIngredient->get('nomCategorieIngredient'));
+                        $selected = ($idCategorieIngredient == $spe_idCategorieIngredient) ? 'selected' : '';
+                        echo '<option value="' . $spe_idCategorieIngredient . '" ' . $selected . '>' . $spe_nomCategorieIngredient . '</option>';
+                    }
+                ?>
             </select>
         </div>
 
         <div class="field-ingr">
-<!--            TODO Check la valeur préremplie pour update. -->
             <label for="idAllergene">Contient-il un ou des allergène(s) ?</label>
             <select name="idAllergene" required>
-                <option value="0" selected>Aucun</option>
-                <option value="1">Arachide</option>
-                <option value="2">Céleri</option>
-                <option value="3">Crustacés</option>
-                <option value="4">Céréales contenant du gluten</option>
+                <?php
+                // Recherche de tous les allergènes en bd, afin de remplir le <select>.
+                foreach ($tabAllergene as $allergene) {
+                    $spe_idAllergene = htmlspecialchars($allergene->get('idAllergene'));
+                    $spe_nomAllergene = htmlspecialchars($allergene->get('nomAllergene'));
+                    $selected = ($idAllergene == $spe_idAllergene) ? 'selected' : '';
+                    echo '<option value="' . $spe_idAllergene . '" ' . $selected . '>' . $spe_nomAllergene . '</option>';
+                }
+                ?>
             </select>
         </div>
 
@@ -49,11 +56,16 @@ $isUpdate = $_GET['action'] == 'update';
             <input name="quantiteAchat" type="number" min="0" value="<?=$quantiteAchat?>" required>
 
             <label for="idUniteQuantite"></label>
-<!--            TODO Check la valeur préremplie pour update. -->
-            <select name="idUniteQuantite" required>
-                <option value="1">Kg</option>
-                <option value="2">L</option>
-                <option value="3">U</option>
+            <select class="unité" name="idUniteQuantite" required>
+                <?php
+                // Recherche de tous les allergènes en bd, afin de remplir le <select>.
+                foreach ($tabUniteQuantite as $uniteQuantite) {
+                    $spe_idUniteQuantite = htmlspecialchars($uniteQuantite->get('idUnite'));
+                    $spe_nomUniteQuantite = htmlspecialchars($uniteQuantite->get('nomUnite'));
+                    $selected = ($idUniteQuantite == $spe_idUniteQuantite) ? 'selected' : '';
+                    echo '<option value="' . $spe_idUniteQuantite . '" ' . $selected . '>' . $spe_nomUniteQuantite . '</option>';
+                }
+                ?>
             </select>
         </div>
 
@@ -63,18 +75,26 @@ $isUpdate = $_GET['action'] == 'update';
         </div>
 
         <div class="field-ingr">
-<!--            TODO Check la valeur préremplie pour update. -->
             <label for="idTaxe">Taxe en %</label>
             <select name="idTaxe" required>
-                <option value="1">5,5</option>
-                <option value="2">10</option>
+                <?php
+                // Recherche de toutes les valeurs de taxes en bd, afin de remplir le <select>.
+                foreach ($tabTaxe as $taxe) {
+                    $spe_idTaxe = htmlspecialchars($taxe->get('idTaxe'));
+                    $spe_montantTaxe = htmlspecialchars($taxe->get('montantTaxe'));
+                    $selected = ($idTaxe == $spe_idTaxe) ? 'selected' : '';
+                    echo '<option value="' . $spe_idTaxe . '" ' . $selected . '>' . $spe_montantTaxe . '</option>';
+                }
+                ?>
             </select>
         </div>
 
-        <div>
+        <div >
             <input hidden name="idIngredient" value="<?=$idIngredient?>">
             <input type="hidden" name="controller" value="<?=static::$object?>"/>
-            <button type="submit">Ajouter</button>
+            <div class="field-ingr">
+                <input class="submit" type="submit" value="Envoyer"/>
+            </div>
         </div>
 
     </form>

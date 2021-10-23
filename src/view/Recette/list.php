@@ -3,13 +3,20 @@
 $object = static::$object;
 $primary = 'idRecette';
 
+$isConnected = Session::isConnected();
+$isAdmin = Session::isAdmin();
+
+echo <<< EOT
+      <h1>Liste des recettes</h1>
+EOT;
+
 echo <<< EOT
     <script type="text/javascript" src="js/recetteScript.js" defer></script>
 EOT;
 
 echo <<< EOT
     <div id="divSearch{$object}">
-        <label>Recherche </label>
+        <label class="class12">Recherche </label>
         <input id="inputSearch{$object}" name="nom{$object}" type="text">
     </div>
 EOT;
@@ -22,18 +29,12 @@ EOT;
 
 echo <<< EOT
     <div id="divOrder{$object}">
-        <label for="order{$object}">Trier </label>
+        <label class="class12" for="order{$object}">Trier </label>
         <select name="order{$object}" id="selectOrder{$object}">
             <option value="nom{$object}ASC">Ordre alphabétique</option>
             <option value="nom{$object}DESC">Ordre anti-alphabétique</option>
 <!--            TODO Par catégorie-->
         </select>
-    </div>
-EOT;
-
-echo <<< EOT
-    <div id="divPrintButton{$object}">
-        <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
     </div>
 EOT;
 
@@ -48,21 +49,34 @@ foreach ($tab_recette as $recette) {
     $spe_idRecette = htmlspecialchars($recette->get($primary));
     $spe_nomRecette = htmlspecialchars($recette->get('nomRecette'));
 
-    echo <<< EOT
-        <li>
-            <a href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}" class="name{$object}">
-               {$spe_nomRecette}
-            </a> 
-            <a href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
-                <button type="button">Modifier</button>
-            </a> 
-            <a href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
-                <button type="button">Supprimer</button>
-            </a> 
-        </li>
+    echo '<li class="listeEspace">';       
 
+    if ($isConnected) {
+        echo <<< EOT
+            <a class="buttonAlign name{$object}" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
+                <button class ="buttonModSize">
+                    <img class = "iconMod" src="image/edit.png" alt="Modifier" />
+                </button>
+            </a> 
 EOT;
+    }
 
+    if ($isAdmin) {
+        echo <<< EOT
+            <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">
+                <button class="buttonSupSize">
+                    <img class = "iconSup" src="image/sup.png" alt="Supprimer" />
+                </button>
+            </a>
+EOT;
+    }
+  
+    echo <<< EOT
+            <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
+                {$spe_nomRecette}
+            </a>
+    </li>
+EOT;
 }
 
 echo '  </ul>
