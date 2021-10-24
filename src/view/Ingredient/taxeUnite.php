@@ -6,7 +6,7 @@ echo <<< EOT
 <div id="div{$object}">
     <div id="divCreation{$object}">
         <form method="post" action="index.php?controller=Ingredient&action=create{$object}">
-            <label for="montant{$object}" >Ajouter une valeure de taxe : </label>
+            <label for="montant{$object}" >Ajouter une valeur de taxe : </label>
             <input type="number" name="montant{$object}">
             
             <button type="submit">Ajouter</button>

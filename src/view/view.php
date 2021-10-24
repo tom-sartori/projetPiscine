@@ -48,7 +48,7 @@ $isAdmin = Session::isAdmin();
                             <a href="index.php?controller=Ingredient&action=readAll">Voir la liste</a>
                             <?= $isConnected ? '<a href="index.php?controller=Ingredient&action=create">Ajouter un ingrédient</a>' : '' ?>
                             <a href="index.php?controller=CategorieIngredient&action=readAll">Catégories</a>
-                            <?= $isConnected ? '<a href="index.php?controller=Ingredient&action=taxeUnite">Taxes et unitées</a>' : '' ?>
+                            <?= $isConnected ? '<a href="index.php?controller=Ingredient&action=taxeUnite">Taxes et unités</a>' : '' ?>
                         </div>
                     </li>
 
