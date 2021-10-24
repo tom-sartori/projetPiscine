@@ -71,9 +71,7 @@ EOT;
     }
   
     echo <<< EOT
-            <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">
-                {$spe_nomRecette}
-            </a>
+            <a class="parentButton" href="./index.php?controller={$object}&action=read&{$primary}={$raw_idRecette}">{$spe_nomRecette}</a>
     </li>
 EOT;
 }

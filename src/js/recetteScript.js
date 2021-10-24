@@ -1,5 +1,5 @@
 const list = document.getElementById('ulListRecette');
-const nameList = document.getElementsByClassName('nameRecette');
+const nameList = document.getElementsByClassName('parentButton');
 const select = document.getElementById('selectOrderRecette');
 const tabRecette = [];
 const researchBar = document.getElementById('inputSearchRecette');
@@ -12,7 +12,7 @@ function Recette(nom, lielement){
 }
 
 for(i=0;i<nameList.length;i++){
-    tabRecette[i] = new Recette(nameList[i].textContent.toLowerCase(), nameList[i].parentNode);
+    tabRecette[i] = new Recette(nameList[i].innerHTML.toLowerCase(), nameList[i].parentNode);
 }
 
 function sortList() {
@@ -39,7 +39,7 @@ researchBar.onkeyup = sortByResearch;
 
 function sortByResearch() {
     for (i = 0; i < tabRecette.length; i++) {
-        console.log(tabRecette[i].name.toLowerCase());
+
         if (!tabRecette[i].name.toLowerCase().includes(researchBar.value.toLowerCase())) {
             tabRecette[i].lielement.style.display = 'none';
         } else {
