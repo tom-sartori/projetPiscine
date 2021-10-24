@@ -65,6 +65,12 @@ function AJAXQueryUpdateRecette(data){
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.addEventListener("load", () => {
         console.log(request.responseText);
+        if (request.responseText==1) {
+            alert("Cette recette a été modifié avec succès !");
+            location.replace("index.php?controller=Recette");
+        } else {
+            alert("Une erreur est survenue");
+        }
     });
     request.send("request=updaterecette&object=" + JSON.stringify(data));
 }

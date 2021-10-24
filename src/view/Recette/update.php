@@ -168,7 +168,7 @@ EOT;
         </div>
 
         <div id="totalRecette">
-            <label for="total">Total de la recette : </label>
+            <label for="total">Total des ingrédients de la recette : </label>
             <label for="totalPrix"></label>
         </div>
 

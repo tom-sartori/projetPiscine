@@ -188,7 +188,6 @@ class ModelJs{
             $sql .= "INSERT INTO `asso_recette_categorieRecette` (`idRecette`, `idCategorieRecette`) VALUES ('{$idRecette}', '{$value}'); ";
         }
         try {
-            print_r($sql);
             $prep = Model::$pdo->prepare($sql);
             $prep->execute();
         } catch (PDOException $e) {
