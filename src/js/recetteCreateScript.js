@@ -318,6 +318,7 @@ getAllIngredients();
 divdenomation.appendChild(select);
 getAllUtilisateurs();
 getAllCategorie();
+
 // Création des champs : quantité et de l'affichage du prixHT pour la première étape 
 divdenomation.nextElementSibling.firstElementChild.firstElementChild.id += nbSelect;
 divdenomation.nextElementSibling.firstElementChild.firstElementChild.addEventListener('keyup', (element) => {
@@ -442,10 +443,3 @@ else if (type=='update'){
     select.disabled =true;
     AJAXQueryDetailRecette(idRecette, afficherDetailRecette);
 }
-
-//if create 
-
-
-
-
-//if update

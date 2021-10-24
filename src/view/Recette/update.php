@@ -1,5 +1,5 @@
 <?php
-
+$isUpdate=false;
 if ($type == 'detail') {
 
     $disabled = "disabled";
@@ -123,7 +123,7 @@ EOT;
                         <div class="denomationIngredient"></div>
                         <div class="valorisationIngredient">
                             <div class="quantiteIngredient">
-                                <input type="number" min="0" class="quantiteIngredientInput" id="quantiteIngredient" <?= $disabled ?> required>
+                                <input type="number" min="0" value=0 class="quantiteIngredientInput" id="quantiteIngredient" <?= $disabled ?> required>
                             </div>
                             <div class="uniteIngredient">unite</div>
                             <div class="prixUniteIngredient">prixUnitaire</div>
@@ -178,6 +178,7 @@ EOT;
             <?php if ($type != 'detail') {
             echo '<input type="button" id="ajouterButton" value="ajouter">';
             } ?>
+            <input type="button" onclick="window.print()" value="Imprimer">
         </div>
     </form>
 </div>
