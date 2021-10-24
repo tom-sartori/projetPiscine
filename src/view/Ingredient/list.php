@@ -62,6 +62,7 @@ foreach ($tab_ingredient as $ingredient) {
     $spe_nomIngredient = htmlspecialchars($ingredient->get('nomIngredient'));
     $spe_quantiteAchat = htmlspecialchars($ingredient->get('quantiteAchat'));
     $spe_idUniteIngredient = htmlspecialchars($ingredient->get('idUniteQuantite'));
+    $spe_unite = htmlspecialchars(ModelUniteQuantite::select($ingredient->get('idUniteQuantite'))->get('nomUnite'));
     $spe_prixHT = htmlspecialchars($ingredient->get('prixHT'));
     $spe_idTaxe = htmlspecialchars($ingredient->get('idTaxe'));
     $spe_idCategorieIngredient = htmlspecialchars($ingredient->get('idCategorieIngredient'));
@@ -74,7 +75,7 @@ foreach ($tab_ingredient as $ingredient) {
             <td hidden>{$spe_idIngredient}</td>
             <td name="nomIngredient">{$spe_nomIngredient}</td>
             <td>{$spe_quantiteAchat}</td>
-            <td>{$spe_idUniteIngredient}</td>
+            <td>{$spe_unite}</td>
             <td>{$spe_prixHT}</td>
             <td>{$spe_idTaxe}</td>
             <td>{$spe_idCategorieIngredient}</td>
