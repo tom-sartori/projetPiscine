@@ -347,7 +347,8 @@ if(type != 'detail'){
     const buttonAddSousRecette = document.getElementById('buttonAddSousRecette');
     const selectSousRecette = document.getElementById('selectSousRecette');
     buttonAddSousRecette.addEventListener('click', () => {
-        if(nbEtape==0){
+        tabEtapes[0].updateData();
+        if(tabEtapes[0].description==""){
             etape.style.display='none';
             nbEtape--;
         }

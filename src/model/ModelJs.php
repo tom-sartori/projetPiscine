@@ -73,7 +73,6 @@ class ModelJs{
 
         $sql = substr($sql, 0, -1);
         try {
-            print_r($sql);
             $prep = Model::$pdo->prepare($sql);
             $prep->execute();
         } catch (PDOException $e) {
