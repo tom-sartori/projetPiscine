@@ -65,6 +65,10 @@ class ModelJs{
             $sql .= "INSERT INTO `asso_recette_utilisateur` (`idRecette`, `loginUtilisateur`) VALUES ('{$idRecette}', '{$value}'); ";
         }
 
+        foreach($data['categories'] as $key => $value){
+            $sql .= "INSERT INTO `asso_recette_categorieRecette` (`idRecette`, `idCategorieRecette`) VALUES ('{$idRecette}', '{$value}'); ";
+        }
+
 
         $sql = substr($sql, 0, -1);
         try {
@@ -107,6 +111,9 @@ class ModelJs{
         }
         $tabRecette  = get_object_vars(self::select('recette','idRecette',$idRecette));
         $tabRecette['tabEtape']=$tabEtape;
+        $tabRecette['categories']=self::getAllIDCategories($idRecette);
+        $tabRecette['auteurs']=self::getAllIDUtilisateurs($idRecette);
+
         return json_encode($tabRecette);
 
     }
@@ -125,6 +132,72 @@ class ModelJs{
         }
         return $ingredientList;
     }
+
+    public static function getAllIDCategories($idRecette)
+    {
+        $sql = "SELECT idCategorieRecette FROM `asso_recette_categorieRecette` WHERE idRecette = {$idRecette}";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_NUM);
+        return $req_prep->fetchAll();
+    }
+
+    public static function getAllIDUtilisateurs($idRecette)
+    {
+        $sql = "SELECT loginUtilisateur FROM `asso_recette_utilisateur` WHERE idRecette = {$idRecette}";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_NUM);
+        return $req_prep->fetchAll();
+    }
+
+
+    public static function updateRecette($data){
+        $data = json_decode($data, true);
+        $idRecette = $data['idRecette'];
+        $sql ="";
+        foreach($data['tabEtapes'] as $key => $value){
+            $estSousRecette = $value['sousRecette'] ? 1 : 0;
+            if(isset($value['id'])){ // etape déjà existante
+                $sql .= "DELETE FROM `asso_etape_ingredient` WHERE idEtape={$value['id']}; ";
+                foreach($value['ingredientlist'] as $key1 => $value1){
+                    $sql .= "INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALUES ('{$value['id']}', '{$value1[0]}', '{$value1[1]}'); ";
+                }
+                $sql .= "UPDATE `etape` SET nomEtape = '{$value['nom']}' WHERE idEtape = {$value['id']}; ";
+                $sql .= "UPDATE `etape` SET description = \"{$value['description']}\" WHERE idEtape = {$value['id']}; ";
+                $sql .= "UPDATE `etape` SET estSousRecette = {$estSousRecette} WHERE idEtape = {$value['id']}; ";
+            } else {
+                $sql .= "INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES (NULL, '{$value['nom']}', '{$value['description']}', '{$value['sousRecette']}'); ";
+                foreach ($value['ingredientlist'] as $key1 => $value1) {
+                    $sql .= "INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALUES ('{$key}', '{$value1[0]}', '{$value1[1]}'); ";
+                }
+                $sql .= "INSERT INTO `asso_recette_etape` (`idRecette`, `idEtape`, `ordre`) VALUES ('{$idRecette}', '$key', '{$value['ordre']}'); ";
+            }
+        }
+        $sql .= "UPDATE recette SET nomRecette = '{$data['nomRecette']}' WHERE idRecette ={$idRecette}; ";
+        $sql .= "UPDATE recette SET nbCouvert = '{$data['nbCouvert']}' WHERE idRecette ={$idRecette}; ";
+        $sql .= "UPDATE recette SET descriptif = \"{$data['descriptif']}\" WHERE idRecette ={$idRecette}; ";
+        $sql .= "UPDATE recette SET coefficient = '{$data['coefficient']}' WHERE idRecette ={$idRecette}; ";
+        $sql .= "UPDATE recette SET chargeSalariale = '{$data['coefficient']}' WHERE idRecette ={$idRecette}; ";  
+        $sql .= "DELETE FROM `asso_recette_categorieRecette` WHERE idRecette= {$idRecette}; ";
+        $sql .= "DELETE FROM `asso_recette_utilisateur` WHERE idRecette ={$idRecette}; ";
+        foreach ($data['auteurs'] as $key => $value) {
+            $sql .= "INSERT INTO `asso_recette_utilisateur` (`idRecette`, `loginUtilisateur`) VALUES ('{$idRecette}', '{$value}'); ";
+        }
+        foreach ($data['categories'] as $key => $value) {
+            $sql .= "INSERT INTO `asso_recette_categorieRecette` (`idRecette`, `idCategorieRecette`) VALUES ('{$idRecette}', '{$value}'); ";
+        }
+        try {
+            print_r($sql);
+            $prep = Model::$pdo->prepare($sql);
+            $prep->execute();
+        } catch (PDOException $e) {
+            echo "L'insertion dans la base de données a rencontré cette erreur : <br> ";
+            echo "{$e->getMessage()} <br><br>";
+            return 0;
+        }
+        return 1;
+    }
 }
 
 if(isset($_POST['request']) && isset($_POST['object'])){
@@ -139,8 +212,12 @@ if(isset($_POST['request']) && isset($_POST['object'])){
         echo ModelJs::saveRecette($_POST['object']);
     }
 
-    if ($request=="updaterecette"){
+    if ($request== "detailrecette"){
         echo ModelJs::getAllEtapes($_POST['object']);
+    }
+
+    if($request== "updaterecette"){
+        echo ModelJs::updateRecette($_POST['object']);
     }
 }
 

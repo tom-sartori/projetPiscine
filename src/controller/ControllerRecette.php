@@ -21,6 +21,12 @@ class ControllerRecette {
         $idRecette = $_GET['idRecette'];
         $recette = ModelRecette::select($idRecette);
 
+        $nomRecette = htmlspecialchars("{$recette->get('nomRecette')}");
+        $nbCouvert = htmlspecialchars("{$recette->get('nbCouvert')}");
+        $descriptif = htmlspecialchars("{$recette->get('descriptif')}");
+        $coefficient = htmlspecialchars("{$recette->get('coefficient')}");
+        $chargeSalariale = htmlspecialchars("{$recette->get('chargeSalariale')}");
+
         if($recette == null){
             $view='error';
             $pagetitle='Erreur recette';

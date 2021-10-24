@@ -52,11 +52,21 @@ function AJAXQuerySaveRecette(data){ // data = tabEtapes de recetteCreateScript.
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.addEventListener("load", () => {
         if(request.responseText!=1){
-            alert("Une erreur est survenue");
+            alert("Veuillez remplir tous les champs de la recette");
             location.replace("index.php?controller=Recette&action=create");
         }
     });
     request.send("request=saverecette&object="+JSON.stringify(data));
+}
+
+function AJAXQueryUpdateRecette(data){
+    let request = new XMLHttpRequest();
+    request.open('POST', urlModel);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.addEventListener("load", () => {
+        console.log(request.responseText);
+    });
+    request.send("request=updaterecette&object=" + JSON.stringify(data));
 }
 
 function AJAXQueryDetailRecette(id, funcToExec){
@@ -66,6 +76,9 @@ function AJAXQueryDetailRecette(id, funcToExec){
     request.addEventListener("load", () => {
         funcToExec(request.responseText)
     });
-    request.send("request=updaterecette&object=" + id);
+    request.send("request=detailrecette&object=" + id);
 
+}
+function isFloat(n) {
+    return !(Number(n) === n && n % 1 !== 0);
 }
