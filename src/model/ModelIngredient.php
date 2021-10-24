@@ -5,6 +5,11 @@ require_once File::build_path(array('model', 'ModelUniteQuantite.php'));
 require_once File::build_path(array('model', 'ModelTaxe.php'));
 
 
+/**
+ * Class ModelIngredient
+ *
+ * Called by Controller and use Model.php to make sql request.
+ */
 class ModelIngredient extends Model {
 
     private $idIngredient;

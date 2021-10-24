@@ -14,6 +14,7 @@ echo <<< EOT
     <script type="text/javascript" src="js/recetteScript.js" defer></script>
 EOT;
 
+// Affichage barre de recherche
 echo <<< EOT
     <div id="divSearch{$object}">
         <label class="class12">Recherche </label>
@@ -21,12 +22,7 @@ echo <<< EOT
     </div>
 EOT;
 
-echo <<< EOT
-    <div id="divPrintButton{$object}">
-    <input id=inputPrintButton{$object} type="button" value="Imprimer" onClick="window.print()">
-    </div>
-EOT;
-
+// Affichage selection de l'ordre.
 echo <<< EOT
     <div id="divOrder{$object}">
         <label class="class12" for="order{$object}">Trier </label>
@@ -38,6 +34,7 @@ echo <<< EOT
     </div>
 EOT;
 
+// Affichage liste des recettes.
 echo <<< EOT
     <div id="divList{$object}"> 
         <ul id="ulList{$object}">
@@ -49,8 +46,9 @@ foreach ($tab_recette as $recette) {
     $spe_idRecette = htmlspecialchars($recette->get($primary));
     $spe_nomRecette = htmlspecialchars($recette->get('nomRecette'));
 
-    echo '<li class="listeEspace">';       
+    echo '<li class="listeEspace">';
 
+    // Si utilisateur connecté, alors affichage du bouton de mofification.
     if ($isConnected) {
         echo <<< EOT
             <a class="buttonAlign name{$object}" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idRecette}">
@@ -61,6 +59,7 @@ foreach ($tab_recette as $recette) {
 EOT;
     }
 
+    // Si utilisateur admin, alors affichage du bouton de suppression.
     if ($isAdmin) {
         echo <<< EOT
             <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idRecette}">

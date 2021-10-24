@@ -3,6 +3,11 @@
 require_once 'Model.php';
 
 
+/**
+ * Class ModelAllergene
+ *
+ * Called by Controller and use Model.php to make sql request.
+ */
 class ModelAllergene extends Model {
 
     private $idAllergene;

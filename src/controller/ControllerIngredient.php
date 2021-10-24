@@ -1,13 +1,21 @@
 <?php
 require_once (File::build_path(array('model', 'ModelIngredient.php')));
-//require_once(File::build_path(Array('lib', 'Security.php')));// chargement du modèle
 
 
+/**
+ * Class ControllerIngredient
+ *
+ * The controller is used between the model and the view. It receives the data from the model, make changes et send it to the right view.
+ */
 class ControllerIngredient {
 
     protected static $object = 'Ingredient';
 
 
+    /**
+     * Get a complete list of objects from the model.
+     * Call $object list view.
+     */
     public static function readAll() {
         $tab_ingredient = ModelIngredient::selectAll();
 
@@ -35,6 +43,11 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Call the model to delete an $object where the primary value equal to the one in $_GET.
+     * Delete only if the request comes from an admin.
+     * Call $object deleted view.
+     */
     public static function delete() {
         if (Session::isAdmin()) {
             ModelIngredient::delete($_GET['idIngredient']);
@@ -51,6 +64,9 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Call $object error view.
+     */
     public static function error(){
         $view = 'error';
         $pagetitle = 'Page d\'erreur ';
@@ -58,6 +74,10 @@ class ControllerIngredient {
         require_once(File::build_path(array('view', 'view.php')));
     }
 
+    /**
+     * Used to call the update view.
+     * Only available if the user is connected.
+     */
     public static function create(){
         if (Session::isConnected()) {
             $idIngredient = '';
@@ -84,6 +104,11 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Used to call the update view.
+     * Pre-fil input in the view with the data got from the model.
+     * Only available if the user is connected.
+     */
     public static function update(){
         if (Session::isConnected()) {
             $idIngredient = htmlspecialchars("" . $_GET['idIngredient']);
@@ -112,6 +137,11 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from the update view with action create.
+     * Get date in $_POST and send it to the model to create a new element.
+     * Only available if the user is connected.
+     */
     public static function created(){
         if (Session::isConnected()) {
             $data = array(
@@ -142,6 +172,11 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from the update view with action update.
+     * Get date in $_POST and send it to the model to update an element.
+     * Only available if the user is connected.
+     */
     public static function updated(){
         if (Session::isConnected()) {
             $data = array(
@@ -173,6 +208,11 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Get the data of 'uniteQuantite' and 'taxe' by using their models.
+     * Call the view 'taxeUnit'.
+     * Only available if the user is connected.
+     */
     public static function taxeUnite () {
         if (Session::isConnected()) {
             $tabUnite = ModelUniteQuantite::selectAll();
@@ -188,6 +228,9 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from 'taxeUnit' view to create a new tax.
+     */
     public static function createTaxe () {
         if (Session::isConnected()) {
             ModelTaxe::save(array('montantTaxe' => $_POST['montantTaxe']));
@@ -199,6 +242,9 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from 'taxeUnit' view to update an existent tax.
+     */
     public static function updateTaxe () {
         if (Session::isConnected()) {
             ModelTaxe::update(array('montantTaxe' => $_POST['montantTaxe']), $_POST['idTaxe']);
@@ -209,6 +255,9 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from 'taxeUnit' view to create a new unit.
+     */
     public static function createUnite () {
         if (Session::isConnected()) {
             ModelUniteQuantite::save(array('nomUnite' => $_POST['nomUnite']));
@@ -220,6 +269,9 @@ class ControllerIngredient {
         }
     }
 
+    /**
+     * Called from 'taxeUnit' view to update an existent unit.
+     */
     public static function updateUnite () {
         if (Session::isConnected()) {
             ModelUniteQuantite::update(array('nomUnite' => $_POST['nomUnite']), $_POST['idUnite']);

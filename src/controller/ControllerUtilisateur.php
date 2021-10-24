@@ -3,11 +3,20 @@ require_once (File::build_path(array('model', 'ModelUtilisateur.php')));
 require_once(File::build_path(Array('lib', 'Security.php')));
 
 
+/**
+ * Class ControllerUtilisateur
+ *
+ * The controller is used between the model and the view. It receives the data from the model, make changes et send it to the right view.
+ */
 class ControllerUtilisateur {
 
     protected static $object = 'Utilisateur';
 
 
+    /**
+     * Get a complete list of objects from the model.
+     * Call $object list view.
+     */
     public static function readAll() {
         $tab_utilisateur = ModelUtilisateur::selectAll();
 
@@ -35,6 +44,11 @@ class ControllerUtilisateur {
         }
     }
 
+    /**
+     * Call the model to delete an $object where the primary value equal to the one in $_GET.
+     * Delete only if the request comes from an admin.
+     * Call $object deleted view.
+     */
     public static function delete() {
         $loginUtilisateur = $_GET['loginUtilisateur'];
 
@@ -58,6 +72,9 @@ class ControllerUtilisateur {
         }
     }
 
+    /**
+     * Call $object error view.
+     */
     public static function error(){
         $view = 'error';
         $pagetitle = 'Page d\'erreur ';
@@ -65,6 +82,10 @@ class ControllerUtilisateur {
         require_once(File::build_path(array('view', 'view.php')));
     }
 
+    /**
+     * Used to call the update view.
+     * Only available if the user is connected.
+     */
     public static function create(){
         if (Session::isConnected()) {
             $loginUtilisateur = '';
@@ -81,6 +102,11 @@ class ControllerUtilisateur {
         }
     }
 
+    /**
+     * Used to call the update view.
+     * Pre-fil input in the view with the data got from the model.
+     * Only available if the user is connected.
+     */
     public static function update(){
         $loginUtilisateur = htmlspecialchars("" . $_GET['loginUtilisateur']);
         if (Session::isUser($loginUtilisateur) || Session::isAdmin()) {
@@ -102,6 +128,11 @@ class ControllerUtilisateur {
         }
     }
 
+    /**
+     * Called from the update view with action create.
+     * Get date in $_POST and send it to the model to create a new element.
+     * Only available if the user is connected.
+     */
     public static function created(){
         if (Session::isConnected()) {
             $data = array(
@@ -130,6 +161,11 @@ class ControllerUtilisateur {
         }
     }
 
+    /**
+     * Called from the update view with action update.
+     * Get date in $_POST and send it to the model to update an element.
+     * Only available if the user is connected.
+     */
     public static function updated(){
         $loginUtilisateur = $_POST['loginUtilisateur'];
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class Conf
+ *
+ * Used to store the logs to log in to the db.
+ */
+
 class Conf {
 
     static private $debug = True;

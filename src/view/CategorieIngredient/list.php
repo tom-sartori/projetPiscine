@@ -17,6 +17,7 @@ if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
     $idToUpdate = $_GET[$primary];
 }
 
+// Affichage formulaire création si l'utilisateur est connecté.
 if ($isConnected) {
     echo <<< EOT
         <div id="divCreation{$object}"> 
@@ -72,6 +73,7 @@ EOT;
     else {
         echo '<li class="listeEspace">';
 
+        // Si utilisateur connecté, alors affichage du bouton de mofification.
         if ($isConnected) {
             echo <<< EOT
                 <a class="buttonAlign" href="./index.php?controller={$object}&action=readAll&{$primary}={$raw_idCategorieIngredient}">
@@ -81,6 +83,8 @@ EOT;
                 </a>
 EOT;
         }
+
+        // Si utilisateur admin, alors affichage du bouton de suppression.
         if ($isAdmin) {
             echo <<< EOT
                 <a class="decalLabel" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idCategorieIngredient}">

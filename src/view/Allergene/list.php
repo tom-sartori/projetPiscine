@@ -18,6 +18,7 @@ if ($_GET['action'] == 'readAll' && isset($_GET[$primary])) {
 }
 
 
+// Affichage formulaire création si l'utilisateur est connecté.
 if ($isConnected) {
     echo <<< EOT
         <div id="divCreation{$object}"> 
@@ -32,7 +33,7 @@ EOT;
 }
 
 
-
+// Affichage de la liste des allergènes.
 echo <<< EOT
     <div id="divList{$object}"> 
         <ul>

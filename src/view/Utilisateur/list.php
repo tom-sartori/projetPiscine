@@ -8,6 +8,7 @@ $object = static::$object;
 $primary = 'loginUtilisateur';
 
 
+// Affichage liste des utilisateurs.
 echo <<< EOT
     <div id="divList{$object}"> 
         <ul>
@@ -29,6 +30,8 @@ foreach ($tab_utilisateur as $utilisateur) {
             <label for="prenom{$object}" >Prénom : </label>
             <input type="text" name="prenom{$object}" value="{$spe_prenomUtilisateur}" readonly>
 EOT;
+
+    // Si l'utilisateur est l'utilisateur affiché, alors affichage du bouton de modification.
     if ($isUser || Session::isAdmin()) {
         echo <<< EOT
             <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_loginUtilisateur}">
@@ -38,7 +41,8 @@ EOT;
             </a>
 EOT;
     }
-  
+
+    // Si admin connecté, alors affichage du bouton de suppression d'utilisateur.
     if (Session::isAdmin()) {
         echo <<< EOT
             <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_loginUtilisateur}">

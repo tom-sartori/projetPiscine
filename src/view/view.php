@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Main view which is called by each under-view.
+ * Show the menu, call the under-view, show the footer.
+ */
+
 $isConnected = Session::isConnected();
 $isAdmin = Session::isAdmin();
 
@@ -13,6 +18,7 @@ $isAdmin = Session::isAdmin();
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/recetteCreate.css">
+    <link rel="icon" type="image/png" href="image/favicon.png">
     <script type="text/javascript" src="js/utils.js" defer></script>
 
     <meta charset="UTF-8">

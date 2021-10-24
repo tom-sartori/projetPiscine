@@ -3,6 +3,11 @@
 require_once 'Model.php';
 
 
+/**
+ * Class ModelAsso_recette_utilisateur
+ *
+ * Called by Controller and use Model.php to make sql request.
+ */
 class ModelAsso_recette_utilisateur extends Model {
 
     private $idRecette;
