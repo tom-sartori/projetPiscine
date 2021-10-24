@@ -100,6 +100,14 @@ class ModelJs{
         return $req_prep->fetchAll();
     }
 
+    public static function getAllIDSousRecette(){
+        $sql = "SELECT idEtape FROM `etape` WHERE estSousRecette = 1";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_NUM);
+        return $req_prep->fetchAll();
+    }
+
     public static function getAllEtapes($idRecette){
         $tabID = self::getAllIDEtapes($idRecette); //$tabID[nombrederecette][0] = idRecette
         $tabEtape = array();
@@ -116,6 +124,19 @@ class ModelJs{
 
         return json_encode($tabRecette);
 
+    }
+
+    public static function getAllSousRecette(){
+        $tabID = self::getAllIDSousRecette();
+        $tabEtape = array();
+        foreach ($tabID as $key => $value) {
+            $tabEtape[$key] = get_object_vars(self::select('etape', 'idEtape', $value[0]));
+        }
+        for ($i = 0; $i < count($tabEtape); $i++) {
+            $tabEtape[$i]['ingredientList'] = self::getAllIngredients($tabEtape[$i]['idEtape']);
+        }
+
+        return json_encode($tabEtape);
     }
 
     public static function getAllIngredients($idEtape){
@@ -217,6 +238,9 @@ if(isset($_POST['request']) && isset($_POST['object'])){
 
     if($request== "updaterecette"){
         echo ModelJs::updateRecette($_POST['object']);
+    }
+    if($request=="sousrecette"){
+        echo ModelJs::getAllSousRecette();
     }
 }
 

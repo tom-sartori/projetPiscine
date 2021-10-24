@@ -8,8 +8,93 @@ const divtotal = document.getElementById('totalRecette').firstElementChild.nextE
 const ajouterButton = document.getElementById('ajouterButton');
 const selectUtilisateurs = document.getElementById('selectUtilisateurs');
 const selectCategories = document.getElementById('selectCategorieRecette');
+
+
+class Etape {
+    constructor(element, ordre, jsonValues, newOne, sousRecette) {
+        if ((type == 'create' || newOne) && !sousRecette) {
+            this.element = element; // Element qui représente la div .etape 
+            this.ordre = ordre; // Int ordre l'étape dans la fiche technique
+            this.nbSelect = 0; // USELESS POUR L'INSTANT
+            this.nom = element.firstElementChild.firstElementChild.nextElementSibling.value; //value de l'input nom de la recette
+            this.sousRecette = element.firstElementChild.lastElementChild.checked ? 1 : 0; // checkbox 
+            this.description = element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value; // value de la textarea description de la recette
+            this.ingredientlist = []; // [[id,quantite]]
+            this.newOne = newOne;
+            this.updateData = function () {
+                this.nom = this.element.firstElementChild.firstElementChild.nextElementSibling.value;
+                this.sousRecette = this.element.firstElementChild.lastElementChild.checked;
+                this.description = this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value;
+            };
+
+            this.submitAllIngredient = function () {
+                let allSelects = document.querySelectorAll("#etape" + this.ordre + " .selectIngredient");
+                let allInputsQuantite = document.querySelectorAll("#etape" + this.ordre + " .quantiteIngredientInput");
+                for (let i = 0; i < allSelects.length; i++) {
+                    if (allInputsQuantite[i].value != 0) {
+                        this.ingredientlist.push([allSelects[i].value, allInputsQuantite[i].value]);
+                    }
+                }
+            };
+        } else { // type=="update" || type=="detail"
+            this.element = element; // Element qui représente la div .etape 
+            this.ordre = ordre; // Int ordre l'étape dans la fiche technique
+            this.nbSelect = 0; // USELESS POUR L'INSTANT
+            this.sousRecette = jsonValues.estSousRecette;
+            this.description = jsonValues.description;
+            this.ingredientlist = jsonValues.ingredientList;
+            this.nom = jsonValues.nomEtape;
+            this.id = jsonValues.idEtape;
+            this.updateView = function () {
+                this.element.firstElementChild.firstElementChild.nextElementSibling.value = this.nom;
+                this.element.firstElementChild.lastElementChild.checked = this.sousRecette == "1" ? true : false;
+                this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value = this.description;
+                if (this.ingredientlist.length > 0) {
+                    if (this.ordre == 0) {
+                        select.value = this.ingredientlist[0][0];
+                        getIngredientByID(select)
+                        select.parentElement.parentElement.lastElementChild.firstElementChild.firstElementChild.value = this.ingredientlist[0][1];
+                        calculerPrix(select.parentElement.parentElement.lastElementChild.firstElementChild.firstElementChild);
+                        for (let i = 1; i < this.ingredientlist.length; i++) {
+                            addNewIngredientFromData(this.element.lastElementChild, this.ingredientlist[i][0], this.ingredientlist[i][1]);
+                            calculerTotal();
+                        }
+                    } else {
+                        for (let i = 0; i < this.ingredientlist.length; i++) {
+                            addNewIngredientFromData(this.element.lastElementChild, this.ingredientlist[i][0], this.ingredientlist[i][1]);
+                            calculerTotal();
+                        }
+                    }
+                } else {
+                    deleteLastIngredient(this.element.lastElementChild, true);
+                }
+
+            };
+            this.updateData = function () {
+                this.nom = this.element.firstElementChild.firstElementChild.nextElementSibling.value;
+                this.sousRecette = this.element.firstElementChild.lastElementChild.checked;
+                this.description = this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value;
+            };
+            this.submitAllIngredient = function () {
+                this.ingredientlist = [];
+                let allSelects = document.querySelectorAll("#etape" + this.ordre + " .selectIngredient");
+                let allInputsQuantite = document.querySelectorAll("#etape" + this.ordre + " .quantiteIngredientInput");
+                for (let i = 0; i < allSelects.length; i++) {
+                    if (allInputsQuantite[i].value != 0) {
+                        this.ingredientlist.push([allSelects[i].value, allInputsQuantite[i].value]);
+                    }
+                }
+            };
+
+        }
+
+    }
+}
+
+
 var nbSelect = 0;
 var nbEtape = 0;
+var tabSousRecette = [Etape];
 
 
 function getAllCategorie(){
@@ -144,6 +229,7 @@ function calculerPrix(element){
 // Gestion des Étapes 
 function createNewEtape() { 
     var newEtape = etape.cloneNode(true);
+    newEtape.style.display = 'flex';
     nbEtape++;
     newEtape.id = newEtape.id.slice(0, -1);
     newEtape.id += nbEtape; 
@@ -168,12 +254,13 @@ function createNewEtape() {
     divdescriptifetape1.firstElementChild.nextElementSibling.value=""; // remise a 0 du nom
     divdescriptifetape1.firstElementChild.nextElementSibling.nextElementSibling.value=""; // remise a 0 du descriptif
     divdescriptifetape1.lastElementChild.checked=0; //remise a 0 du sousRecette?
-    tabEtapes[nbEtape] = new Etape(newEtape,nbEtape,null,true);
+    tabEtapes[nbEtape] = new Etape(newEtape,nbEtape,null,true,false);
     listEtapes.appendChild(newEtape);
 }
 
 function createNewEtapeFromData(etape1) {
     var newEtape = etape.cloneNode(true);
+    newEtape.style.display='flex';
     nbEtape++;
     newEtape.id = newEtape.id.slice(0, -1);
     newEtape.id += nbEtape;
@@ -224,86 +311,7 @@ function calculerTotal() {
 }
 
 
-class Etape {
-    constructor(element, ordre, jsonValues,newOne) {
-        if (type == 'create' || newOne) {
-            this.element = element; // Element qui représente la div .etape 
-            this.ordre = ordre; // Int ordre l'étape dans la fiche technique
-            this.nbSelect = 0; // USELESS POUR L'INSTANT
-            this.nom = element.firstElementChild.firstElementChild.nextElementSibling.value; //value de l'input nom de la recette
-            this.sousRecette = element.firstElementChild.lastElementChild.checked ? 1 : 0; // checkbox 
-            this.description = element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value; // value de la textarea description de la recette
-            this.ingredientlist = []; // [[id,quantite]]
-            this.newOne = newOne;
-            this.updateData = function () {
-                this.nom = this.element.firstElementChild.firstElementChild.nextElementSibling.value;
-                this.sousRecette = this.element.firstElementChild.lastElementChild.checked;
-                this.description = this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value;
-            };
 
-            this.submitAllIngredient = function () {
-                let allSelects = document.querySelectorAll("#etape" + this.ordre + " .selectIngredient");
-                let allInputsQuantite = document.querySelectorAll("#etape" + this.ordre + " .quantiteIngredientInput");
-                for (let i = 0; i < allSelects.length; i++) {
-                    if (allInputsQuantite[i].value != 0) {
-                        this.ingredientlist.push([allSelects[i].value, allInputsQuantite[i].value]);
-                    }
-                }
-            };
-        } else { // type=="update" || type=="detail"
-            this.element = element; // Element qui représente la div .etape 
-            this.ordre = ordre; // Int ordre l'étape dans la fiche technique
-            this.nbSelect = 0; // USELESS POUR L'INSTANT
-            this.sousRecette = jsonValues.estSousRecette;
-            this.description = jsonValues.description;
-            this.ingredientlist = jsonValues.ingredientList;
-            this.nom = jsonValues.nomEtape;
-            this.id = jsonValues.idEtape;
-            this.updateView = function () {
-                this.element.firstElementChild.firstElementChild.nextElementSibling.value = this.nom;
-                this.element.firstElementChild.lastElementChild.checked = this.sousRecette == "1" ? true : false;
-                this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value = this.description;
-                if(this.ingredientlist.length>0){
-                    if (this.ordre == 0) {
-                        select.value=this.ingredientlist[0][0];
-                        getIngredientByID(select)
-                        select.parentElement.parentElement.lastElementChild.firstElementChild.firstElementChild.value = this.ingredientlist[0][1];
-                        calculerPrix(select.parentElement.parentElement.lastElementChild.firstElementChild.firstElementChild);
-                        for (let i = 1; i < this.ingredientlist.length; i++) {
-                            addNewIngredientFromData(this.element.lastElementChild, this.ingredientlist[i][0], this.ingredientlist[i][1]);
-                            calculerTotal();
-                        }
-                    } else {
-                        for (let i = 0; i < this.ingredientlist.length; i++) {
-                            addNewIngredientFromData(this.element.lastElementChild, this.ingredientlist[i][0], this.ingredientlist[i][1]);
-                            calculerTotal();
-                        }
-                    }
-                } else {
-                    deleteLastIngredient(this.element.lastElementChild,true);
-                }
-
-            };
-            this.updateData = function () {
-                this.nom = this.element.firstElementChild.firstElementChild.nextElementSibling.value;
-                this.sousRecette = this.element.firstElementChild.lastElementChild.checked;
-                this.description = this.element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling.value;
-            };
-            this.submitAllIngredient = function () {
-                this.ingredientlist = [];
-                let allSelects = document.querySelectorAll("#etape" + this.ordre + " .selectIngredient");
-                let allInputsQuantite = document.querySelectorAll("#etape" + this.ordre + " .quantiteIngredientInput");
-                for (let i = 0; i < allSelects.length; i++) {
-                    if (allInputsQuantite[i].value != 0) {
-                        this.ingredientlist.push([allSelects[i].value, allInputsQuantite[i].value]);
-                    }
-                }
-            };
-
-        }
-
-    }
-}
 
 
 
@@ -318,6 +326,7 @@ getAllIngredients();
 divdenomation.appendChild(select);
 getAllUtilisateurs();
 getAllCategorie();
+
 
 // Création des champs : quantité et de l'affichage du prixHT pour la première étape 
 divdenomation.nextElementSibling.firstElementChild.firstElementChild.id += nbSelect;
@@ -335,17 +344,24 @@ if(type!='detail'){
 select.addEventListener('change',(element) => getIngredientByID(element.target));
 
 if(type != 'detail'){
-ajouterButton.addEventListener('click', () => {
-    if(type=="update"){
-        sendDataUpdate();
-    }
-    if(type=="create"){
-        sendDataCreate();
-    }
-    // if(type=="detail"){ pas de bouton en detail
-    //     AJAXQueryDetailRecette(idRecette, afficherDetailRecette);
-    // }
-    
+    const buttonAddSousRecette = document.getElementById('buttonAddSousRecette');
+    const selectSousRecette = document.getElementById('selectSousRecette');
+    buttonAddSousRecette.addEventListener('click', () => {
+        if(nbEtape==0){
+            etape.style.display='none';
+            nbEtape--;
+        }
+        addSousRecette();
+
+    });
+    getAllSousRecette();
+    ajouterButton.addEventListener('click', () => {
+        if(type=="update"){
+            sendDataUpdate();
+        }
+        if(type=="create"){
+            sendDataCreate();
+        }
 }); }
 
 
@@ -360,15 +376,15 @@ function afficherDetailRecette(responseText){
 function createTabEtapes(jsonValues){
     console.log(jsonValues);
     if (jsonValues.tabEtape.length > 0) {
-    tabEtapes[0] = new Etape(etape, 0, jsonValues.tabEtape[0]);
+    tabEtapes[0] = new Etape(etape, 0, jsonValues.tabEtape[0],false,false);
     tabEtapes[0].updateView();
     for(let i=1;i<jsonValues.tabEtape.length;i++){
-        tabEtapes[i] = new Etape(null, i, jsonValues.tabEtape[i]);
+        tabEtapes[i] = new Etape(null, i, jsonValues.tabEtape[i],false,false);
         createNewEtapeFromData(tabEtapes[i]);
         tabEtapes[i].updateView();
     }
     } else {
-        tabEtapes[0] = new Etape(etape, 0,null,true);
+        tabEtapes[0] = new Etape(etape, 0,null,true,false);
     }
 }
 
@@ -428,11 +444,41 @@ function updateSelectFromData(select,data){
     }
 }
 
+function getAllSousRecette(){
+    AJAXQueryAllSousRecette(afficherSousRecette);
+}
+
+function afficherSousRecette(responseText){
+    tab = JSON.parse(responseText)
+    for(let i=0;i<tab.length;i++){
+        tabSousRecette[i] = new Etape(null,null,tab[i],false,true);
+    }
+    tabSousRecette.forEach(element => {
+        var opt = document.createElement('option');
+        opt.value = element.id;
+        opt.innerHTML = element.nom;
+        selectSousRecette.appendChild(opt);
+    });
+}
+
+function addSousRecette(){
+    idSousRecette = selectSousRecette.value;
+    if(idSousRecette!=''){
+        tabSousRecette.forEach(element => {
+            if(element.id==idSousRecette){
+                createNewEtapeFromData(element)
+                element.updateView();
+                element.ordre=nbEtape;
+                
+            }
+        });
+    }
+}
 
 // Création du tableau des Étapes
 if(type=='create'){
     var tabEtapes = [Etape];
-    tabEtapes[0] = new Etape(etape,0,null);
+    tabEtapes[0] = new Etape(etape,0,null,false,false);
 }
 else if (type=='update'){
     var tabEtapes = [Etape];

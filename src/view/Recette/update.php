@@ -1,5 +1,5 @@
 <?php
-$isUpdate=false;
+$isUpdate = false;
 if ($type == 'detail') {
 
     $disabled = "disabled";
@@ -10,7 +10,7 @@ if ($type == 'detail') {
 EOT;
 }
 if ($type == 'update') {
-    $isUpdate=true;
+    $isUpdate = true;
     $disabled = "";
     echo <<< EOT
         <script type="text/javascript"> 
@@ -61,7 +61,7 @@ EOT;
                     <!--            TODO Pouvoir selectionner plusieures catégories pour une recette. -->
                     <!--            TODO En js get les catégories de recette. -->
                     <!--        TODO possibilité d'ajouter rapidement la valeur souhaitée n'est pas présente dans le select. -->
-                    <select id="selectCategorieRecette"<?= $disabled ?> name="idCategorieRecette[]" multiple required>
+                    <select id="selectCategorieRecette" <?= $disabled ?> name="idCategorieRecette[]" multiple required>
                         <option disabled selected value="">--Catégories--</option>
                         <!-- <option value="1">Entrée</option>
                         <option value="2">Plat principal</option>
@@ -176,8 +176,13 @@ EOT;
             <input hidden name="idRecette" value="<?= $idRecette ?>">
             <input type="hidden" name="controller" value="<?= static::$object ?>" />
             <?php if ($type != 'detail') {
-            echo '<input type="button" id="ajouterButton" value="ajouter">';
+                echo '<input type="button" id="ajouterButton" value="ajouter">';
+                echo '<select name="selectSousrecette" id="selectSousRecette">
+                <option disabled selected value="">--Sous-recettes--</option>-->
+            </select>
+            <input type="button" id="buttonAddSousRecette" value="Ajouter sous recette">';
             } ?>
+            
             <input type="button" onclick="window.print()" value="Imprimer">
         </div>
     </form>

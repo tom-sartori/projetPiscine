@@ -88,6 +88,16 @@ function AJAXQueryDetailRecette(id, funcToExec){
     request.send("request=detailrecette&object=" + id);
 
 }
+
+function AJAXQueryAllSousRecette(funcToExec){
+    let request = new XMLHttpRequest();
+    request.open('POST', urlModel);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.addEventListener("load", () => {
+        funcToExec(request.responseText)
+    });
+    request.send("request=sousrecette&object=");
+}
 function isFloat(n) {
     return !(Number(n) === n && n % 1 !== 0);
 }
