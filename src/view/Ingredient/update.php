@@ -53,7 +53,7 @@ if ($isUpdate) {
 
         <div class="field-ingr">
             <label for="quantiteAchat">Quantité à l'achat</label>
-            <input name="quantiteAchat" type="number" min="0" value="<?=$quantiteAchat?>" required>
+            <input name="quantiteAchat" type="float" step="0.01" min="0" value="<?=$quantiteAchat?>" required>
 
             <label for="idUniteQuantite"></label>
             <select class="unité" name="idUniteQuantite" required>
@@ -71,7 +71,7 @@ if ($isUpdate) {
 
         <div class="field-ingr">
             <label for="prixHT">Prix d'achat HT en €</label>
-            <input name="prixHT" type="number" min="0" value="<?=$prixHT?>" required>
+            <input name="prixHT" type="number" step="0.01" min="0" value="<?=$prixHT?>" required>
         </div>
 
         <div class="field-ingr">
