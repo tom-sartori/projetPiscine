@@ -3,6 +3,11 @@
 require_once 'Model.php';
 
 
+/**
+ * Class ModelTaxe
+ *
+ * Called by Controller and use Model.php to make sql request.
+ */
 class ModelTaxe extends Model {
 
     private $idTaxe;

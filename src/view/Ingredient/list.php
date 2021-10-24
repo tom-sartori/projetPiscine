@@ -14,6 +14,7 @@ echo <<< EOT
      <h1>Liste des ingrédients</h1>
 EOT;
 
+// Affichage barre de recherche.
 echo <<< EOT
     <div id="divSearch{$object}">
         <label class="class12">Recherche </label>
@@ -21,6 +22,7 @@ echo <<< EOT
     </div>
 EOT;
 
+// Affichage selection de l'ordre.
 echo <<< EOT
     <div id="divOrder{$object}">
         <label class="class12" for="order{$object}">Trier </label>
@@ -35,6 +37,7 @@ echo <<< EOT
 EOT;
 
 
+// Affichage de la liste des ingrédients.
 echo <<< EOT
     <div id="divList{$object}"> 
 EOT;
@@ -78,7 +81,8 @@ foreach ($tab_ingredient as $ingredient) {
             <td>{$spe_idAllergene}</td>
             <td> 
 EOT;
-  
+
+    // Si utilisateur connecté, alors affichage du bouton de mofification.
     if ($isConnected) {
         echo <<< EOT
                 <a class="parentButton" href="./index.php?controller={$object}&action=update&{$primary}={$raw_idIngredient}">
@@ -88,7 +92,8 @@ EOT;
                 </a>
 EOT;
     }
-  
+
+    // Si utilisateur admin, alors affichage du bouton de suppression.
     if ($isAdmin) {
         echo <<< EOT
                 <a class="parentButton" href="./index.php?controller={$object}&action=delete&{$primary}={$raw_idIngredient}">

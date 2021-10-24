@@ -3,6 +3,11 @@
 require_once 'Model.php';
 
 
+/**
+ * Class ModelUtilisateur
+ *
+ * Called by Controller and use Model.php to make sql request.
+ */
 class ModelUtilisateur extends Model {
 
     private $loginUtilisateur;
@@ -35,6 +40,12 @@ class ModelUtilisateur extends Model {
         return false;
     }
 
+    /**
+     * Return true if $loginUtilisateur $hashedPassword corresponds to the ones in db.
+     * @param $loginUtilisateur
+     * @param $hashedPassword
+     * @return bool
+     */
     public static function checkPassword ($loginUtilisateur, $hashedPassword) {
         try{
             $sql = '
@@ -57,6 +68,11 @@ class ModelUtilisateur extends Model {
         return $result == 1;
     }
 
+    /**
+     * Return true if the user in parameters is admin in the db.
+     *
+     * @param $loginUtilisateur
+     */
     public static function getAdminUtilisateur ($loginUtilisateur) {
         try{
             $sql = '

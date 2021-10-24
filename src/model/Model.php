@@ -2,9 +2,18 @@
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . "File.php";
 require_once File::build_path(array("config", "Conf.php"));
 
+/**
+ * Class Model
+ *
+ * Generic model which make sql request for all others model.
+ * Used by controllers which get the data requested.
+ */
 class Model{
     public static $pdo;
 
+    /**
+     * Initialisation of the model with the logs in Conf.php.
+     */
     public static function Init() {
         $hostname = Conf::getHostname();
         $database_name = Conf::getDatabase();
@@ -12,18 +21,18 @@ class Model{
         $password = Conf::getPassword();
 
         try {
-            // Connexion à la base de données
+            // Connexion à la base de données.
             // Le dernier argument sert à ce que toutes les chaines de caractères
-            // en entrée et sortie de MySql soit dans le codage UTF-8
+            // en entrée et sortie de MySql soient dans le codage UTF-8.
             self::$pdo = new PDO("mysql:host=$hostname;dbname=$database_name", $login, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
-            // On active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreur
+            // On active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreur.
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $e) {
             if (Conf::getDebug()) {
-                echo $e->getMessage(); // affiche un message d'erreur
+                echo $e->getMessage(); // Affiche un message d'erreur.
             } else {
                 echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
             }
@@ -31,39 +40,57 @@ class Model{
         }
     }
 
+    /**
+     * Make a request of type :
+     * SELECT * FROM $table_name;
+     */
     public static function selectAll() {
         $table_name = static::$nomTable;
         $nomObject = static::$object;
         $class_name = "Model" . ucfirst($nomObject);
-        $rep = Model::$pdo->query('Select * from ' . $table_name);
+        $rep = Model::$pdo->query('SELECT * FROM ' . $table_name);
         $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         return $rep->fetchAll();
     }
 
-    public static function select($primary_value) {
+    /**
+     * Make a request of type :
+     * SELECT * FROM $table_name WHERE $primary_key = $primaryValue;
+     * Return false if the request doesn't works.
+     */
+    public static function select($primaryValue) {
         $table_name = static::$nomTable;
         $nomObject = static::$object;
         $class_name = "Model" . ucfirst($nomObject);
         $primary_key = static::$primary;
-        $sql = "SELECT * from " . $table_name . " WHERE " . $primary_key . "=:nom_tag";
+        $sql = "
+            SELECT * 
+            FROM " . $table_name . " 
+            WHERE " . $primary_key . "=:nom_tag";
+
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $primary_value,
+            "nom_tag" => $primaryValue,
         );
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $tab_gen = $req_prep->fetchAll();
-        // Attention, si il n'y a pas de résultats, on renvoie false
+        // Attention, si il n'y a pas de résultats, on renvoie false.
         if (empty($tab_gen))
             return false;
         return $tab_gen[0];
     }
 
-    public static function delete($primary_value) {
+    /**
+     * Make a request of type :
+     * DELETE FROM $table_name WHERE $primary_key = $primaryValue;
+     * Return false if the request doesn't works.
+     */
+    public static function delete($primaryValue) {
         $table_name = static::$nomTable;
         $class_name = "Model" . ucfirst($table_name);
         $primary_key = static::$primary;
@@ -73,7 +100,7 @@ class Model{
         try {
             $req_prep = Model::$pdo->prepare($sql);
             $value = array(
-                "valeur" => $primary_value
+                "valeur" => $primaryValue
             );
             $req_prep->execute($value);
         } catch (PDOException $e) {
@@ -83,7 +110,12 @@ class Model{
         return 1;
     }
 
-    public static function update($data, $primary_value) {
+    /**
+     * Make a request of type :
+     * UPDATE $table_name SET ($date) WHERE $primary_key = $primaryValue;
+     * Return false if the request doesn't works.
+     */
+    public static function update($data, $primaryValue) {
         $table_name = static::$nomTable;
         $primary_key = static::$primary;
         try {
@@ -95,7 +127,7 @@ class Model{
             $sql = $sql . "WHERE $primary_key =:valeur";
             $req_prep = Model::$pdo->prepare($sql);
             $value = array(
-                "valeur" => $primary_value
+                "valeur" => $primaryValue
             );
             $req_prep->execute($value);
         } catch (PDOException $e) {
@@ -106,6 +138,11 @@ class Model{
         return 1;
     }
 
+    /**
+     * Make a request of type :
+     * INSERT INTO $table_name ($data) VALUES ($data);
+     * Return false if the request doesn't works.
+     */
     public static function save($data) {
         $table_name = static::$nomTable;
         $sql = "INSERT INTO $table_name (";

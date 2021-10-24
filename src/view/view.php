@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Main view which is called by each under-view.
+ * Show the menu, call the under-view, show the footer.
+ */
+
 $isConnected = Session::isConnected();
 $isAdmin = Session::isAdmin();
 
