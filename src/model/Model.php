@@ -48,7 +48,7 @@ class Model{
         $table_name = static::$nomTable;
         $nomObject = static::$object;
         $class_name = "Model" . ucfirst($nomObject);
-        $rep = Model::$pdo->query('SELECT * FROM ' . $table_name);
+        $rep = Model::$pdo->query('SELECT * FROM ' . rawurlencode($table_name));
         $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         return $rep->fetchAll();
     }
@@ -65,14 +65,14 @@ class Model{
         $primary_key = static::$primary;
         $sql = "
             SELECT * 
-            FROM " . $table_name . " 
-            WHERE " . $primary_key . "=:nom_tag";
+            FROM " . rawurlencode($table_name) . " 
+            WHERE " . rawurlencode($primary_key) . "=:nom_tag";
 
         // Préparation de la requête
         $req_prep = Model::$pdo->prepare($sql);
 
         $values = array(
-            "nom_tag" => $primaryValue,
+            "nom_tag" => rawurlencode($primaryValue),
         );
         $req_prep->execute($values);
 
@@ -95,12 +95,12 @@ class Model{
         $class_name = "Model" . ucfirst($table_name);
         $primary_key = static::$primary;
 
-        $sql = "DELETE FROM " . $table_name . " WHERE " . $primary_key . " =:valeur";
+        $sql = "DELETE FROM " . rawurlencode($table_name) . " WHERE " . rawurlencode($primary_key) . " =:valeur";
 
         try {
             $req_prep = Model::$pdo->prepare($sql);
             $value = array(
-                "valeur" => $primaryValue
+                "valeur" => rawurlencode($primaryValue)
             );
             $req_prep->execute($value);
         } catch (PDOException $e) {
@@ -121,13 +121,14 @@ class Model{
         try {
             $sql = "UPDATE $table_name SET";
             foreach ($data as $key => $value) {
-                $sql = $sql . " $key='$value' ,";
+                $raw_value = rawurlencode($value);
+                $sql = $sql . " $key='$raw_value' ,";
             }
             $sql = rtrim($sql, ',');
             $sql = $sql . "WHERE $primary_key =:valeur";
             $req_prep = Model::$pdo->prepare($sql);
             $value = array(
-                "valeur" => $primaryValue
+                "valeur" => rawurlencode($primaryValue)
             );
             $req_prep->execute($value);
         } catch (PDOException $e) {
@@ -147,11 +148,13 @@ class Model{
         $table_name = static::$nomTable;
         $sql = "INSERT INTO $table_name (";
         foreach ($data as $key => $value) {
-            $sql = $sql . "$key,";
+            $raw_key = rawurlencode($key);
+            $sql = $sql . "$raw_key,";
         }
         $sql = rtrim($sql, ',') . ') VALUES(';
         foreach ($data as $key => $value) {
-            $sql = $sql . "'$value',";
+            $raw_value = rawurlencode($value);
+            $sql = $sql . "'$raw_value',";
         }
         $sql = rtrim($sql, ',') . ')';
 
