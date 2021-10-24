@@ -47,11 +47,12 @@ class ModelJs{
     public static function saveRecette($data){
         $data = json_decode($data,true);
         $sql = "INSERT INTO `recette` (`idRecette`, `nomRecette`, `nbCouvert`, `descriptif`, `coefficient`, `chargeSalariale`) VALUES (NULL, '".$data['nomRecette']."','". $data['nbCouvert']."','". $data['descriptif']."','". $data['coefficient']."','". $data['chargeSalariale']."'); ";
-        $idRecette = self::getLastId("idRecette","recette");
+        $idRecette = self::getLastId("idRecette","recette")+1;
         $tabEtape = array();
 
         foreach($data['tabEtapes'] as $key => $value){
-            $sql .= "INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES (NULL, '{$value['nom']}', '{$value['description']}', '{$value['sousRecette']}'); ";
+            $estSousRecette = $value['sousRecette'] ? 1 : 0;
+            $sql .= "INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES (NULL, '{$value['nom']}', '{$value['description']}', '{$estSousRecette}'); ";
             $tabEtape[self::getLastId("idEtape","etape")+1+$key]=$value;
         }
         foreach($tabEtape as $key => $value){
@@ -72,6 +73,7 @@ class ModelJs{
 
         $sql = substr($sql, 0, -1);
         try {
+            print_r($sql);
             $prep = Model::$pdo->prepare($sql);
             $prep->execute();
         } catch (PDOException $e) {
@@ -140,7 +142,7 @@ class ModelJs{
     }
 
     public static function getAllIngredients($idEtape){
-        $sql = "SELECT a.idIngredient, a.quantite FROM `asso_etape_ingredient` a WHERE a.idEtape={$idEtape}";
+        $sql = "SELECT a.idIngredient, a.quantite FROM `asso_etape_ingredient` a WHERE a.idEtape='{$idEtape}'";
         $req_prep = Model::$pdo->prepare($sql);
         $req_prep->execute();
         $req_prep->setFetchMode(PDO::FETCH_NUM);
@@ -188,11 +190,12 @@ class ModelJs{
                 $sql .= "UPDATE `etape` SET description = \"{$value['description']}\" WHERE idEtape = {$value['id']}; ";
                 $sql .= "UPDATE `etape` SET estSousRecette = {$estSousRecette} WHERE idEtape = {$value['id']}; ";
             } else {
-                $sql .= "INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES (NULL, '{$value['nom']}', '{$value['description']}', '{$value['sousRecette']}'); ";
+                $sql .= "INSERT INTO `etape` (`idEtape`, `nomEtape`, `description`, `estSousRecette`) VALUES (NULL, '{$value['nom']}', '{$value['description']}', '{$estSousRecette}'); ";
+                $lastID = self::getLastId('idEtape','etape')+1;
                 foreach ($value['ingredientlist'] as $key1 => $value1) {
-                    $sql .= "INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALUES ('{$key}', '{$value1[0]}', '{$value1[1]}'); ";
+                    $sql .= "INSERT INTO `asso_etape_ingredient` (`idEtape`, `idIngredient`, `quantite`) VALUES ('{$lastID}', '{$value1[0]}', '{$value1[1]}'); ";
                 }
-                $sql .= "INSERT INTO `asso_recette_etape` (`idRecette`, `idEtape`, `ordre`) VALUES ('{$idRecette}', '$key', '{$value['ordre']}'); ";
+                $sql .= "INSERT INTO `asso_recette_etape` (`idRecette`, `idEtape`, `ordre`) VALUES ('{$idRecette}', '$lastID', '{$value['ordre']}'); ";
             }
         }
         $sql .= "UPDATE recette SET nomRecette = '{$data['nomRecette']}' WHERE idRecette ={$idRecette}; ";

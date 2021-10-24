@@ -51,12 +51,14 @@ function AJAXQuerySaveRecette(data){ // data = tabEtapes de recetteCreateScript.
     request.open('POST', urlModel);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.addEventListener("load", () => {
+        console.log(request.responseText);
         if(request.responseText!=1){
             alert("Veuillez remplir tous les champs de la recette");
-            location.replace("index.php?controller=Recette&action=create");
+            ;
+            // location.replace("index.php?controller=Recette&action=create");
         } else {
             alert("Nouvelle recette ajouté avec succès !");
-            location.replace("index.php?controller=Recette");
+            // location.replace("index.php?controller=Recette");
         }
     });
     request.send("request=saverecette&object="+JSON.stringify(data));
@@ -70,7 +72,7 @@ function AJAXQueryUpdateRecette(data){
         console.log(request.responseText);
         if (request.responseText==1) {
             alert("Cette recette a été modifié avec succès !");
-            location.replace("index.php?controller=Recette");
+            // location.replace("index.php?controller=Recette");
         } else {
             alert("Une erreur est survenue");
         }

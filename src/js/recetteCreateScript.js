@@ -366,7 +366,9 @@ if(type != 'detail'){
 
 
 function afficherDetailRecette(responseText){
+    console.log(responseText);
     let data = JSON.parse(responseText);
+    console.log(data);
     createTabEtapes(data);
     updateSelectFromData(selectCategories,data.categories);
     updateSelectFromData(selectUtilisateurs,data.auteurs);
