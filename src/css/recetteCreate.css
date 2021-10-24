@@ -4,35 +4,38 @@ body {
 
 }
 
+
+
 textarea{
     resize: none;
 }
-#ajoutbox {
+div#ajoutbox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 80%;
     width: 100%;
+    margin: 0;
 }
 
-.headerform {
+div.headerform {
     display: flex;
     height: 300px;
     flex-direction: row;
+    margin: 0;
     width: 100%;
-    border: 1px solid red;
 }
-.header1 {
+div.header1 {
     display: flex;
+    margin: 0;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
     align-content: space-around;
     width: 50%;
-    border: 1px solid blue;
 }
 
-.descriptif {
+div.descriptif {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -40,120 +43,231 @@ textarea{
     margin-bottom: 3%;
 }
 
-.descriptif input {
+div.descriptif input {
+    margin: 0;
     height: 100%;
     width: 80%;
     
 }
 
-.etape {
+div.etape {
+    width: fit-content;
+    height: fit-content;
     display: flex;
-    height: 400px;
-    border: 1px solid cyan;
+    min-height: 400px;
+    padding: 4px;
+    border: thick double  black;
     margin-top: 1%;
     margin-bottom: 3%;
 }
 
-.etape .descriptifetape {
+div.etape .descriptifetape {
+    margin: 0;
     width: 30%;
 }
 
-.etape .denomationetape {
+div.etape .denomationetape {
+    margin: 0;
     width: 25%;
 
 }
 
-.etape .informationsEtape {
+div.etape .informationsEtape {
+    margin: 0;
     width: 70%;
     display: flex;
     flex-direction: column;
 }
 
-.etape .informationsEtape .ingredient {
+select.selectIngredient {
+    height: 64%;
+}
+
+div.etape .informationsEtape .ingredient {
     width: 100%;
+    margin-top:5px ;
     display: flex;
     flex-direction: row;
+
 }
 
-.etape .valorisationIngredient {
+div.etape .valorisationIngredient {
     display: flex;
     flex-direction: row;
+    margin: 0;
     width: 50%;
 }
 
-.etape .denomationIngredient {
+div.etape .denomationIngredient {
     width: 50%;
-}
+    margin: 0;
+    }
 
 
-.etape .descriptifetape textarea {
+div.etape .descriptifetape textarea {
+    margin: 0;
     height: 50%;
     width: 97%;
 }
 
-.quantiteIngredient{
+div.quantiteIngredient {
+    margin: 0;
     width: 25%;
 }
 
-.quantiteIngredient input{
+div.quantiteIngredient input {
+    margin: 0;
     width:75%;
+    height: 60%;
 }
 
 
-.uniteIngredient {
+div.uniteIngredient {
+    margin: 0;
     width: 25%;
 }
 
 
-.prixUniteIngredient {
+div.prixUniteIngredient {
+    margin: 0;
     width: 25%;
 }
 
-.prixHTIngredient {
+div.prixHTIngredient {
     width: 25%;
 }
 
- .entete {
+div.entete {
     display: flex;
     flex-direction: row;
+    margin: 0;
     width: 100%;
+    height: fit-content;
  }
 
- .entete_valorisation {
+div.entete_valorisation {
      display: flex;
-     flex-direction: column;
+    margin: 0;
+    flex-direction: column;
  }
 
- .sousvalorisation {
+ div.sousvalorisation {
      display: flex;
      flex-direction: row;
+    margin: 0;
     text-align: center;
  }
-.entete_progression {
+div.entete_progression {
+    margin: 0;
     width: 30%;
-    border: 1px solid black;
 }
 
-.entete_denomination {
+div.entete_denomination {
+    margin: 0;
     width: 35%;
-    border: 1px solid black;
 }
 
-.entetevalorisation {
+div.entetevalorisation {
+    margin: 0;
     width: 35%;
-    border: 1px solid black;
 }
 
-.entetequantite {
+div.entetequantite {
+    margin: 0;
     width: 25%;
 }
-.enteteUnite {
+div.enteteUnite {
+    margin: 0;
     width: 50%;
 }
 
-.enteteprixUnitaire {
+div.enteteprixUnitaire {
+    margin: 0;
     width: 50%;
 }
-.enteteprixHT {
+div.enteteprixHT {
+    margin: 0;
     width: 50%;
+}
+
+div.selectIngredient {
+    margin: 0;
+    margin-bottom: 4px;
+}
+div.entete h1 {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 2px;
+    border: 1px solid black;
+}
+div.entete h3 {
+    margin-top: 3px;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+#descriptifRecette {
+    width: 90%;
+}
+
+input.nomEtape {
+    margin-bottom: 10px;
+    width: 90%;
+    height: 50px;
+    font-size: 1.1em;
+}
+
+label {
+    font-size: 1.3em;
+    margin: 2px;
+}
+
+input#addEtape {
+    height: 40px;
+    padding: 1em;
+}
+input#deleteEtape {
+    height: 40px;
+    
+}
+input#addEtape:hover{
+    background-color: #aa9f9f;
+}
+
+
+input#deleteEtape:hover {
+background-color: #aa9f9f;
+
+}
+
+input#coefficientRecette {
+     height: 40px;
+    margin-bottom: 5px;
+}
+
+input#chargeSalariale {
+     height: 40px;
+margin-bottom: 5px;
+}
+
+select#selectSousRecette {
+      height: 40px;
+}
+
+input#buttonAddSousRecette {
+    height: 40px;
+    padding: 1em;
+    margin-bottom: 25px;
+}
+
+input#ajouterButton {
+    height: 40px;
+    padding: 1.3em;
+
+}
+
+input#ajouterButton:hover {
+
+background-color: #aa9f9f;
 }
