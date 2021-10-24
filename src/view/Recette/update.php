@@ -137,24 +137,14 @@ EOT;
 
         <?php if ($type != 'detail') {
             echo '<div class="buttonsaddEtape">
-            <input type="button" value="Nouvelle Étape" onclick="createNewEtape()">
-            <input type="button" value="Supprimer la dernière étape" onclick="deleteLastEtape()">
+            <input type="button" value="Nouvelle Étape" id="addEtape" onclick="createNewEtape()">
+            <input type="button" value="Supprimer la dernière étape" id="deleteEtape" onclick="deleteLastEtape()">
         </div>';
+            echo '<select name="selectSousrecette" id="selectSousRecette">
+                <option disabled selected value="">--Sous-recettes--</option>-->
+            </select>
+            <input type="button" id="buttonAddSousRecette" value="Ajouter sous recette">';
         } ?>
-        <div>
-            <!--            <label for="idIngredient[]">Ingrédients nécessaires à la recette </label>-->
-            <!--        TODO en js get les ingrédients. -->
-            <!--        TODO en js recherche des ingrédients. -->
-            <!--        TODO possibilité d'ajouter rapidement la valeur souhaitée n'est pas présente dans le select. -->
-            <!--            <select name="idIngredient[]" multiple>-->
-            <!--                <option disabled selected value="">--Ingrédients--</option>-->
-            <!--                <option value="1">Epaule d'agneau sans os</option>-->
-            <!--                <option value="2">Filet de poulet</option>-->
-            <!--                <option value="3">Chorizo doux</option>-->
-            <!--            </select>-->
-        </div>
-
-
 
 
         <div>
@@ -168,7 +158,7 @@ EOT;
         </div>
 
         <div id="totalRecette">
-            <label for="total">Total des ingrédients de la recette : </label>
+            <label for="total">Total HT des ingrédients de la recette : </label>
             <label for="totalPrix"></label>
         </div>
 
@@ -176,11 +166,7 @@ EOT;
             <input hidden name="idRecette" value="<?= $idRecette ?>">
             <input type="hidden" name="controller" value="<?= static::$object ?>" />
             <?php if ($type != 'detail') {
-                echo '<input type="button" id="ajouterButton" value="ajouter">';
-                echo '<select name="selectSousrecette" id="selectSousRecette">
-                <option disabled selected value="">--Sous-recettes--</option>-->
-            </select>
-            <input type="button" id="buttonAddSousRecette" value="Ajouter sous recette">';
+                echo '<input type="button" id="ajouterButton" value="Enregistrer">';
             } ?>
             
             <input type="button" onclick="window.print()" value="Imprimer">
