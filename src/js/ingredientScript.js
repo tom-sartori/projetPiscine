@@ -117,5 +117,5 @@ function changeIdAllergene(responseText){
 sortTable();
 getAllAllergenes();
 getAllCategories();
-getAllUnite(); 
+// getAllUnite();
 getAllTaxes();
