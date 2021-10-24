@@ -350,7 +350,6 @@ ajouterButton.addEventListener('click', () => {
 
 function afficherDetailRecette(responseText){
     let data = JSON.parse(responseText);
-    console.log(data);
     createTabEtapes(data);
     updateSelectFromData(selectCategories,data.categories);
     updateSelectFromData(selectUtilisateurs,data.auteurs);
@@ -358,12 +357,17 @@ function afficherDetailRecette(responseText){
 }
 
 function createTabEtapes(jsonValues){
+    console.log(jsonValues);
+    if (jsonValues.tabEtape.length > 0) {
     tabEtapes[0] = new Etape(etape, 0, jsonValues.tabEtape[0]);
     tabEtapes[0].updateView();
     for(let i=1;i<jsonValues.tabEtape.length;i++){
         tabEtapes[i] = new Etape(null, i, jsonValues.tabEtape[i]);
         createNewEtapeFromData(tabEtapes[i]);
         tabEtapes[i].updateView();
+    }
+    } else {
+        tabEtapes[0] = new Etape(etape, 0,null,true);
     }
 }
 
@@ -374,7 +378,7 @@ function createData(){
     recette.descriptif = document.getElementById('descriptifRecette').value;
     recette.coefficient = document.getElementById('coefficientRecette').value;
     recette.chargeSalariale = document.getElementById('chargeSalariale').value;
-    if(idRecette != undefined){
+    if (typeof idRecette != 'undefined') {
         recette.idRecette = idRecette
     }
     let tabEtapescopy = tabEtapes;

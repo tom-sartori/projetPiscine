@@ -54,6 +54,9 @@ function AJAXQuerySaveRecette(data){ // data = tabEtapes de recetteCreateScript.
         if(request.responseText!=1){
             alert("Veuillez remplir tous les champs de la recette");
             location.replace("index.php?controller=Recette&action=create");
+        } else {
+            alert("Nouvelle recette ajouté avec succès !");
+            location.replace("index.php?controller=Recette");
         }
     });
     request.send("request=saverecette&object="+JSON.stringify(data));
