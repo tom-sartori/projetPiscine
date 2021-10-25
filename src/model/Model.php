@@ -121,14 +121,14 @@ class Model{
         try {
             $sql = "UPDATE $table_name SET";
             foreach ($data as $key => $value) {
-                $raw_value = rawurlencode($value);
+                $raw_value = $value;
                 $sql = $sql . " $key='$raw_value' ,";
             }
             $sql = rtrim($sql, ',');
             $sql = $sql . "WHERE $primary_key =:valeur";
             $req_prep = Model::$pdo->prepare($sql);
             $value = array(
-                "valeur" => rawurlencode($primaryValue)
+                "valeur" => $primaryValue
             );
             $req_prep->execute($value);
         } catch (PDOException $e) {
@@ -148,12 +148,12 @@ class Model{
         $table_name = static::$nomTable;
         $sql = "INSERT INTO $table_name (";
         foreach ($data as $key => $value) {
-            $raw_key = rawurlencode($key);
+            $raw_key = $key;
             $sql = $sql . "$raw_key,";
         }
         $sql = rtrim($sql, ',') . ') VALUES(';
         foreach ($data as $key => $value) {
-            $raw_value = rawurlencode($value);
+            $raw_value = $value;
             $sql = $sql . "'$raw_value',";
         }
         $sql = rtrim($sql, ',') . ')';
