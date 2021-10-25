@@ -160,6 +160,17 @@ EOT;
         <div id="totalRecette">
             <label for="total">Total HT des ingrédients de la recette : </label>
             <label for="totalPrix"></label>
+            <br>
+            <label for="totalTTCRecette">Total TTC de la recette : </label>
+            <label for="totalTTC"></label>
+            <br>
+            <label for="TotalTTCparTete">Total TTC par portion de la recette : </label>
+            <label for="TotalTTCPortion"></label>
+        </div>
+
+        <div class="affichagePrix">
+            Voulez-vous afficher le prix ?
+            <input type="checkbox" checked name="afficherTotal" id="afficherTotal">
         </div>
 
         <div>
@@ -170,7 +181,7 @@ EOT;
             } ?>
 
             <?php if ($type == 'detail') {
-                echo '<input type="button" id="buttonEtiquette" value="Etiquette">';
+               // echo '<input type="button" id="buttonEtiquette" value="Etiquette">';
             } ?>
 
             <input type="button" onclick="window.print()" value="Imprimer">

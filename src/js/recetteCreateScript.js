@@ -8,6 +8,7 @@ const divtotal = document.getElementById('totalRecette').firstElementChild.nextE
 const ajouterButton = document.getElementById('ajouterButton');
 const selectUtilisateurs = document.getElementById('selectUtilisateurs');
 const selectCategories = document.getElementById('selectCategorieRecette');
+const afficherTotal = document.getElementById('afficherTotal');
 var prixHTTotal = 0;
 
 
@@ -311,6 +312,9 @@ function calculerTotal() {
     prixHTTotal = result;
     result += " €"
     divtotal.innerHTML = result;
+    let totalTTC = parseFloat(prixHTTotal * 1.1 * document.getElementById('coefficientRecette').value + parseFloat(document.getElementById('chargeSalariale').value)).toFixed(2);
+    divtotal.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML = totalTTC + " €";
+    divtotal.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML = (totalTTC/parseInt(document.getElementById('nbCouvert').value)).toFixed(2);
 
 }
 
@@ -347,6 +351,13 @@ if(type!='detail'){
 }
 select.addEventListener('change',(element) => getIngredientByID(element.target));
 
+afficherTotal.addEventListener('change',function(){
+    divtotal.parentElement.toggleAttribute('hidden');
+    document.getElementById('coefficientRecette').parentElement.toggleAttribute('hidden');
+    document.getElementById('chargeSalariale').parentElement.toggleAttribute('hidden');
+    
+});
+
 if(type != 'detail'){
     const buttonAddSousRecette = document.getElementById('buttonAddSousRecette');
     const selectSousRecette = document.getElementById('selectSousRecette');
@@ -367,7 +378,12 @@ if(type != 'detail'){
         if(type=="create"){
             sendDataCreate();
         }
-}); }
+    }); 
+    document.getElementById('coefficientRecette').addEventListener('change',calculerTotal);
+    document.getElementById('chargeSalariale').addEventListener('change',calculerTotal);
+    document.getElementById('nbCouvert').addEventListener('change', calculerTotal);
+    
+}
 
 
 function afficherDetailRecette(responseText){
@@ -494,6 +510,9 @@ else if (type=='update'){
 } else if (type=='detail'){
     var tabEtapes = [Etape];
     select.disabled =true;
+    document.getElementById('descriptifRecette').disabled=true;
+    document.getElementById('coefficientRecette').disabled=true;
+    document.getElementById('chargeSalariale').disabled=true;
     const buttonEtiquette = document.getElementById('buttonEtiquette');
     buttonEtiquette.addEventListener('click',() => {
         location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + prixHTTotal);

@@ -51,7 +51,7 @@ div.descriptif input {
 }
 
 div.etape {
-    width: fit-content;
+    /* width: fit-content; */
     height: fit-content;
     display: flex;
     min-height: 400px;
