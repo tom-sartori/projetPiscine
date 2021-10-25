@@ -8,6 +8,7 @@ const divtotal = document.getElementById('totalRecette').firstElementChild.nextE
 const ajouterButton = document.getElementById('ajouterButton');
 const selectUtilisateurs = document.getElementById('selectUtilisateurs');
 const selectCategories = document.getElementById('selectCategorieRecette');
+var prixHTTotal = 0;
 
 
 class Etape {
@@ -307,6 +308,7 @@ function calculerTotal() {
         }
     }
     result = result.toFixed(2);
+    prixHTTotal = result;
     result += " €"
     divtotal.innerHTML = result;
 
@@ -494,7 +496,7 @@ else if (type=='update'){
     select.disabled =true;
     const buttonEtiquette = document.getElementById('buttonEtiquette');
     buttonEtiquette.addEventListener('click',() => {
-        location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + divtotal.innerHTML);
+        location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + prixHTTotal);
     });
     AJAXQueryDetailRecette(idRecette, afficherDetailRecette);
 }
