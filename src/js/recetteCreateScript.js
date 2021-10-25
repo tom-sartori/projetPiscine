@@ -306,7 +306,7 @@ function calculerTotal() {
         }
     }
     result += " €"
-    divtotal.innerHTML = result;
+    divtotal.innerHTML = result.toFixed(2);
 
 }
 
