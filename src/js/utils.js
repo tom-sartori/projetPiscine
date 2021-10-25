@@ -6,6 +6,12 @@ function sortByNameASC(a, b) {
     else return 1;
 }
 
+function sortByNameASCIngredient(a, b) {
+    if (a.nomIngredient.toLowerCase() < b.nomIngredient.toLowerCase()) return -1;
+    else if (a.nomIngredient.toLowerCase() == b.nomIngredient.toLowerCase()) return 0;
+    else return 1;
+}
+
 function sortByNameDESC(a, b) {
     if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
     else if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;

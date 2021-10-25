@@ -120,6 +120,7 @@ function getAllIngredients(){
 
 function allIngredientSelect(responseText){
     const tabIngredient=JSON.parse(responseText)
+    tabIngredient.sort(sortByNameASCIngredient);
     tabIngredient.forEach(element => {
         var opt = document.createElement('option');
         opt.value = element.idIngredient;
@@ -305,8 +306,9 @@ function calculerTotal() {
             result += parseFloat(tabDivPrixHT[i].innerHTML)
         }
     }
+    result = result.toFixed(2);
     result += " €"
-    divtotal.innerHTML = result.toFixed(2);
+    divtotal.innerHTML = result;
 
 }
 

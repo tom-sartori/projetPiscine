@@ -1,4 +1,4 @@
-const list = document.getElementById('ulListRecette');
+const listUl = document.getElementById('ulListRecette');
 const nameList = document.getElementsByClassName('parentButton');
 const select = document.getElementById('selectOrderRecette');
 const tabRecette = [];
@@ -28,9 +28,9 @@ function sortList() {
 }
 
 function updateView(){
-    list.innerHTML="";
+    listUl.innerHTML = "";
     tabRecette.forEach(element => {
-        list.appendChild(element.lielement);
+        listUl.appendChild(element.lielement);
     });
     
 }
