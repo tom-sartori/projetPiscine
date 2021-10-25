@@ -513,9 +513,9 @@ else if (type=='update'){
     document.getElementById('descriptifRecette').disabled=true;
     document.getElementById('coefficientRecette').disabled=true;
     document.getElementById('chargeSalariale').disabled=true;
-    const buttonEtiquette = document.getElementById('buttonEtiquette');
-    buttonEtiquette.addEventListener('click',() => {
-        location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + prixHTTotal);
-    });
+    // const buttonEtiquette = document.getElementById('buttonEtiquette');
+    // buttonEtiquette.addEventListener('click',() => {
+    //     location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + prixHTTotal);
+    // });
     AJAXQueryDetailRecette(idRecette, afficherDetailRecette);
 }
