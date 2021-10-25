@@ -492,5 +492,9 @@ else if (type=='update'){
 } else if (type=='detail'){
     var tabEtapes = [Etape];
     select.disabled =true;
+    const buttonEtiquette = document.getElementById('buttonEtiquette');
+    buttonEtiquette.addEventListener('click',() => {
+        location.replace('index.php?controller=recette&action=etiquette&idRecette=' + idRecette + '&prix=' + divtotal.innerHTML);
+    });
     AJAXQueryDetailRecette(idRecette, afficherDetailRecette);
 }

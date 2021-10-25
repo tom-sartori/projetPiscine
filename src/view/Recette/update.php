@@ -168,7 +168,11 @@ EOT;
             <?php if ($type != 'detail') {
                 echo '<input type="button" id="ajouterButton" value="Enregistrer">';
             } ?>
-            
+
+            <?php if ($type == 'detail') {
+                echo '<input type="button" id="buttonEtiquette" value="Etiquette">';
+            } ?>
+
             <input type="button" onclick="window.print()" value="Imprimer">
         </div>
     </form>
